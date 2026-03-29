@@ -1,0 +1,449 @@
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+    <meta name="theme-color" content="#05050A">
+    <title>Zarabiaj na Scrollowaniu</title>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JW1QWB73B1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JW1QWB73B1');
+    </script>
+
+    <style>
+        /* Base Variables & Reset */
+        :root {
+            --bg: #05050A;
+            --text: #f0f6ff;
+            --muted: #9AA0AE;
+            --brand: #00ff88;
+            --brand2: #00d175;
+            --accent-red: #ff4757;
+            --bg-card: #0E0E14;
+            --border: #1a1a27;
+            --brand-glow: rgba(0,255,136,0.25);
+        }
+
+        /* Shopify Override Hack - Prevents Black Screen */
+        html, body { margin: 0 !important; padding: 0 !important; width: 100%; min-height: 100vh; background-color: var(--bg) !important; overflow-x: hidden; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        .av-master-container {
+            position: absolute; top: 0; left: 0; right: 0; min-height: 100vh; width: 100%;
+            background-color: var(--bg); color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            z-index: 999999; /* Hides Shopify header/footer */
+            background-image: 
+                radial-gradient(circle at 10% 80%, rgba(0,255,136,.08) 0%, transparent 45%),
+                radial-gradient(circle at 90% 20%, rgba(0,255,136,.05) 0%, transparent 45%),
+                linear-gradient(to top, rgba(0,0,0,0.1), transparent);
+            background-attachment: fixed;
+        }
+
+        /* Background Orbs */
+        .bg-orb { position: fixed; border-radius: 50%; filter: blur(80px); opacity: .3; pointer-events: none; z-index: 0; }
+        .orb1 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(0,255,136,.4), transparent); top: -100px; left: -100px; animation: float1 20s ease-in-out infinite; }
+        .orb2 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(0,213,117,.3), transparent); bottom: -50px; right: -50px; animation: float2 15s ease-in-out infinite; }
+        @keyframes float1 { 0%, 100%{transform:translate(0,0) scale(1);} 50%{transform:translate(50px,50px) scale(1.1);} }
+        @keyframes float2 { 0%, 100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-30px,-40px) scale(1.15);} }
+
+        /* Shared Animations */
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Containers */
+        #age-quiz, #fc-content { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 40px 20px; position: relative; z-index: 1; }
+        #fc-content { display: none; opacity: 0; padding-top: 60px; justify-content: flex-start; }
+        #fc-content.active { display: flex; animation: slideUp 0.6s ease-out forwards; }
+        .quiz-container, .container { max-width: 480px; width: 100%; text-align: center; }
+
+        /* Main Freecash Logo */
+        .av-logo-container { margin: 0 auto 32px auto; width: 70px; height: 70px; border-radius: 20px; display: flex; align-items: center; justify-content: center; background: rgba(0,255,136,.1); border: 1px solid rgba(0,255,136,.3); box-shadow: 0 10px 40px rgba(0,255,136,.4); overflow: hidden; animation: slideUp 0.5s ease-out both; }
+        .av-logo { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Typography */
+        .question { font-size: clamp(32px, 10vw, 48px); font-weight: 900; line-height: 1.1; margin-bottom: 16px; animation: slideUp 0.6s ease-out 0.2s both; }
+        .question-gradient { background: linear-gradient(90deg, var(--text), var(--brand)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .question-subtitle { font-size: 15px; color: var(--muted); margin-bottom: 32px; animation: slideUp 0.6s ease-out 0.3s both; }
+        
+        /* Bonus Card */
+        .signup-bonus-card { display: flex; align-items: center; gap: 14px; background: linear-gradient(135deg, #0a1a0f 0%, #0f1a14 100%); border: 2px solid var(--brand); border-radius: 16px; padding: 14px 20px; margin: 0 auto 28px auto; max-width: 360px; box-shadow: 0 8px 30px rgba(0,255,136,0.3), 0 0 20px rgba(0,255,136,0.2); animation: slideUp 0.5s ease-out 0.25s both; }
+        .signup-bonus-icon { font-size: 32px; line-height: 1; flex-shrink: 0; }
+        .signup-bonus-content { text-align: left; }
+        .signup-bonus-title { font-size: 18px; font-weight: 900; color: var(--brand); margin: 0 0 2px 0; text-shadow: 0 0 12px rgba(0,255,136,0.5); }
+        .signup-bonus-sub { font-size: 11px; color: var(--muted); font-weight: 500; letter-spacing: 0.5px; }
+
+        /* Options */
+        .options { display: flex; flex-direction: column; gap: 14px; max-width: 400px; margin: 0 auto; }
+        .option { display: block; text-decoration: none; background: var(--bg-card); border: 2px solid var(--border); border-radius: 16px; padding: 18px 24px; cursor: pointer; transition: all 0.2s ease; animation: slideUp 0.5s ease-out both; position: relative; overflow: hidden; }
+        .option:nth-child(1) { animation-delay: 0.3s; background: var(--brand); border-color: var(--brand); box-shadow: 0 8px 30px rgba(0,255,136,0.4); }
+        .option:nth-child(1) .option-label { color: #000; }
+        .option:nth-child(1) .option-payout { color: rgba(0, 0, 0, 0.7); }
+        .option:nth-child(2) { animation-delay: 0.4s; background: linear-gradient(135deg, #1a1a24, #252530); border-color: rgba(0,255,136,0.3); }
+        .option-label { font-size: 18px; font-weight: 700; color: var(--text); text-align: center; margin-bottom: 6px; }
+        .option-payout { font-size: 12px; color: rgba(255, 255, 255, 0.8); text-align: center; font-weight: 500; }
+        .option:active { transform: scale(0.98); }
+
+        /* Counters */
+        .live-counter { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,255,136,.08); border: 1px solid rgba(0,255,136,.25); border-radius: 12px; padding: 10px 18px; margin-top: 24px; animation: slideUp 0.5s ease-out 0.5s both; }
+        .live-dot { width: 8px; height: 8px; background: var(--brand); border-radius: 50%; animation: blink 1.5s infinite; box-shadow: 0 0 8px rgba(0,255,136,.5); }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+        .live-counter span { font-size: 13px; color: var(--brand); font-weight: 600; }
+
+        .countdown-bar { display: flex; align-items: center; justify-content: center; gap: 8px; background: rgba(255,71,87,.08); border: 1px solid rgba(255,71,87,.25); border-radius: 12px; padding: 10px 18px; margin-bottom: 20px; }
+        .countdown-bar svg { width: 16px; height: 16px; color: var(--accent-red); flex-shrink: 0; }
+        .countdown-bar span { font-size: 13px; color: #ff6b8a; font-weight: 600; }
+        .countdown-bar .timer { color: var(--accent-red); font-weight: 700; }
+
+        /* Results Screen */
+        .youre-in-section { display: flex; align-items: center; justify-content: center; gap: 16px; margin: 20px 0; }
+        .check-circle { width: 54px; height: 54px; background: #00ff88; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 20px rgba(0,255,136,0.25); }
+        .check-circle svg { width: 28px; height: 28px; color: var(--bg); flex-shrink: 0; }
+        .youre-in-text { font-size: 42px; font-weight: 900; background: linear-gradient(90deg, var(--text), #00ff88); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .dollar-counter { margin-bottom: 12px; }
+        .dollar-counter span { font-size: 14px; font-weight: 600; color: var(--brand); text-shadow: 0 0 10px rgba(0,255,136,.3); }
+
+        /* Call to Action */
+        .cta { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; background: linear-gradient(135deg, #00ff88, #00d175); color: #05050A !important; font-weight: 800; font-size: 16px; text-transform: uppercase; border-radius: 16px; padding: 18px; margin: 24px 0 10px 0; text-decoration: none; box-shadow: 0 10px 30px rgba(0,255,136,0.25); animation: pulse-fc 3s infinite; }
+        .cta svg { width: 20px; height: 20px; flex-shrink: 0; }
+        @keyframes pulse-fc { 0%, 100% { box-shadow:0 10px 30px rgba(0,255,136,0.25); } 50% { box-shadow:0 15px 40px rgba(0,255,136,.6);} }
+        .cta-sub { font-size: 12px; color: var(--muted); margin-bottom: 32px; }
+
+        /* Journey Card */
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; text-align: left; padding: 0; margin-bottom: 24px; box-shadow: 0 12px 40px rgba(0,0,0,0.8), 0 0 30px rgba(0,255,136,0.15); }
+        .section-title { font-size: 12px; font-weight: 700; text-align: center; padding: 18px 0; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid var(--border); margin:0;}
+        .li { display: flex; gap: 14px; padding: 16px 20px; border-bottom: 1px solid var(--border); }
+        .li:last-child { border-bottom: none; }
+        .check { display: flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: #00ff88; font-size: 12px; font-weight: 700; color: #05050A; flex-shrink: 0; }
+        .li b { display: block; color: var(--text); font-size: 15px; margin-bottom: 4px; font-weight: 700; }
+        .muted-text { color: var(--muted); font-size: 12px; line-height: 1.4; }
+
+        /* Warning Notice */
+        .activation-notice { background: linear-gradient(135deg, #1a0f0a 0%, #0f1419 100%); border: 2px solid var(--accent-red); border-radius: 16px; padding: 18px; text-align: left; position: relative; animation: glow-border 2s infinite; margin-bottom: 24px; }
+        .activation-notice::before { content: '⚠️ WAŻNE'; position: absolute; top: -1px; right: 16px; background: var(--accent-red); color: #fff; font-size: 9px; font-weight: 800; padding: 4px 10px; border-radius: 0 0 8px 8px; letter-spacing: .5px; }
+        @keyframes glow-border { 0%, 100% { box-shadow: 0 0 15px rgba(255,71,87,.2); border-color: var(--accent-red); } 50% { box-shadow: 0 0 25px rgba(255,71,87,.4); border-color: #ff6b7a; } }
+        .activation-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+        .activation-title { font-size: 15px; font-weight: 700; color: var(--text); }
+        .activation-text { font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0; }
+        .highlight-green { color: #00ff88; font-weight: 700; }
+
+        /* Footer & Trust */
+        .trust-bar { display: flex; align-items: center; justify-content: center; gap: 16px; padding: 10px 0; }
+        .trust-item { display: flex; align-items: center; gap: 4px; }
+        .trust-item svg { width: 14px; height: 14px; color: var(--brand); flex-shrink: 0; }
+        .trust-item span { font-size: 11px; color: var(--muted); font-weight: 500; }
+        .foot { color: var(--muted); font-size: 11px; text-align: center; margin-top: 10px; opacity: .7; padding-bottom: 80px; }
+
+        /* Notifications */
+        .notif-zone { position: fixed; top: 16px; left: 50%; transform: translateX(-50%); z-index: 100; width: calc(100% - 32px); max-width: 400px; pointer-events: none; height: 70px; }
+        .notif-toast { position: absolute; top: 0; left: 0; right: 0; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 12px 14px; display: flex; align-items: center; gap: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 0 20px rgba(0,255,136,.15); animation: toastIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; opacity: 0; }
+        @keyframes toastIn { from{opacity:0;transform:translateY(-20px) scale(0.96)} to{opacity:1;transform:translateY(0) scale(1)} }
+        @keyframes toastOut { from{opacity:1;transform:translateY(0) scale(1)} to{opacity:0;transform:translateY(-10px) scale(0.96)} }
+        .notif-toast.leaving { animation: toastOut 0.3s forwards; }
+        .notif-icon { width: 32px; height: 32px; border-radius: 8px; background: rgba(0,255,136,.12); border: 1px solid rgba(0,255,136,.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
+        .notif-icon img { width: 100%; height: 100%; object-fit: cover; }
+        .notif-body { flex: 1; min-width: 0; }
+        .notif-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+        .notif-desc { font-size: 11px; color: var(--muted); }
+        .notif-time { font-size: 10px; color: var(--muted); opacity: 0.6; }
+
+        /* Sticky CTA */
+        .sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; z-index: 90; background: linear-gradient(to top, var(--bg) 60%, transparent); padding: 16px 20px; display: flex; justify-content: center; opacity: 0; transform: translateY(20px); transition: all 0.3s ease; pointer-events: none;}
+        .sticky-cta.visible { opacity: 1; transform: translateY(0); pointer-events: auto;}
+        .sticky-cta .cta-sm { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; max-width: 440px; background: linear-gradient(135deg, #00ff88, #00d175); color: #05050A !important; font-weight: 800; font-size: 15px; text-transform: uppercase; border-radius: 16px; padding: 16px; text-decoration: none; box-shadow: 0 -4px 30px rgba(0,255,136,0.25); }
+        .sticky-cta .cta-sm svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+        @media (max-width: 480px) {
+            .question { font-size: 32px; }
+            .youre-in-text { font-size: 36px; }
+            .check-circle { width: 46px; height: 46px; }
+            .check-circle svg { width: 24px; height: 24px; }
+            #age-quiz, #fc-content { padding: 30px 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="av-master-container">
+        <div class="bg-orb orb1"></div>
+        <div class="bg-orb orb2"></div>
+
+        <div class="notif-zone" id="notifZone"></div>
+
+        <div id="age-quiz">
+            <div class="quiz-container">
+                <div class="av-logo-container">
+                    <img class="av-logo" src="https://cdn.brandfetch.io/id13-G6XbU/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1767430401517" alt="Freecash Symbol">
+                </div>
+                
+                <h1 class="question">Zarabiaj na <span class="question-gradient">Scrollowaniu</span></h1>
+                <p class="question-subtitle">Dołącz do tysięcy dziewczyn zarabiających codziennie na oglądaniu i scrollowaniu w telefonie.</p>
+                
+                <div class="signup-bonus-card">
+                    <span class="signup-bonus-icon">🎁</span>
+                    <div class="signup-bonus-content">
+                        <div class="signup-bonus-title">Bonus powitalny</div>
+                        <div class="signup-bonus-sub">DARMOWY BONUS PRZY REJESTRACJI</div>
+                    </div>
+                </div>
+                
+                <div class="options">
+                    <a class="option" href="#" onclick="proceed(event)">
+                        <div class="option-label">Mam powyżej 18 lat</div>
+                        <div class="option-payout">Szybkie wypłaty: PayPal, Blik, Przelew & Krypto</div>
+                    </a>
+                    <a class="option" href="#" onclick="proceed(event)">
+                        <div class="option-label">Mam poniżej 18 lat</div>
+                        <div class="option-payout">Ograniczone wypłaty: Tylko Przelew Bankowy</div>
+                    </a>
+                </div>
+
+                <div class="live-counter">
+                    <div class="live-dot"></div>
+                    <span id="liveCount">12 847 osób zarabia w tym momencie</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="fc-content">
+            <div class="container">
+                <div class="av-logo-container">
+                    <img class="av-logo" src="https://cdn.brandfetch.io/id13-G6XbU/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1767430401517" alt="Freecash Symbol">
+                </div>
+
+                <div class="countdown-bar">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    <span>Twój bonus wygasa za: <span class="timer" id="countdown">14:59</span></span>
+                </div>
+
+                <div class="youre-in-section">
+                    <div class="check-circle">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <div class="youre-in-text">Udało się!</div>
+                </div>
+
+                <div class="dollar-counter">
+                    <span>💰 Wypłacono już ponad <span id="dollarCount">12 000 000</span> zł</span>
+                </div>
+
+                <p class="question-subtitle" style="margin-bottom: 24px; padding: 0 10px;">
+                    Twoje konto kwalifikuje się do wyższych stawek. Załóż konto, aby odebrać swój <span class="highlight-green">bonus na start</span>.
+                </p>
+
+                <a class="cta trxbutton" id="mainCta" href="#">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"></path>
+                    </svg>
+                    Załóż darmowe konto
+                </a>
+                <p class="cta-sub">Dziewczyny zazwyczaj zarabiają ok. 50-80 zł pierwszego dnia.</p>
+
+                <div class="card">
+                    <div class="section-title">JAK ZACZĄĆ ZARABIAĆ?</div>
+                    <div class="li">
+                        <span class="check">1</span>
+                        <div>
+                            <b>Załóż darmowe konto</b>
+                            <div class="muted-text">Rejestracja zajmuje dosłownie 60 sekund.</div>
+                        </div>
+                    </div>
+                    <div class="li av-step-hl">
+                        <span class="check">2</span>
+                        <div>
+                            <b>Odblokuj panel do scrollowania</b>
+                            <div class="muted-text">Wykonaj minimum 2 darmowe zadania z listy (np. ankiety lub gry), aby udowodnić, że nie jesteś botem.</div>
+                        </div>
+                    </div>
+                    <div class="li">
+                        <span class="check">3</span>
+                        <div>
+                            <b>Wypłacaj pieniądze</b>
+                            <div class="muted-text">Przelewaj zarobki natychmiastowo na Blik lub PayPal.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activation-notice">
+                    <div class="activation-header">
+                        <span class="lock-icon">🔒</span>
+                        <span class="activation-title">Wymagana Aktywacja</span>
+                    </div>
+                    <p class="activation-text">
+                        Nowe konta: Ukończ <span class="highlight-green">minimum 2 darmowe zadania</span> z listy startowej, aby zdjąć blokadę zabezpieczającą i zacząć zarabiać.
+                    </p>
+                </div>
+
+                <div class="trust-bar">
+                    <div class="trust-item">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        <span>Zweryfikowane</span>
+                    </div>
+                    <div class="trust-item">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        <span>Ponad 500 tys. użytkowników</span>
+                    </div>
+                    <div class="trust-item">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <span>Ocena 4.8/5</span>
+                    </div>
+                </div>
+
+                <div class="foot">Zaufało nam ponad 500 000 osób zarabiających każdego dnia</div>
+            </div>
+        </div>
+
+        <div class="sticky-cta" id="stickyCta">
+            <a class="cta-sm trxbutton" href="#">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                Załóż darmowe konto
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // AFFILIATE LINK & TIKTOK WEBVIEW BYPASS
+        // ==========================================
+        const BASE_LINK = "https://rainawards.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidSI6IjY5OTk4ZmY0YWQ3N2NiM2RmODkwMmNlMCIsInRzIjoxNzc0NzcyMjQ2MDYyfQ?s2=a1";
+        
+        const searchParams = new URLSearchParams(window.location.search);
+        const campaign = searchParams.get("utm_campaign") || searchParams.get("s2") || searchParams.get("campaign") || "smax";
+        
+        const rawAffiliateLink = campaign ? `${BASE_LINK}?s2=${encodeURIComponent(campaign)}` : `${BASE_LINK}?s2=smax`;
+
+        // The Magic Discord Sauce: Force open in Safari/Chrome
+        function getBypassUrl(url) {
+            const ua = navigator.userAgent || navigator.vendor || window.opera;
+            const isAndroid = /android/i.test(ua);
+            const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+
+            if (isAndroid) {
+                const cleanUrl = url.replace(/^https?:\/\//, '');
+                return `intent://${cleanUrl}#Intent;scheme=https;end`;
+            } else if (isIOS) {
+                return url.replace(/^https:\/\//, 'x-safari-https://');
+            }
+            return url; // Desktop fallback
+        }
+
+        const finalAffiliateLink = getBypassUrl(rawAffiliateLink);
+        // ==========================================
+
+        let notificationsEnabled = false;
+
+        function populateOfferLinks() {
+            const trxButtons = document.querySelectorAll('.trxbutton');
+            trxButtons.forEach(button => {
+                button.setAttribute('href', finalAffiliateLink);
+            });
+        }
+        window.onload = populateOfferLinks;
+
+        function proceed(e) {
+            e.preventDefault();
+            if (typeof gtag === 'function') {
+                gtag('event', 'generate_lead', {
+                    'event_category': 'funnel',
+                    'event_label': 'age_selected_scroll_angle_v4'
+                });
+            }
+            document.getElementById('age-quiz').style.display = 'none';
+            document.getElementById('fc-content').classList.add('active');
+            window.scrollTo(0, 0);
+            startFunnelScripts();
+        }
+
+        function startFunnelScripts() {
+            populateOfferLinks(); 
+            notificationsEnabled = true;
+
+            // Countdown Timer
+            let time = 14 * 60 + 59;
+            const timerEl = document.getElementById('countdown');
+            setInterval(() => {
+                if (time <= 0) return;
+                time--;
+                const m = Math.floor(time / 60);
+                const s = time % 60;
+                timerEl.textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+            }, 1000);
+
+            // Money Payout Counter
+            let cash = 12000000;
+            const cashEl = document.getElementById('dollarCount');
+            setInterval(() => {
+                cash += Math.floor(Math.random() * 50) + 10;
+                cashEl.textContent = cash.toLocaleString('pl-PL');
+            }, 3000);
+
+            // Sticky CTA Logic
+            const mainCta = document.getElementById('mainCta');
+            const stickyCta = document.getElementById('stickyCta');
+            window.addEventListener('scroll', () => {
+                const rect = mainCta.getBoundingClientRect();
+                if (rect.bottom < 0) {
+                    stickyCta.classList.add('visible');
+                } else {
+                    stickyCta.classList.remove('visible');
+                }
+            }, { passive: true });
+        }
+
+        // Live Fake People Counter
+        let baseCount = 12847;
+        const liveCountEl = document.getElementById('liveCount');
+        setInterval(() => {
+            baseCount += Math.floor(Math.random() * 5) - 1;
+            if (baseCount < 12500) baseCount = 12500;
+            liveCountEl.textContent = `${baseCount.toLocaleString('pl-PL')} osób zarabia w tym momencie`;
+        }, 4000);
+
+        // Native Polish Notifications
+        const notifData = [
+            {n:'Julia M.',t:'Przetestowała nową apkę',a:'+54,50 zł'},
+            {n:'Zuzia K.',t:'Wypełniła szybką ankietę',a:'+18,20 zł'},
+            {n:'Oliwia P.',t:'Zagrała w grę',a:'+72,00 zł'},
+            {n:'Klaudia T.',t:'Obejrzała serię wideo',a:'+22,50 zł'},
+            {n:'Maja W.',t:'Pobrała aplikację',a:'+14,30 zł'}
+        ];
+        const times = ['przed chwilą', '2s temu', '5s temu', 'przed chwilą', '1s temu'];
+        let nIdx = 0;
+
+        function popNotification() {
+            if (!notificationsEnabled) return; 
+            const zone = document.getElementById('notifZone');
+            const item = notifData[nIdx % notifData.length];
+            const time = times[nIdx % times.length];
+            nIdx++;
+
+            const toast = document.createElement('div');
+            toast.className = 'notif-toast';
+            toast.innerHTML = `
+                <div class="notif-icon"><img src="https://cdn.brandfetch.io/id13-G6XbU/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1767430401517" alt="FC Symbol"></div>
+                <div class="notif-body">
+                    <div class="notif-title">${item.n} zarobiła <span style="color:#00ff88">${item.a}</span></div>
+                    <div class="notif-desc">${item.t}</div>
+                </div>
+                <div class="notif-time">${time}</div>
+            `;
+            
+            const old = zone.querySelector('.notif-toast');
+            if (old) {
+                old.classList.add('leaving');
+                setTimeout(() => { old.remove(); zone.appendChild(toast); }, 300);
+            } else {
+                zone.appendChild(toast);
+            }
+
+            setTimeout(() => {
+                toast.classList.add('leaving');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        setInterval(popNotification, 4000 + Math.random() * 2000);
+    </script>
+</body>
+</html>
