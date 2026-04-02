@@ -2,12 +2,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
-  <title>Zarabiaj na Scrollowaniu</title>
-  <meta property="og:title" content="Odbierz dostęp do aplikacji">
-  <meta property="og:description" content="Zamień czas spędzony przed ekranem na prawdziwą kasę.">
-  
+  <title>Freecash - Scrolluj i Zarabiaj</title>
+  <meta property="og:title" content="Freecash - Scrolluj i Zarabiaj">
+  <meta property="og:description" content="Zamień czas spędzony przed ekranem w pieniądze.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Freecash - Scrolluj i Zarabiaj">
+  <meta name="twitter:description" content="Zamień czas spędzony przed ekranem w pieniądze.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
@@ -37,7 +40,7 @@
   ttq.page();
   }(window,document,'ttq');
   </script>
-  
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; overflow-x: hidden; }
@@ -45,369 +48,134 @@
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: #05050A;
-      color: #ffffff;
+      color: #fff;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     ::selection { background: #00ff88; color: #000; }
 
-    /* Premium Dark Mode Background Effects */
-    .bg-glow { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+    .bg-glow {
+      position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0;
+    }
     .bg-glow::before {
-      content: ''; position: absolute; top: -150px; left: -100px;
-      width: 600px; height: 600px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,255,136,0.15) 0%, rgba(0,0,0,0) 70%);
-      filter: blur(60px);
+      content: ''; position: absolute; top: -100px; left: -100px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: rgba(0,255,136,0.2); filter: blur(120px);
     }
     .bg-glow::after {
-      content: ''; position: absolute; bottom: -100px; right: -50px;
-      width: 400px; height: 400px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,255,136,0.1) 0%, rgba(0,0,0,0) 70%);
-      filter: blur(50px);
+      content: ''; position: absolute; bottom: -50px; right: -50px;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: rgba(0,255,136,0.1); filter: blur(100px);
     }
     .grid-bg {
-      position: fixed; inset: 0; pointer-events: none; z-index: 0;
-      background: linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
-                  linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size: 30px 30px;
-      mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+      position: fixed; inset: 0; pointer-events: none;
+      background:
+        linear-gradient(to right, #8080800a 1px, transparent 1px),
+        linear-gradient(to bottom, #8080800a 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: linear-gradient(to bottom, black, transparent);
+      -webkit-mask-image: linear-gradient(to bottom, black, transparent);
     }
 
-    /* Shared Layout */
-    .screen-container {
+    /* ============ PAGE 1: AGE GATE ============ */
+
+    #screen0 {
       min-height: 100vh; min-height: 100dvh;
       display: flex; flex-direction: column; align-items: center;
-      padding: 0 24px 30px;
-      padding-top: max(24px, env(safe-area-inset-top));
+      padding: 0 24px 20px;
+      padding-top: max(16px, env(safe-area-inset-top));
       position: relative; z-index: 10;
-      transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: opacity 0.4s ease;
     }
-    .screen-content { width: 100%; max-width: 420px; margin: auto 0; }
-    
-    .hidden { display: none !important; }
-    .fade-out { opacity: 0; transform: translateY(-10px); pointer-events: none; }
-    .fade-in { animation: smoothUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-    @keyframes smoothUp { 
-      0% { opacity: 0; transform: translateY(20px); } 
-      100% { opacity: 1; transform: translateY(0); } 
+    #screen0.fade-out { opacity: 0; pointer-events: none; }
+    #screen0.hidden { display: none; }
+
+    .s0-main {
+      width: 100%; max-width: 400px; text-align: center;
+      margin: auto 0;
     }
 
-    /* Common Elements */
-    .logo-box {
-      width: 64px; height: 64px; border-radius: 18px; margin: 0 auto 24px;
-      background: linear-gradient(145deg, #1a1a24, #0d0d12);
-      border: 1px solid rgba(0, 255, 136, 0.3);
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 0 30px rgba(0, 255, 136, 0.15), inset 0 0 20px rgba(0, 255, 136, 0.05);
+    .s0-logobox {
+      width: 72px; height: 72px; border-radius: 20px; margin: 0 auto 20px;
+      border: 1px solid rgba(255,255,255,0.1); overflow: hidden;
+      background: #141414; box-shadow: 0 0 28px rgba(0,255,136,0.25);
     }
-    .logo-box svg { width: 32px; height: 32px; color: #00ff88; }
+    .s0-logobox img { width: 100%; height: 100%; object-fit: cover; }
 
-    .main-title {
-      font-size: 44px; font-weight: 900; letter-spacing: -0.04em;
-      line-height: 1.05; margin-bottom: 12px; text-align: center;
+    .s0-title {
+      font-size: 42px; font-weight: 900; letter-spacing: -0.03em;
+      line-height: 1.1; margin-bottom: 12px;
     }
-    .main-title .green { 
-      color: #00ff88; 
-      text-shadow: 0 0 40px rgba(0,255,136,0.4); 
-    }
-    
-    .sub-title {
-      color: rgba(255,255,255,0.6); font-size: 16px; line-height: 1.5;
-      margin-bottom: 20px; text-align: center; font-weight: 500;
+    .s0-title .green { color: #00ff88; text-shadow: 0 0 40px rgba(0,255,136,0.3); }
+
+    .s0-sub {
+      color: rgba(255,255,255,0.5); font-size: 15px; line-height: 1.5;
+      margin-bottom: 14px;
     }
 
-    .pill-badge {
-      display: inline-flex; justify-content: center; align-items: center;
-      background: rgba(0,255,136,0.1); border: 1px solid rgba(0,255,136,0.2);
-      padding: 8px 24px; border-radius: 100px;
-      font-size: 15px; color: rgba(255,255,255,0.8);
-      margin: 0 auto 32px; font-weight: 600;
-      box-shadow: 0 4px 20px rgba(0,255,136,0.05);
+    .s0-pill {
+      display: inline-block;
+      background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.18);
+      padding: 8px 20px; border-radius: 100px;
+      font-size: 14px; color: rgba(255,255,255,0.5);
+      margin-bottom: 32px;
     }
-    .pill-badge b { color: #00ff88; margin-left: 5px; }
+    .s0-pill b { color: #00ff88; font-weight: 700; }
 
-    /* Age Gate Buttons */
-    .btn-group { display: flex; flex-direction: column; gap: 12px; }
-    .action-btn {
+    .age-buttons { display: flex; flex-direction: column; gap: 10px; }
+    .age-btn {
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      padding: 18px 24px; background: rgba(255,255,255,0.03); 
-      border: 1px solid rgba(255,255,255,0.08);
+      padding: 16px 24px; height: 82px; background: #0E0E14; border: 1px solid rgba(255,255,255,0.08);
       border-radius: 16px; cursor: pointer; transition: all 0.2s ease;
-      text-align: center; backdrop-filter: blur(10px);
+      text-align: center;
     }
-    .action-btn-title { font-size: 18px; font-weight: 800; margin-bottom: 4px; color: #fff; }
-    .action-btn-sub { font-size: 12px; color: rgba(255,255,255,0.4); font-weight: 500; }
-    
-    .action-btn.primary {
-      background: #00ff88; border-color: #00ff88; 
-      box-shadow: 0 8px 32px rgba(0,255,136,0.25);
+    .age-btn-title { font-size: 17px; font-weight: 700; margin-bottom: 3px; color: #fff; letter-spacing: -0.02em; }
+    .age-btn-subtitle { font-size: 11px; color: rgba(255,255,255,0.4); font-weight: 500; }
+    .age-btn.primary {
+      background: #00ff88; border-color: #00ff88; box-shadow: 0 6px 28px rgba(0,255,136,0.3);
     }
-    .action-btn.primary .action-btn-title { color: #000; }
-    .action-btn.primary .action-btn-sub { color: rgba(0,0,0,0.6); font-weight: 600;}
-    
-    .action-btn:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.2); }
-    .action-btn.primary:hover { box-shadow: 0 12px 40px rgba(0,255,136,0.4); }
-    .action-btn:active { transform: translateY(1px); }
+    .age-btn.primary .age-btn-title { color: #000; }
+    .age-btn.primary .age-btn-subtitle { color: rgba(0,0,0,0.5); }
+    .age-btn:hover { transform: translateY(-2px); }
+    .age-btn.primary:hover { box-shadow: 0 10px 36px rgba(0,255,136,0.4); }
+    .age-btn:active { transform: translateY(0); }
 
-    .reviews-box { margin-top: 32px; text-align: center; }
-    .stars { color: #00ff88; font-size: 18px; letter-spacing: 2px; text-shadow: 0 0 10px rgba(0,255,136,0.5);}
-    .rating-text { font-size: 14px; color: rgba(255,255,255,0.4); margin-left: 8px; font-weight: 500;}
-    .rating-text b { color: #fff; }
+    .s0-reviews { margin-top: 24px; }
+    .s0-stars { color: #fbbf24; font-size: 16px; letter-spacing: 2px; }
+    .s0-rating { font-size: 13px; color: rgba(255,255,255,0.35); margin-left: 6px; }
+    .s0-rating b { color: rgba(255,255,255,0.7); }
 
-    /* Main Screen Steps */
-    .status-badge {
-      display: flex; align-items: center; justify-content: center; gap: 6px;
-      margin: 0 auto 16px; width: fit-content;
-      padding: 6px 16px; background: rgba(0,255,136,0.1);
+    /* ============ PAGE 2: MAIN ============ */
+
+    #screen3 {
+      min-height: 100vh; display: none; flex-direction: column;
+      align-items: center; padding: 24px 20px; position: relative; z-index: 10;
+      animation: fadeIn 0.4s ease;
+    }
+    #screen3.visible { display: flex; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+    .s3 { width: 100%; max-width: 400px; }
+
+    .s3-top { text-align: center; margin-bottom: 20px; }
+    .s3-logo { width: 56px; height: 56px; border-radius: 16px; margin: 0 auto 12px; overflow: hidden; box-shadow: 0 0 24px rgba(0,255,136,0.2); }
+    .s3-logo img { width: 100%; height: 100%; object-fit: cover; }
+    .s3-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 14px; background: rgba(0,255,136,0.1);
       border: 1px solid rgba(0,255,136,0.2); border-radius: 100px;
-      font-size: 12px; font-weight: 800; color: #00ff88; text-transform: uppercase; letter-spacing: 0.05em;
+      font-size: 11px; font-weight: 700; color: #00ff88;
+      text-transform: uppercase; letter-spacing: 0.04em;
+      margin-bottom: 14px;
     }
-    .status-badge svg { width: 14px; height: 14px; }
-
-    .step-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
-    .step-card {
-      display: flex; align-items: flex-start; gap: 14px;
-      background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 16px; padding: 16px; backdrop-filter: blur(10px);
+    .s3-badge svg { width: 12px; height: 12px; }
+    .s3-top h1 {
+      font-size: 36px; font-weight: 900; letter-spacing: -0.03em;
+      line-height: 1.05; margin-bottom: 6px;
     }
-    .step-card.active {
-      background: rgba(0,255,136,0.03); border-color: rgba(0,255,136,0.2);
-    }
-    .step-num {
-      width: 32px; height: 32px; border-radius: 10px; flex-shrink: 0;
-      background: #00ff88; color: #000;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 15px; font-weight: 800; box-shadow: 0 4px 12px rgba(0,255,136,0.3);
-    }
-    .step-text h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; color: #fff; }
-    .step-text p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.4; }
-    .step-text b { color: #00ff88; font-weight: 600; }
+    .s3-top h1 span { color: #00ff88; text-shadow: 0 0 30px rgba(0,255,136,0.25); }
+    .s3-top p { font-size: 14px; color: rgba(255,255,255,0.45); }
 
-    /* Final CTA */
-    .final-cta {
-      display: flex; align-items: center; justify-content: center; gap: 12px;
-      width: 100%; padding: 20px; background: #00ff88; color: #000;
-      border: none; border-radius: 16px; text-decoration: none;
-      box-shadow: 0 8px 32px rgba(0,255,136,0.3);
-      transition: all 0.2s; margin-bottom: 24px;
-    }
-    .final-cta:hover { transform: scale(1.02); box-shadow: 0 12px 40px rgba(0,255,136,0.4); }
-    .final-cta:active { transform: scale(0.98); }
-    .final-cta-content { display: flex; flex-direction: column; align-items: center; }
-    .final-cta-title { font-size: 20px; font-weight: 900; letter-spacing: -0.02em; }
-    .final-cta-sub { font-size: 12px; font-weight: 700; opacity: 0.7; margin-top: 2px; text-transform: uppercase;}
-
-    /* Stats Footer */
-    .stats-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05);
-      border-radius: 16px; padding: 18px 10px;
-    }
-    .stat-item { text-align: center; }
-    .stat-item:nth-child(2) { border-left: 1px solid rgba(255,255,255,0.08); border-right: 1px solid rgba(255,255,255,0.08); }
-    .stat-val { font-size: 20px; font-weight: 900; color: #fff; margin-bottom: 4px;}
-    .stat-lbl { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.05em;}
-
-    @media (max-height: 700px) {
-      .main-title { font-size: 38px; }
-      .step-card { padding: 12px; }
-      .final-cta { padding: 16px; }
-    }
-  </style>
-</head>
-<body>
-  <div class="bg-glow"></div>
-  <div class="grid-bg"></div>
-
-  <div id="screen0" class="screen-container">
-    <div class="screen-content" style="display: flex; flex-direction: column; align-items: center;">
-      
-      <div class="logo-box">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3" />
-        </svg>
-      </div>
-      
-      <h1 class="main-title">Zarabiaj na<br><span class="green">Scrollowaniu</span></h1>
-      <p class="sub-title">Zamień bezmyślne przewijanie ekranu<br>na prawdziwą kasę.</p>
-      
-      <div class="pill-badge">
-        Zarabiaj do <b>4 000 zł tygodniowo</b>
-      </div>
-
-      <div class="btn-group" style="width: 100%;">
-        <button type="button" class="action-btn primary" id="ageOver21">
-          <span class="action-btn-title">Mam 21+ lat</span>
-          <span class="action-btn-sub">Wypłaty od razu na BLIK, mBank, PayPal</span>
-        </button>
-        <button type="button" class="action-btn" id="ageUnder21">
-          <span class="action-btn-title">Mam poniżej 21 lat</span>
-          <span class="action-btn-sub">Tylko standardowy przelew na konto</span>
-        </button>
-      </div>
-
-      <div class="reviews-box">
-        <span class="stars">★★★★★</span>
-        <span class="rating-text"><b>4.9</b> · 128 tys. weryfikacji</span>
-      </div>
-
-    </div>
-  </div>
-
-  <div id="screen3" class="screen-container hidden">
-    <div class="screen-content fade-in">
-      
-      <div class="status-badge">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-        <span>Kwalifikujesz się</span>
-      </div>
-
-      <h1 class="main-title">Odbierz<br><span class="green">swoją kasę</span></h1>
-      <p class="sub-title" style="margin-bottom: 24px;">Wykonaj 3 proste kroki poniżej, aby odblokować zarabianie na TikToku.</p>
-
-      <div class="step-list">
-        <div class="step-card">
-          <div class="step-num">1</div>
-          <div class="step-text">
-            <h4>Załóż darmowe konto</h4>
-            <p>Zgarnij <b>40 zł na start</b> za samą rejestrację w aplikacji.</p>
-          </div>
-        </div>
-        
-        <div class="step-card active">
-          <div class="step-num">2</div>
-          <div class="step-text">
-            <h4>Zdejmij kłódkę (Ważne)</h4>
-            <p>Wyklikaj <b>2 darmowe apki z listy</b>, żeby zweryfikować konto. To odblokuje zarabianie (zajmuje 3 minuty).</p>
-          </div>
-        </div>
-        
-        <div class="step-card">
-          <div class="step-num">3</div>
-          <div class="step-text">
-            <h4>Wypłać siano</h4>
-            <p>Zlecaj wypłaty bezpośrednio na swojego BLIKa, konto bankowe lub Revolut.</p>
-          </div>
-        </div>
-      </div>
-
-      <a href="https://go2rewardable.com/click/1" class="final-cta" id="cta-btn" onclick="handleClick(event)">
-        <div class="final-cta-content">
-          <span class="final-cta-title">ODBIERZ DOSTĘP TERAZ</span>
-          <span class="final-cta-sub">Darmowa Apka na iOS & Android</span>
-        </div>
-      </a>
-
-      <div class="stats-grid">
-        <div class="stat-item"><div class="stat-val">500K+</div><div class="stat-lbl">Aktywnych</div></div>
-        <div class="stat-item"><div class="stat-val">18M zł</div><div class="stat-lbl">Wypłacono</div></div>
-        <div class="stat-item"><div class="stat-val">&lt;3 min</div><div class="stat-lbl">Na Wypłatę</div></div>
-      </div>
-
-    </div>
-  </div>
-
-  <script>
-    var clickBaseUrl = 'https://go2rewardable.com/click';
-    var clickPath = '/1';
-
-    function makeId() {
-      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random() * 16 | 0;
-        var v = c === 'x' ? r : (r & 0x3) | 0x8;
-        return v.toString(16);
-      });
-    }
-
-    function initAgeGate() {
-      var screen0 = document.getElementById('screen0');
-      var screen3 = document.getElementById('screen3');
-      
-      document.getElementById('ageOver21').addEventListener('click', function() {
-        clickPath = '/1';
-        passAgeGate();
-      });
-      document.getElementById('ageUnder21').addEventListener('click', function() {
-        clickPath = '/2';
-        passAgeGate();
-      });
-
-      function passAgeGate() {
-        screen0.classList.add('fade-out');
-        setTimeout(function() {
-          screen0.classList.add('hidden');
-          screen3.classList.remove('hidden');
-          setCtaHref();
-        }, 400);
-      }
-    }
-
-    function setCtaHref() {
-      var cta = document.getElementById('cta-btn');
-      if (cta) {
-        var url = clickBaseUrl + clickPath;
-        cta.href = url;
-      }
-    }
-
-    function trackViewContent() {
-      var viewContentEventId = makeId();
-      try {
-        ttq.track('ViewContent', {
-          event_id: viewContentEventId,
-          content_type: 'lead',
-          content_id: 'landing-page-view',
-          value: 0.5,
-          currency: 'PLN'
-        });
-      } catch (e) {}
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', trackViewContent);
-    } else {
-      trackViewContent();
-    }
-
-    var isProcessing = false;
-    function handleClick(event) {
-      event.preventDefault();
-      if (isProcessing) return;
-      isProcessing = true;
-
-      var url = clickBaseUrl + clickPath;
-      var eventIds = {
-        'AddToCart': makeId(),
-        'CompleteRegistration': makeId(),
-        'SubmitForm': makeId(),
-        'ClickButton': makeId()
-      };
-
-      try {
-        // TikTok Events
-        ttq.track('ClickButton', {
-          event_id: eventIds['ClickButton'],
-          content_type: 'lead',
-          content_id: 'rewards-lead-form',
-          value: 0.5,
-          currency: 'PLN'
-        });
-        
-        // GA4 Custom Event Trigger (Optional, but good for tracking CTA clicks)
-        if (typeof gtag === 'function') {
-          gtag('event', 'generate_lead', {
-            'event_category': 'engagement',
-            'event_label': 'cta_click',
-            'value': 0.5
-          });
-        }
-      } catch (e) {}
-
-      setTimeout(function() { window.location.href = url; }, 500);
-    }
-
-    initAgeGate();
-  </script>
-</body>
-</html>
+    .s3-cta {
+      display: flex; align-items: center; justify-content: center; gap: 14
