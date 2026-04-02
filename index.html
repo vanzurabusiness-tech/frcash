@@ -13,12 +13,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JW1QWB73B1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX'); // PODMIEN NA SWOJE ID G4
+    gtag('config', 'G-JW1QWB73B1');
   </script>
 
   <script async defer src="https://go2rewardable.com/t/t.js"></script>
@@ -79,7 +79,6 @@
     }
 
     /* ============ PAGE 1: AGE GATE ============ */
-
     #screen0 {
       min-height: 100vh; min-height: 100dvh;
       display: flex; flex-direction: column; align-items: center;
@@ -87,9 +86,8 @@
       padding-top: max(16px, env(safe-area-inset-top));
       position: relative; z-index: 10;
       transition: opacity 0.4s ease;
+      opacity: 1; 
     }
-    #screen0.fade-out { opacity: 0; pointer-events: none; }
-    #screen0.hidden { display: none; }
 
     .s0-main {
       width: 100%; max-width: 400px; text-align: center;
@@ -147,14 +145,13 @@
     .s0-rating b { color: rgba(255,255,255,0.7); }
 
     /* ============ PAGE 2: MAIN ============ */
-
     #screen3 {
-      min-height: 100vh; display: none; flex-direction: column;
+      min-height: 100vh; flex-direction: column;
       align-items: center; padding: 24px 20px; position: relative; z-index: 10;
-      animation: fadeIn 0.4s ease;
+      transition: opacity 0.4s ease;
+      display: none; 
+      opacity: 0;
     }
-    #screen3.visible { display: flex; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 
     .s3 { width: 100%; max-width: 400px; }
 
@@ -178,4 +175,237 @@
     .s3-top p { font-size: 14px; color: rgba(255,255,255,0.45); }
 
     .s3-cta {
-      display: flex; align-items: center; justify-content: center; gap: 14
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      width: 100%; padding: 18px; background: #00ff88; color: #000;
+      border: none; border-radius: 16px; text-decoration: none;
+      font-size: 17px; font-weight: 800;
+      box-shadow: 0 0 32px rgba(0,255,136,0.3);
+      transition: transform 0.15s, box-shadow 0.15s;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    .s3-cta:hover { transform: scale(1.02); box-shadow: 0 0 48px rgba(0,255,136,0.4); }
+    .s3-cta:active { transform: scale(0.98); }
+    .s3-cta svg { width: 24px; height: 24px; fill: #000; flex-shrink: 0; }
+    .s3-cta-sub { font-size: 11px; font-weight: 600; opacity: 0.6; margin-top: 1px; }
+
+    .s3-how { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.25); text-transform: uppercase; letter-spacing: 0.15em; text-align: center; margin-bottom: 12px; }
+
+    .s3-steps { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+    .s3-step {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: #13141c; border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px; padding: 12px;
+    }
+    .s3-num {
+      width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+      background: #00ff88; color: #000;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700;
+    }
+    .s3-step-hl {
+      background: #111a15; border-color: rgba(0,255,136,0.2);
+    }
+    .s3-step-text h4 { font-size: 14px; font-weight: 600; margin-bottom: 2px; color: #fff; }
+    .s3-step-text p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.3; }
+    .s3-step-text .g { color: #00ff88; font-weight: 600; }
+
+    .s3-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 14px; padding: 16px 8px; margin-bottom: 16px;
+    }
+    .s3-stat { text-align: center; }
+    .s3-stat:nth-child(2) { border-left: 1px solid rgba(255,255,255,0.08); border-right: 1px solid rgba(255,255,255,0.08); }
+    .s3-stat-val { font-size: 17px; font-weight: 900; line-height: 1; }
+    .s3-stat-lbl { font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.35); text-transform: uppercase; margin-top: 3px; }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-height: 700px) {
+      .s0-logobox { width: 60px; height: 60px; margin-bottom: 14px; }
+      .s0-title { font-size: 36px; margin-bottom: 10px; }
+      .s0-sub { margin-bottom: 10px; }
+      .s0-pill { margin-bottom: 24px; }
+      .age-btn { height: 74px; padding: 14px 20px; }
+      .s0-reviews { margin-top: 18px; }
+    }
+    @media (max-height: 600px) {
+      .s0-logobox { width: 48px; height: 48px; border-radius: 14px; margin-bottom: 10px; }
+      .s0-title { font-size: 30px; margin-bottom: 8px; }
+      .s0-sub { font-size: 13px; margin-bottom: 8px; }
+      .s0-pill { padding: 5px 14px; font-size: 13px; margin-bottom: 18px; }
+      .age-buttons { gap: 8px; }
+      .age-btn { height: 66px; padding: 10px 16px; }
+      .age-btn-title { font-size: 15px; }
+      .s0-reviews { margin-top: 14px; }
+    }
+    @media (min-width: 768px) {
+      .s0-title { font-size: 46px; }
+      .s3-top h1 { font-size: 40px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+  <div class="grid-bg"></div>
+
+  <div id="screen0">
+    <div class="s0-main">
+      <div class="s0-logobox"><img alt="Freecash" src="images/fc.webp"></div>
+      <h1 class="s0-title">Scrolluj i<br><span class="green">Zarabiaj</span></h1>
+      <p class="s0-sub">Zamień czas spędzony przed ekranem w pieniądze.</p>
+      <div class="s0-pill">Zarabiaj do <b>4 000 zł/tydzień</b></div>
+      <div class="age-buttons">
+        <button type="button" class="age-btn primary" id="ageOver21">
+          <span class="age-btn-title">Mam ponad 21 lat</span>
+          <span class="age-btn-subtitle">Natychmiastowe wypłaty: PayPal, przelew, Revolut i więcej</span>
+        </button>
+        <button type="button" class="age-btn" id="ageUnder21">
+          <span class="age-btn-title">Mam poniżej 21 lat</span>
+          <span class="age-btn-subtitle">Ograniczone wypłaty: tylko przelew bankowy</span>
+        </button>
+      </div>
+      <div class="s0-reviews">
+        <span class="s0-stars">★★★★★</span>
+        <span class="s0-rating"><b>4,8</b> · 251 tys. ocen</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="screen3">
+    <div class="s3">
+      <div class="s3-top">
+        <div class="s3-logo"><img alt="Freecash" src="images/fc.webp"></div>
+        <div class="s3-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>
+          <span>Kwalifikujesz się</span>
+        </div>
+        <h1>Scrolluj i<br><span>Zarabiaj</span></h1>
+        <p>Pobierz. 2 oferty. Natychmiastowa wypłata.</p>
+      </div>
+
+      <div class="s3-how">Jak to działa</div>
+
+      <div class="s3-steps">
+        <div class="s3-step">
+          <div class="s3-num">1</div>
+          <div class="s3-step-text">
+            <h4>Załóż konto</h4>
+            <p>Otrzymaj <span class="g">40 zł od razu</span> tylko za rejestrację</p>
+          </div>
+        </div>
+        <div class="s3-step s3-step-hl">
+          <div class="s3-num">2</div>
+          <div class="s3-step-text">
+            <h4>Odblokuj ofertę Scroll</h4>
+            <p>Ukończ <span class="g">2 szybkie oferty</span>, aby odblokować ofertę Scroll. Większość użytkowników kończy w mniej niż 5 minut.</p>
+          </div>
+        </div>
+        <div class="s3-step">
+          <div class="s3-num">3</div>
+          <div class="s3-step-text">
+            <h4>Odbierz wypłatę</h4>
+            <p>PayPal, krypto, przelew lub karty podarunkowe</p>
+          </div>
+        </div>
+      </div>
+
+      <a class="s3-cta" id="cta-btn" onclick="handleClick(event)">
+        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.1 2.48-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.24-1.99 1.1-3.15-1.02.04-2.25.68-2.98 1.54-.66.76-1.24 1.93-1.1 3.05 1.13.09 2.25-.61 2.98-1.44z"></path></svg>
+        <div>
+          <div>Pobierz teraz</div>
+          <div class="s3-cta-sub">iOS & Android · Za darmo</div>
+        </div>
+      </a>
+
+      <div class="s3-stats">
+        <div class="s3-stat"><div class="s3-stat-val">500K+</div><div class="s3-stat-lbl">Użytkowników</div></div>
+        <div class="s3-stat"><div class="s3-stat-val">18 M zł+</div><div class="s3-stat-lbl">Wypłacono</div></div>
+        <div class="s3-stat"><div class="s3-stat-val">&lt;5 min</div><div class="s3-stat-lbl">Pierwsza wypłata</div></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ==========================================================
+    // UPDATE THIS LINK ONLY - ALL TRAFFIC GOES HERE
+    // ==========================================================
+    var AFFILIATE_LINK = 'https://rainawards.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidSI6IjY5OTk4ZmY0YWQ3N2NiM2RmODkwMmNlMCIsInRzIjoxNzc1MTI2NjUzMjE1fQ?s2=1';
+
+    function makeId() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0;
+        var v = c === 'x' ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      });
+    }
+
+    // Age Gate transition logic
+    function initAgeGate() {
+      document.getElementById('ageOver21').addEventListener('click', passAgeGate);
+      document.getElementById('ageUnder21').addEventListener('click', passAgeGate);
+
+      function passAgeGate() {
+        var s0 = document.getElementById('screen0');
+        var s3 = document.getElementById('screen3');
+        
+        s0.style.opacity = '0';
+        
+        setTimeout(function() {
+          s0.style.display = 'none';
+          s3.style.display = 'flex';
+          
+          setTimeout(function() {
+            s3.style.opacity = '1';
+          }, 50);
+        }, 400);
+      }
+    }
+
+    function trackViewContent() {
+      var viewContentEventId = makeId();
+      try {
+        ttq.track('ViewContent', {
+          event_id: viewContentEventId,
+          content_type: 'lead',
+          content_id: 'landing-page-view',
+          value: 0.5,
+          currency: 'PLN'
+        });
+      } catch (e) {}
+    }
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', trackViewContent);
+    } else {
+      trackViewContent();
+    }
+
+    var isProcessing = false;
+    function handleClick(event) {
+      event.preventDefault();
+      if (isProcessing) return;
+      isProcessing = true;
+
+      var eventIds = {
+        'AddToCart': makeId(),
+        'CompleteRegistration': makeId(),
+        'SubmitForm': makeId(),
+        'ClickButton': makeId()
+      };
+
+      try {
+        ttq.track('AddToCart', { event_id: eventIds['AddToCart'], content_type: 'lead', content_id: 'rewards-app-100', value: 0.5, currency: 'PLN' });
+        ttq.track('CompleteRegistration', { event_id: eventIds['CompleteRegistration'], content_type: 'lead', content_id: 'rewards-lead-form', value: 0.5, currency: 'PLN' });
+        ttq.track('SubmitForm', { event_id: eventIds['SubmitForm'], content_type: 'lead', content_id: 'rewards-lead-form', value: 0.5, currency: 'PLN' });
+        ttq.track('ClickButton', { event_id: eventIds['ClickButton'], content_type: 'lead', content_id: 'rewards-lead-form', value: 0.5, currency: 'PLN' });
+      } catch (e) {}
+
+      // Routes traffic in current browser window
+      setTimeout(function() { window.location.href = AFFILIATE_LINK; }, 500);
+    }
+
+    initAgeGate();
+  </script>
+</body>
+</html>
