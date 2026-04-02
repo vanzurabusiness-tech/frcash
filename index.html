@@ -237,12 +237,12 @@
       </div>
 
       <div class="btn-group" style="width: 100%;">
-        <button type="button" class="action-btn primary" id="ageOver18">
-          <span class="action-btn-title">Mam 18+ lat</span>
+        <button type="button" class="action-btn primary" id="ageOver21">
+          <span class="action-btn-title">Mam 21+ lat</span>
           <span class="action-btn-sub">Wypłaty od razu na BLIK, mBank, PayPal</span>
         </button>
-        <button type="button" class="action-btn" id="ageUnder18">
-          <span class="action-btn-title">Mam poniżej 18 lat</span>
+        <button type="button" class="action-btn" id="ageUnder21">
+          <span class="action-btn-title">Mam poniżej 21 lat</span>
           <span class="action-btn-sub">Tylko standardowy przelew na konto</span>
         </button>
       </div>
@@ -324,11 +324,11 @@
       var screen0 = document.getElementById('screen0');
       var screen3 = document.getElementById('screen3');
       
-      document.getElementById('ageOver18').addEventListener('click', function() {
+      document.getElementById('ageOver21').addEventListener('click', function() {
         clickPath = '/1';
         passAgeGate();
       });
-      document.getElementById('ageUnder18').addEventListener('click', function() {
+      document.getElementById('ageUnder21').addEventListener('click', function() {
         clickPath = '/2';
         passAgeGate();
       });
