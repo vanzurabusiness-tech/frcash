@@ -1,18 +1,10 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
-  <title>Freecash - Scrolluj i Zarabiaj</title>
-  <meta property="og:title" content="Freecash - Scrolluj i Zarabiaj">
-  <meta property="og:description" content="Zamień czas spędzony przed ekranem w pieniądze.">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Freecash - Scrolluj i Zarabiaj">
-  <meta name="twitter:description" content="Zamień czas spędzony przed ekranem w pieniądze.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scrolluj i Zarabiaj</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JW1QWB73B1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -21,391 +13,688 @@
     gtag('config', 'G-JW1QWB73B1');
   </script>
 
-  <script async defer src="https://go2rewardable.com/t/t.js"></script>
-  <script>!function(w,d,o,n,c){w[o]=w[o]||function(){(w[o].q=w[o].q||[]).push(arguments)};var s=d.createElement(n),t=d.getElementsByTagName(n)[0];s.async=!0;s.defer=!0;s.src="https://go2rewardable.com/t/t.js";t.parentNode.insertBefore(s,t);}(window,document,"maxconv","script");</script>
-  <noscript><link rel="stylesheet" href="https://go2rewardable.com/t/t.css?mc_ns=1" /></noscript>
-
-  <script>
-  !function(w,d,t){
-  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];
-  ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"];
-  ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};
-  for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);
-  ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e};
-  ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js";
-  ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};
-  var o=d.createElement("script");o.type="text/javascript",o.async=!0,o.src=r+"?sdkid="+e+"&lib="+t;
-  var a=d.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)};
-  ttq.load('D4LHD2BC77UCJ0N6LHT0');
-  ttq.page();
-  }(window,document,'ttq');
-  </script>
-
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; overflow-x: hidden; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --green: #2ee87a;
+      --green-dim: #1db954;
+      --green-glow: rgba(46, 232, 122, 0.35);
+      --green-faint: rgba(46, 232, 122, 0.08);
+      --bg: #060c08;
+      --card: rgba(255,255,255,0.04);
+      --card-border: rgba(255,255,255,0.08);
+      --text-muted: #5a7a5a;
+      --text-sub: #8a9e8a;
+    }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: #05050A;
+      background: var(--bg);
       color: #fff;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      font-family: 'Inter', -apple-system, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      overflow-x: hidden;
     }
 
-    ::selection { background: #00ff88; color: #000; }
+    ::selection { background: var(--green); color: #000; }
 
-    .bg-glow {
-      position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0;
+    .bg-orb {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(80px);
+      opacity: 0.18;
     }
-    .bg-glow::before {
-      content: ''; position: absolute; top: -100px; left: -100px;
-      width: 500px; height: 500px; border-radius: 50%;
-      background: rgba(0,255,136,0.2); filter: blur(120px);
+    .orb-1 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, #2ee87a, transparent 70%);
+      top: -150px; left: 50%;
+      transform: translateX(-50%);
+      animation: float1 8s ease-in-out infinite;
     }
-    .bg-glow::after {
-      content: ''; position: absolute; bottom: -50px; right: -50px;
-      width: 300px; height: 300px; border-radius: 50%;
-      background: rgba(0,255,136,0.1); filter: blur(100px);
+    .orb-2 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, #00c853, transparent 70%);
+      bottom: 200px; right: -80px;
+      animation: float2 10s ease-in-out infinite;
     }
-    .grid-bg {
-      position: fixed; inset: 0; pointer-events: none;
-      background:
-        linear-gradient(to right, #8080800a 1px, transparent 1px),
-        linear-gradient(to bottom, #8080800a 1px, transparent 1px);
-      background-size: 40px 40px;
-      mask-image: linear-gradient(to bottom, black, transparent);
-      -webkit-mask-image: linear-gradient(to bottom, black, transparent);
-    }
-
-    /* ============ PAGE 1: AGE GATE ============ */
-    #screen0 {
-      min-height: 100vh; min-height: 100dvh;
-      display: flex; flex-direction: column; align-items: center;
-      padding: 0 24px 20px;
-      padding-top: max(16px, env(safe-area-inset-top));
-      position: relative; z-index: 10;
-      transition: opacity 0.4s ease;
-      opacity: 1; 
+    .orb-3 {
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, #69f0ae, transparent 70%);
+      bottom: 400px; left: -60px;
+      animation: float2 12s ease-in-out infinite reverse;
     }
 
-    .s0-main {
-      width: 100%; max-width: 400px; text-align: center;
-      margin: auto 0;
+    @keyframes float1 {
+      0%, 100% { transform: translateX(-50%) translateY(0px); }
+      50% { transform: translateX(-50%) translateY(30px); }
+    }
+    @keyframes float2 {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
     }
 
-    .s0-logobox {
-      width: 72px; height: 72px; border-radius: 20px; margin: 0 auto 20px;
-      border: 1px solid rgba(255,255,255,0.1); overflow: hidden;
-      background: #141414; box-shadow: 0 0 28px rgba(0,255,136,0.25);
-    }
-    .s0-logobox img { width: 100%; height: 100%; object-fit: cover; }
-
-    .s0-title {
-      font-size: 42px; font-weight: 900; letter-spacing: -0.03em;
-      line-height: 1.1; margin-bottom: 12px;
-    }
-    .s0-title .green { color: #00ff88; text-shadow: 0 0 40px rgba(0,255,136,0.3); }
-
-    .s0-sub {
-      color: rgba(255,255,255,0.5); font-size: 15px; line-height: 1.5;
-      margin-bottom: 14px;
+    .page {
+      max-width: 430px;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 56px 20px 140px;
+      position: relative;
+      z-index: 1;
     }
 
-    .s0-pill {
-      display: inline-block;
-      background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.18);
-      padding: 8px 20px; border-radius: 100px;
-      font-size: 14px; color: rgba(255,255,255,0.5);
-      margin-bottom: 32px;
+    .app-icon-wrap {
+      position: relative;
+      margin-bottom: 20px;
+      animation: popIn 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
     }
-    .s0-pill b { color: #00ff88; font-weight: 700; }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.6); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .app-icon {
+      position: relative;
+      width: 80px; height: 80px;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(46,232,122,0.3),
+        0 8px 40px rgba(46,232,122,0.4),
+        0 0 80px rgba(46,232,122,0.15);
+    }
+    .app-icon img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
-    .age-buttons { display: flex; flex-direction: column; gap: 10px; }
-    .age-btn {
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      padding: 16px 24px; height: 82px; background: #0E0E14; border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px; cursor: pointer; transition: all 0.2s ease;
+    .trending-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(46,232,122,0.1);
+      border: 1px solid rgba(46,232,122,0.25);
+      border-radius: 30px;
+      padding: 6px 16px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      color: var(--green);
+      text-transform: uppercase;
+      margin-bottom: 26px;
+      animation: fadeUp 0.5s 0.2s ease both;
+      backdrop-filter: blur(8px);
+    }
+    .trending-dot {
+      width: 7px; height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--green);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .headline {
+      text-align: center;
+      font-size: 54px;
+      font-weight: 900;
+      line-height: 1.0;
+      margin-bottom: 18px;
+      letter-spacing: -2.5px;
+      animation: fadeUp 0.5s 0.3s ease both;
+    }
+    .headline .white { color: #ffffff; }
+    .headline .green {
+      color: var(--green);
+      text-shadow: 0 0 40px rgba(46,232,122,0.5);
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--text-sub);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.65;
+      margin-bottom: 36px;
+      max-width: 310px;
+      animation: fadeUp 0.5s 0.4s ease both;
+    }
+    .subtitle strong { color: #b0d0b0; font-weight: 600; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .stats-row {
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      display: flex;
+      align-items: stretch;
+      margin-bottom: 24px;
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+      animation: fadeUp 0.5s 0.5s ease both;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.07),
+        0 4px 30px rgba(0,0,0,0.4);
+    }
+    .stat {
+      flex: 1;
+      padding: 18px 8px;
+      text-align: center;
+      border-right: 1px solid var(--card-border);
+      position: relative;
+    }
+    .stat:last-child { border-right: none; }
+    .stat::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 40%; height: 1px;
+      background: linear-gradient(to right, transparent, var(--green), transparent);
+      opacity: 0.5;
+    }
+    .stat-value {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--green);
+      letter-spacing: -0.5px;
+      text-shadow: 0 0 20px rgba(46,232,122,0.4);
+    }
+    .stat-label {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-top: 5px;
+    }
+
+    .steps-card {
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 36px;
+      backdrop-filter: blur(20px);
+      animation: fadeUp 0.5s 0.6s ease both;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.07),
+        0 4px 30px rgba(0,0,0,0.4);
+    }
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 22px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      position: relative;
+      transition: background 0.2s;
+    }
+    .step:hover { background: rgba(46,232,122,0.04); }
+    .step:last-child { border-bottom: none; }
+
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 34px;
+      bottom: -1px;
+      width: 2px;
+      height: 22px;
+      background: linear-gradient(to bottom, rgba(46,232,122,0.3), transparent);
+      z-index: 1;
+    }
+
+    .step-num {
+      width: 32px; height: 32px;
+      min-width: 32px;
+      background: linear-gradient(135deg, var(--green), #1db954);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 800;
+      color: #060c08;
+      box-shadow: 0 4px 16px rgba(46,232,122,0.45);
+      position: relative;
+      z-index: 2;
+    }
+    .step-content h3 {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #e8f5e8;
+      margin-bottom: 5px;
+      letter-spacing: -0.2px;
+    }
+    .step-content p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .step-content p strong { color: var(--text-sub); font-weight: 500; }
+    .step-content .meta {
+      font-size: 11.5px;
+      color: rgba(138,158,138,0.6);
+      margin-top: 4px;
+      letter-spacing: 0.1px;
+    }
+
+    .social-proof {
+      width: 100%;
+      overflow: hidden;
+      margin-bottom: 20px;
+      animation: fadeUp 0.5s 0.7s ease both;
+    }
+    .ticker-track {
+      display: flex;
+      gap: 12px;
+      animation: ticker 22s linear infinite;
+      width: max-content;
+    }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .ticker-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 30px;
+      padding: 8px 14px;
+      white-space: nowrap;
+      font-size: 12px;
+      color: var(--text-sub);
+      backdrop-filter: blur(10px);
+    }
+    .ticker-avatar {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green), #1db954);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 700;
+      color: #060c08;
+    }
+    .ticker-amount { color: var(--green); font-weight: 700; }
+
+    .cta-wrapper {
+      position: fixed;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 430px;
+      padding: 16px 20px 32px;
+      background: linear-gradient(to top, #060c08 55%, transparent);
+      z-index: 100;
+    }
+    .cta-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #4dffa0, #2ee87a, #1db954);
+      border: none;
+      border-radius: 16px;
+      padding: 18px;
+      font-size: 16px;
+      font-weight: 800;
+      color: #060c08;
+      cursor: pointer;
+      letter-spacing: -0.2px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      box-shadow:
+        0 4px 30px rgba(46,232,122,0.5),
+        0 0 0 1px rgba(46,232,122,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%);
+      transform: translateX(-100%);
+      animation: shimmer 3s ease-in-out infinite 1.5s;
+    }
+    @keyframes shimmer {
+      to { transform: translateX(100%); }
+    }
+    .cta-btn:hover {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow:
+        0 8px 40px rgba(46,232,122,0.6),
+        0 0 0 1px rgba(46,232,122,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.4);
+    }
+    .cta-btn:active { transform: scale(0.98) translateY(0); }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal-sheet {
+      width: 100%;
+      max-width: 430px;
+      background: #0d1a0f;
+      border: 1px solid rgba(46,232,122,0.2);
+      border-bottom: none;
+      border-radius: 28px 28px 0 0;
+      padding: 12px 28px 44px;
+      text-align: center;
+      transform: translateY(100%);
+      transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+      box-shadow:
+        0 -4px 60px rgba(0,0,0,0.7),
+        0 -1px 0 rgba(46,232,122,0.2),
+        inset 0 1px 0 rgba(255,255,255,0.06);
+      position: relative;
+      overflow: hidden;
+    }
+    .modal-sheet::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 60%; height: 1px;
+      background: linear-gradient(to right, transparent, var(--green), transparent);
+    }
+    .modal-overlay.active .modal-sheet {
+      transform: translateY(0);
+    }
+
+    .modal-handle {
+      width: 40px; height: 4px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 4px;
+      margin: 0 auto 28px;
+    }
+
+    .modal-icon {
+      width: 64px; height: 64px;
+      background: rgba(46,232,122,0.12);
+      border: 1px solid rgba(46,232,122,0.25);
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+      font-size: 28px;
+      box-shadow: 0 0 30px rgba(46,232,122,0.2);
+    }
+
+    .modal-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      color: var(--green);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .modal-title {
+      font-size: 28px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 12px;
+      letter-spacing: -1px;
+    }
+    .modal-title span {
+      color: var(--green);
+      text-shadow: 0 0 30px rgba(46,232,122,0.5);
+    }
+    .modal-desc {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.65;
+      margin-bottom: 28px;
+      max-width: 280px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .modal-highlight {
+      background: rgba(46,232,122,0.07);
+      border: 1px solid rgba(46,232,122,0.18);
+      border-radius: 14px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+      text-align: left;
+    }
+    .modal-highlight-icon {
+      font-size: 22px;
+      min-width: 30px;
       text-align: center;
     }
-    .age-btn-title { font-size: 17px; font-weight: 700; margin-bottom: 3px; color: #fff; letter-spacing: -0.02em; }
-    .age-btn-subtitle { font-size: 11px; color: rgba(255,255,255,0.4); font-weight: 500; }
-    .age-btn.primary {
-      background: #00ff88; border-color: #00ff88; box-shadow: 0 6px 28px rgba(0,255,136,0.25);
+    .modal-highlight-text {
+      font-size: 13px;
+      color: var(--text-sub);
+      line-height: 1.5;
     }
-    .age-btn.primary .age-btn-title { color: #000; }
-    .age-btn.primary .age-btn-subtitle { color: rgba(0,0,0,0.5); }
-    .age-btn:hover { transform: translateY(-2px); }
-    .age-btn.primary:hover { box-shadow: 0 10px 36px rgba(0,255,136,0.4); }
-    .age-btn:active { transform: translateY(0); }
+    .modal-highlight-text strong { color: var(--green); font-weight: 600; }
 
-    .s0-reviews { margin-top: 24px; }
-    .s0-stars { color: #fbbf24; font-size: 16px; letter-spacing: 2px; }
-    .s0-rating { font-size: 13px; color: rgba(255,255,255,0.35); margin-left: 6px; }
-    .s0-rating b { color: rgba(255,255,255,0.7); }
-
-    /* ============ PAGE 2: MAIN ============ */
-    #screen3 {
-      min-height: 100vh; flex-direction: column;
-      align-items: center; padding: 24px 20px; position: relative; z-index: 10;
-      transition: opacity 0.4s ease;
-      display: none; 
-      opacity: 0;
-    }
-
-    .s3 { width: 100%; max-width: 400px; }
-
-    .s3-top { text-align: center; margin-bottom: 20px; }
-    .s3-logo { width: 56px; height: 56px; border-radius: 16px; margin: 0 auto 12px; overflow: hidden; box-shadow: 0 0 24px rgba(0,255,136,0.2); }
-    .s3-logo img { width: 100%; height: 100%; object-fit: cover; }
-    .s3-badge {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 5px 14px; background: rgba(0,255,136,0.1);
-      border: 1px solid rgba(0,255,136,0.2); border-radius: 100px;
-      font-size: 11px; font-weight: 700; color: #00ff88;
-      text-transform: uppercase; letter-spacing: 0.04em;
-      margin-bottom: 14px;
-    }
-    .s3-badge svg { width: 12px; height: 12px; }
-    .s3-top h1 {
-      font-size: 36px; font-weight: 900; letter-spacing: -0.03em;
-      line-height: 1.05; margin-bottom: 6px;
-    }
-    .s3-top h1 span { color: #00ff88; text-shadow: 0 0 30px rgba(0,255,136,0.25); }
-    .s3-top p { font-size: 14px; color: rgba(255,255,255,0.45); }
-
-    .s3-cta {
-      display: flex; align-items: center; justify-content: center; gap: 14px;
-      width: 100%; padding: 18px; background: #00ff88; color: #000;
-      border: none; border-radius: 16px; text-decoration: none;
-      font-size: 17px; font-weight: 800;
-      box-shadow: 0 0 32px rgba(0,255,136,0.3);
-      transition: transform 0.15s, box-shadow 0.15s;
-      margin-bottom: 20px;
+    .modal-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #4dffa0, #2ee87a, #1db954);
+      border: none;
+      border-radius: 14px;
+      padding: 17px;
+      font-size: 16px;
+      font-weight: 800;
+      color: #060c08;
       cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      box-shadow:
+        0 4px 25px rgba(46,232,122,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.4);
+      letter-spacing: -0.2px;
     }
-    .s3-cta:hover { transform: scale(1.02); box-shadow: 0 0 48px rgba(0,255,136,0.4); }
-    .s3-cta:active { transform: scale(0.98); }
-    .s3-cta svg { width: 24px; height: 24px; fill: #000; flex-shrink: 0; }
-    .s3-cta-sub { font-size: 11px; font-weight: 600; opacity: 0.6; margin-top: 1px; }
+    .modal-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 35px rgba(46,232,122,0.55), inset 0 1px 0 rgba(255,255,255,0.4);
+    }
+    .modal-btn:active { transform: scale(0.98); }
 
-    .s3-how { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.25); text-transform: uppercase; letter-spacing: 0.15em; text-align: center; margin-bottom: 12px; }
-
-    .s3-steps { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
-    .s3-step {
-      display: flex; align-items: flex-start; gap: 12px;
-      background: #13141c; border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 10px; padding: 12px;
-    }
-    .s3-num {
-      width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
-      background: #00ff88; color: #000;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 700;
-    }
-    .s3-step-hl {
-      background: #111a15; border-color: rgba(0,255,136,0.2);
-    }
-    .s3-step-text h4 { font-size: 14px; font-weight: 600; margin-bottom: 2px; color: #fff; }
-    .s3-step-text p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.3; }
-    .s3-step-text .g { color: #00ff88; font-weight: 600; }
-
-    .s3-stats {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.05);
-      border-radius: 14px; padding: 16px 8px; margin-bottom: 16px;
-    }
-    .s3-stat { text-align: center; }
-    .s3-stat:nth-child(2) { border-left: 1px solid rgba(255,255,255,0.08); border-right: 1px solid rgba(255,255,255,0.08); }
-    .s3-stat-val { font-size: 17px; font-weight: 900; line-height: 1; }
-    .s3-stat-lbl { font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.35); text-transform: uppercase; margin-top: 3px; }
-
-    /* ============ RESPONSIVE ============ */
-    @media (max-height: 700px) {
-      .s0-logobox { width: 60px; height: 60px; margin-bottom: 14px; }
-      .s0-title { font-size: 36px; margin-bottom: 10px; }
-      .s0-sub { margin-bottom: 10px; }
-      .s0-pill { margin-bottom: 24px; }
-      .age-btn { height: 74px; padding: 14px 20px; }
-      .s0-reviews { margin-top: 18px; }
-    }
-    @media (max-height: 600px) {
-      .s0-logobox { width: 48px; height: 48px; border-radius: 14px; margin-bottom: 10px; }
-      .s0-title { font-size: 30px; margin-bottom: 8px; }
-      .s0-sub { font-size: 13px; margin-bottom: 8px; }
-      .s0-pill { padding: 5px 14px; font-size: 13px; margin-bottom: 18px; }
-      .age-buttons { gap: 8px; }
-      .age-btn { height: 66px; padding: 10px 16px; }
-      .age-btn-title { font-size: 15px; }
-      .s0-reviews { margin-top: 14px; }
-    }
-    @media (min-width: 768px) {
-      .s0-title { font-size: 46px; }
-      .s3-top h1 { font-size: 40px; }
+    @media (max-width: 400px) {
+      .headline { font-size: 42px; }
     }
   </style>
 </head>
 <body>
-  <div class="bg-glow"></div>
-  <div class="grid-bg"></div>
 
-  <div id="screen0">
-    <div class="s0-main">
-      <div class="s0-logobox"><img alt="Freecash" src="https://cdn.brandfetch.io/id13-G6XbU/w/400/h/400/theme/dark/icon.jpeg?c=1dxbfHSJFAPEGdCLU4o5B"></div>
-      <h1 class="s0-title">Scrolluj i<br><span class="green">Zarabiaj</span></h1>
-      <p class="s0-sub">Zamień czas spędzony przed ekranem w pieniądze.</p>
-      <div class="s0-pill">Zarabiaj do <b>4 000 zł/tydzień</b></div>
-      <div class="age-buttons">
-        <button type="button" class="age-btn primary" id="ageOver21">
-          <span class="age-btn-title">Mam ponad 21 lat</span>
-          <span class="age-btn-subtitle">Natychmiastowe wypłaty: PayPal, przelew, Revolut i więcej</span>
-        </button>
-        <button type="button" class="age-btn" id="ageUnder21">
-          <span class="age-btn-title">Mam poniżej 21 lat</span>
-          <span class="age-btn-subtitle">Ograniczone wypłaty: tylko przelew bankowy</span>
-        </button>
-      </div>
-      <div class="s0-reviews">
-        <span class="s0-stars">★★★★★</span>
-        <span class="s0-rating"><b>4,8</b> · 251 tys. ocen</span>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <div class="page">
+
+    <div class="app-icon-wrap">
+      <div class="app-icon">
+        <img src="https://cdn.brandfetch.io/id13-G6XbU/w/400/h/400/theme/dark/icon.jpeg?c=1dxbfHSJFAPEGdCLU4o5B" alt="Freecash Logo">
       </div>
     </div>
+
+    <div class="trending-badge">
+      <div class="trending-dot"></div>
+      Popularne w Polsce
+    </div>
+
+    <div class="headline">
+      <span class="white">Scrolluj i<br></span>
+      <span class="green">Zarabiaj</span>
+    </div>
+
+    <p class="subtitle">
+      Dołącz do tysięcy osób zarabiających codziennie za scrollowanie. Załóż darmowe konto, aby odblokować pełen dostęp.
+    </p>
+
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-value">Do 4 000 zł</div>
+        <div class="stat-label">Wypłaty / Tydz.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">500K+</div>
+        <div class="stat-label">Użytkowników</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">&lt;5 min</div>
+        <div class="stat-label">Pierwsza wypłata</div>
+      </div>
+    </div>
+
+    <div class="social-proof">
+      <div class="ticker-track" id="ticker">
+        </div>
+    </div>
+
+    <div class="steps-card">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Załóż konto</h3>
+          <p>Otrzymaj <strong>40 zł od razu</strong> tylko za rejestrację</p>
+          <p class="meta">Działa w przeglądarce &nbsp;•&nbsp; Za darmo</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Odblokuj ofertę Scroll</h3>
+          <p>Ukończ <strong>2 szybkie oferty</strong>, aby odblokować opcję płatnej przewijanki.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Odbierz wypłatę</h3>
+          <p>Środki lecą prosto na <strong>BLIK, Revolut lub przelew bankowy</strong>.</p>
+          <p class="meta">Żadnego czekania. Natychmiastowo.</p>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-  <div id="screen3">
-    <div class="s3">
-      <div class="s3-top">
-        <div class="s3-logo"><img alt="Freecash" src="https://cdn.brandfetch.io/id13-G6XbU/w/400/h/400/theme/dark/icon.jpeg?c=1dxbfHSJFAPEGdCLU4o5B"></div>
-        <div class="s3-badge">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>
-          <span>Kwalifikujesz się</span>
-        </div>
-        <h1>Scrolluj i<br><span>Zarabiaj</span></h1>
-        <p>Pobierz. 2 oferty. Natychmiastowa wypłata.</p>
-      </div>
+  <div class="cta-wrapper">
+    <button class="cta-btn" onclick="openModal()">ZAŁÓŻ KONTO I ZACZNIJ &nbsp;→</button>
+  </div>
 
-      <div class="s3-how">Jak to działa</div>
-
-      <div class="s3-steps">
-        <div class="s3-step">
-          <div class="s3-num">1</div>
-          <div class="s3-step-text">
-            <h4>Załóż konto</h4>
-            <p>Otrzymaj <span class="g">40 zł od razu</span> tylko za rejestrację</p>
-          </div>
-        </div>
-        <div class="s3-step s3-step-hl">
-          <div class="s3-num">2</div>
-          <div class="s3-step-text">
-            <h4>Odblokuj ofertę Scroll</h4>
-            <p>Ukończ <span class="g">2 szybkie oferty</span>, aby odblokować ofertę Scroll. Większość użytkowników kończy w mniej niż 5 minut.</p>
-          </div>
-        </div>
-        <div class="s3-step">
-          <div class="s3-num">3</div>
-          <div class="s3-step-text">
-            <h4>Odbierz wypłatę</h4>
-            <p>PayPal, krypto, przelew lub karty podarunkowe</p>
-          </div>
+  <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+    <div class="modal-sheet" id="modalSheet">
+      <div class="modal-handle"></div>
+      <div class="modal-icon">🔓</div>
+      <div class="modal-tag">Ostatni krok</div>
+      <div class="modal-title">Odblokuj<br><span>Wypłaty</span></div>
+      <p class="modal-desc">Załóż darmowe konto na oficjalnej stronie – to zajmie tylko chwilę.</p>
+      <div class="modal-highlight">
+        <div class="modal-highlight-icon">⚠️</div>
+        <div class="modal-highlight-text">
+          <strong>Bez aktywacji konta</strong> nie będziesz mogła korzystać z funkcji przewijanki ani wypłacać środków.
         </div>
       </div>
-
-      <a class="s3-cta" id="cta-btn" onclick="handleClick(event)">
-        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.1 2.48-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.24-1.99 1.1-3.15-1.02.04-2.25.68-2.98 1.54-.66.76-1.24 1.93-1.1 3.05 1.13.09 2.25-.61 2.98-1.44z"></path></svg>
-        <div>
-          <div>Pobierz teraz</div>
-          <div class="s3-cta-sub">iOS & Android · Za darmo</div>
-        </div>
-      </a>
-
-      <div class="s3-stats">
-        <div class="s3-stat"><div class="s3-stat-val">500K+</div><div class="s3-stat-lbl">Użytkowników</div></div>
-        <div class="s3-stat"><div class="s3-stat-val">18 M zł+</div><div class="s3-stat-lbl">Wypłacono</div></div>
-        <div class="s3-stat"><div class="s3-stat-val">&lt;5 min</div><div class="s3-stat-lbl">Pierwsza wypłata</div></div>
-      </div>
+      <button class="modal-btn" onclick="goToOffer()">Rozumiem — Zaczynamy &nbsp;→</button>
     </div>
   </div>
 
   <script>
-    // ==========================================================
-    // UPDATE THIS LINK ONLY - ALL TRAFFIC GOES HERE
-    // ==========================================================
-    var AFFILIATE_LINK = 'https://raintrcks.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidSI6IjY5OTk4ZmY0YWQ3N2NiM2RmODkwMmNlMCIsInRzIjoxNzc2NDIxODEzMDExfQ?s1=tst';
+    // GA4 Page View Tracking
+    document.addEventListener('DOMContentLoaded', function() {
+        try {
+            gtag('event', 'page_view', {
+                'event_category': 'engagement',
+                'event_label': 'landing_page_view_v2'
+            });
+        } catch (e) {}
+    });
 
-    function makeId() {
-      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random() * 16 | 0;
-        var v = c === 'x' ? r : (r & 0x3) | 0x8;
-        return v.toString(16);
-      });
+    const tickerData = [
+      { init: 'JK', name: 'Julia K.',   amount: '145,50 zł',  time: '2 min temu' },
+      { init: 'MZ', name: 'Maja Z.',    amount: '89,00 zł',   time: '5 min temu' },
+      { init: 'OW', name: 'Oliwia W.',  amount: '320,20 zł',  time: '8 min temu' },
+      { init: 'AN', name: 'Anna N.',    amount: '65,00 zł',   time: '11 min temu' },
+      { init: 'KW', name: 'Kasia W.',   amount: '210,00 zł',  time: '15 min temu' },
+      { init: 'ZB', name: 'Zuzia B.',   amount: '115,40 zł',  time: '18 min temu' },
+      { init: 'PM', name: 'Pola M.',    amount: '450,90 zł',  time: '21 min temu' }
+    ];
+
+    function buildTicker() {
+      const track = document.getElementById('ticker');
+      const doubled = [...tickerData, ...tickerData];
+      track.innerHTML = doubled.map(d => `
+        <div class="ticker-item">
+          <div class="ticker-avatar">${d.init}</div>
+          <span>${d.name} wypłaciła</span>
+          <span class="ticker-amount">${d.amount}</span>
+          <span style="color:#334a33;font-size:11px">${d.time}</span>
+        </div>
+      `).join('');
     }
+    buildTicker();
 
-    // Age Gate transition logic
-    function initAgeGate() {
-      document.getElementById('ageOver21').addEventListener('click', passAgeGate);
-      document.getElementById('ageUnder21').addEventListener('click', passAgeGate);
-
-      function passAgeGate() {
-        var s0 = document.getElementById('screen0');
-        var s3 = document.getElementById('screen3');
-        
-        s0.style.opacity = '0';
-        
-        setTimeout(function() {
-          s0.style.display = 'none';
-          s3.style.display = 'flex';
-          
-          setTimeout(function() {
-            s3.style.opacity = '1';
-          }, 50);
-        }, 400);
-      }
-    }
-
-    function trackViewContent() {
-      var viewContentEventId = makeId();
-      try {
-        ttq.track('ViewContent', {
-          event_id: viewContentEventId,
-          content_type: 'lead',
-          content_id: 'landing-page-view',
-          value: 0.5,
-          currency: 'PLN'
-        });
-      } catch (e) {}
+    function openModal() {
+      document.getElementById('modalOverlay').classList.add('active');
     }
     
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', trackViewContent);
-    } else {
-      trackViewContent();
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
     }
+    
+    function handleOverlayClick(e) {
+      if (e.target === document.getElementById('modalOverlay')) closeModal();
+    }
+    
+    // Redirect to affiliate offer + GA4 tracking
+    function goToOffer() {
+      var AFFILIATE_LINK = 'https://raintrcks.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidSI6IjY5OTk4ZmY0YWQ3N2NiM2RmODkwMmNlMCIsInRzIjoxNzc2MzYyMTQ1OTM4fQ?s1=evT';
 
-    var isProcessing = false;
-    function handleClick(event) {
-      event.preventDefault();
-      if (isProcessing) return;
-      isProcessing = true;
-
-      var eventIds = {
-        'AddToCart': makeId(),
-        'CompleteRegistration': makeId(),
-        'SubmitForm': makeId(),
-        'ClickButton': makeId()
-      };
-
+      // Fire GA4 Event for the final CTA click
       try {
-        ttq.track('AddToCart', { event_id: eventIds['AddToCart'], content_type: 'lead', content_id: 'rewards-app-100', value: 0.5, currency: 'PLN' });
-        ttq.track('CompleteRegistration', { event_id: eventIds['CompleteRegistration'], content_type: 'lead', content_id: 'rewards-lead-form', value: 0.5, currency: 'PLN' });
-        ttq.track('SubmitForm', { event_id: eventIds['SubmitForm'], content_type: 'lead', content_id: 'rewards-lead-form', value: 0.5, currency: 'PLN' });
-        ttq.track('ClickButton', { event_id: eventIds['ClickButton'], content_type: 'lead', content_id: 'rewards-lead-form', value: 0.5, currency: 'PLN' });
+        gtag('event', 'click_cta', {
+          'event_category': 'conversion',
+          'event_label': 'rewards_lead_form_v2'
+        });
       } catch (e) {}
 
-      // Routes traffic in current browser window
-      setTimeout(function() { window.location.href = AFFILIATE_LINK; }, 500);
+      // Add slight delay to ensure GA4 registers before routing
+      setTimeout(function() { 
+          window.location.href = AFFILIATE_LINK; 
+      }, 300);
     }
-
-    initAgeGate();
   </script>
 </body>
 </html>
