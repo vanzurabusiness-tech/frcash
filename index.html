@@ -18,7 +18,7 @@
 
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background-color: #0b051a; /* Dark vibrant background */
+    background-color: #0b051a; /* Dark vibrant Indigo */
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -32,7 +32,7 @@
     content: '';
     position: fixed;
     inset: 0;
-    background: radial-gradient(ellipse at 50% 40%, #3b1c7a 0%, #0b051a 60%, #05020a 100%);
+    background: radial-gradient(ellipse at 50% 40%, #2e008a 0%, #0b051a 60%, #05020a 100%);
     z-index: 0;
   }
 
@@ -42,8 +42,8 @@
     position: fixed;
     inset: 0;
     background-image:
-      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.02) 39px, rgba(255,255,255,0.02) 40px),
-      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.02) 39px, rgba(255,255,255,0.02) 40px);
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.01) 39px, rgba(255,255,255,0.01) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.01) 39px, rgba(255,255,255,0.01) 40px);
     z-index: 0;
   }
 
@@ -61,7 +61,7 @@
     text-align: center;
   }
 
-  /* Logo section */
+  /* Logo section - Both logos now real and distinct */
   .logos {
     display: flex;
     align-items: center;
@@ -82,10 +82,17 @@
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
   }
 
-  .logo-earn {
-    background: #111;
+  .logo-playful {
+    background: #5d00d1; /* Playful Indigo */
     flex-direction: column;
     gap: 0;
+  }
+
+  .logo-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
   }
 
   .x-divider {
@@ -132,7 +139,7 @@
     margin-bottom: 32px;
   }
 
-  /* Download button - Vibrant Playful Color */
+  /* Download button - Updated Playful Indigo Color */
   .btn-download {
     display: flex;
     align-items: center;
@@ -140,7 +147,7 @@
     gap: 10px;
     width: 100%;
     max-width: 320px;
-    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+    background: linear-gradient(135deg, #7c22f0, #5d00d1);
     color: #fff;
     font-size: 15px;
     font-weight: 800;
@@ -150,14 +157,14 @@
     border-radius: 12px;
     padding: 18px 24px;
     cursor: pointer;
-    box-shadow: 0 6px 24px rgba(139, 92, 246, 0.4);
+    box-shadow: 0 6px 24px rgba(93, 0, 209, 0.4);
     transition: transform 0.1s, box-shadow 0.1s;
     text-decoration: none;
   }
 
   .btn-download:active {
     transform: scale(0.98);
-    box-shadow: 0 2px 12px rgba(139, 92, 246, 0.3);
+    box-shadow: 0 2px 12px rgba(93, 0, 209, 0.3);
   }
 
   .btn-download svg {
@@ -254,8 +261,8 @@
   }
 
   .step.active {
-    background: rgba(139, 92, 246, 0.1);
-    border: 1px solid rgba(139, 92, 246, 0.2);
+    background: rgba(93, 0, 209, 0.1);
+    border: 1px solid rgba(93, 0, 209, 0.2);
   }
 
   .step-num {
@@ -274,9 +281,9 @@
   }
 
   .step.active .step-num {
-    background: #8b5cf6;
+    background: #5d00d1;
     color: #fff;
-    box-shadow: 0 0 12px rgba(139, 92, 246, 0.5);
+    box-shadow: 0 0 12px rgba(93, 0, 209, 0.5);
   }
 
   .step-content h3 {
@@ -325,7 +332,7 @@
   }
 
   .badge-important {
-    background: #8b5cf6;
+    background: #5d00d1;
     color: #fff;
     font-size: 9px;
     font-weight: 800;
@@ -351,14 +358,14 @@
     font-weight: 800;
   }
 
-  /* Continue button */
+  /* Continue button - Playful Indigo */
   .btn-continue {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     width: 100%;
-    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+    background: linear-gradient(135deg, #7c22f0, #5d00d1);
     color: #fff;
     font-size: 14px;
     font-weight: 800;
@@ -368,7 +375,7 @@
     border-radius: 12px;
     padding: 18px 24px;
     cursor: pointer;
-    box-shadow: 0 6px 24px rgba(139, 92, 246, 0.4);
+    box-shadow: 0 6px 24px rgba(93, 0, 209, 0.4);
     transition: transform 0.1s;
   }
 
@@ -381,14 +388,14 @@
 
 <div class="page">
   <div class="logos">
-    <div class="logo-circle logo-earn" style="padding:0; overflow:hidden;">
-      <img src="https://cdn.brandfetch.io/id13-G6XbU/w/400/h/400/theme/dark/icon.jpeg" width="72" height="72" style="object-fit:cover; border-radius:50%;" alt="Playful Rewards">
+    <div class="logo-circle logo-playful" style="padding:0; overflow:hidden;">
+      <img src="https://cdn.brandfetch.io/id13-G6XbU/w/400/h/400/theme/dark/icon.jpeg" width="72" height="72" alt="Playful Rewards">
     </div>
 
     <span class="x-divider">✕</span>
 
     <div class="logo-circle" style="background:#fff; padding:0; overflow:hidden;">
-      <img src="https://play-lh.googleusercontent.com/TLUeelONsQh_K-1XWz3D7m6kGnt71H7A1lD-YQ5l4D4U9G6bH-D3NfUuY9kG1MGEZ0Q" width="72" height="72" style="object-fit:cover; border-radius:50%;" alt="Candy Crush">
+      <img src="https://play-lh.googleusercontent.com/JvMhIxuwArVmcMReJQB8PIEB1MIQNMGf9j5i914JtkBrHrA55K-nMUIVlYCa7SXAdHtzLtsycEo6NpXeHFxLwvI" width="72" height="72" alt="Candy Crush Saga">
     </div>
   </div>
 
@@ -431,7 +438,7 @@
         <div class="step-num">2</div>
         <div class="step-content">
           <h3>Débloque l'accès rémunéré</h3>
-          <p>Joue à au moins 1 jeu pour débloquer les paiements Candy Crush.</p>
+          <p>Joue à au moins 1 jeu pour débloquer les paiements Candy Crush Saga.</p>
         </div>
       </div>
 
@@ -439,7 +446,7 @@
         <div class="step-num">3</div>
         <div class="step-content">
           <h3>Retire tes gains</h3>
-          <p>Paiements instantanés : PayPal, Apple Pay, Virement & Crypto</p>
+          <p>Paiements instantanés : PayPal, Apple Pay, Virement Bancaire & Crypto</p>
         </div>
       </div>
     </div>
@@ -463,7 +470,7 @@
 
 <script>
   // ==========================================
-  // YOUR AFFILIATE LINK
+  // YOUR FRANCE PLAYFUL REWARDS AFFILIATE LINK
   // ==========================================
   var AFF_LINK = 'https://taptrcks.com/r/eyJ0IjoicGxheWZ1bC1yZXdhcmRzLXJldnNoYXJlIiwidGlkIjoiNzA1NWY0NDc5OWE3NDRmN2ZiYTc1ZDhhYjQ4MDliNzYiLCJ0cyI6MTc3Njg0OTg2NDQ0Mn0?s1=test&feb=1';
 
@@ -481,7 +488,7 @@
     if(e) e.preventDefault();
     try { gtag('event', 'click_continue', { 'event_category': 'conversion' }); } catch(err){}
     
-    // Smooth delay so the GA4 event fires before redirecting
+    // 250ms smooth delay for GA4 pixel fire before redirect
     setTimeout(function(){
       window.location.href = AFF_LINK;
     }, 250);
