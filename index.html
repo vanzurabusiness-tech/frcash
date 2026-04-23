@@ -1,168 +1,493 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Être payé pour jouer à Roblox -Fixed</title>
-    <style>
-        /* CSS resets for a clean start */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Être payé pour jouer à Roblox</title>
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7FRZMX1VN5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7FRZMX1VN5');
+</script>
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(135deg, #05041a 0%, #1a0a2e 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            color: white;
-            padding: 20px;
-        }
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* Container for the page content, set to mobile-first width */
-        .landing-page-container {
-            width: 100%;
-            max-width: 375px; /* Common mobile width */
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: #0b051a; /* Dark vibrant Indigo */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
 
-        /* Logos section styles */
-        .logos-section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
+  /* Deep purple/blue textured background for Playful Rewards vibe */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 40%, #2e008a 0%, #0b051a 60%, #05020a 100%);
+    z-index: 0;
+  }
 
-        .logo-circle {
-            width: 80px;
-            height: 80px;
-            background-color: white;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden; /* Important to contain the image */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        }
+  /* Subtle grid/noise texture */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.01) 39px, rgba(255,255,255,0.01) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.01) 39px, rgba(255,255,255,0.01) 40px);
+    z-index: 0;
+  }
 
-        .logo-circle img {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-        }
+  .page {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 390px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+  }
 
-        .cross-icon {
-            font-size: 24px;
-            font-weight: bold;
-            color: #ccc;
-        }
+  /* Logo section - Both logos now real and distinct */
+  .logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
 
-        /* Verified badge styles */
-        .verified-badge {
-            background-color: rgba(0, 128, 0, 0.1);
-            color: #4ade80; /* A vibrant light green */
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(0, 128, 0, 0.3);
-        }
+  .logo-circle {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  }
 
-        .verified-badge img {
-            width: 16px;
-            height: 16px;
-        }
+  .logo-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
 
-        /* Headline styles */
-        h1 {
-            font-size: 28px;
-            font-weight: 800;
-            margin-bottom: 30px;
-            line-height: 1.2;
-            max-width: 300px;
-        }
+  .x-divider {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ccc;
+  }
 
-        /* Purple download button styles */
-        .download-button {
-            background-color: #8b5cf6; /* A vibrant purple */
-            color: white;
-            border: none;
-            padding: 18px 24px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            max-width: 320px;
-            cursor: pointer;
-            margin-bottom: 30px;
-            text-decoration: none;
-            transition: background-color 0.2s;
-            box-shadow: 0 6px 15px rgba(139, 92, 246, 0.3);
-        }
+  /* Verified badge */
+  .verified-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(74, 222, 128, 0.15);
+    border: 1px solid rgba(74, 222, 128, 0.3);
+    color: #4ade80;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
 
-        .download-button:hover {
-            background-color: #7c3aed; /* Darker purple on hover */
-        }
+  .verified-badge svg {
+    width: 16px;
+    height: 16px;
+  }
 
-        .download-button img {
-            width: 18px;
-            height: 18px;
-        }
+  /* Headline */
+  h1 {
+    font-size: 26px;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.2;
+    margin-bottom: 14px;
+    max-width: 300px;
+  }
 
-        /* Disclaimer paragraph styles */
-        .disclaimer-text {
-            font-size: 12px;
-            color: #94a3b8; /* A muted gray-blue */
-            line-height: 1.5;
-            max-width: 280px;
-        }
-    </style>
+  .subtitle {
+    font-size: 14px;
+    color: #b0a4c4;
+    line-height: 1.5;
+    max-width: 280px;
+    margin-bottom: 32px;
+  }
+
+  /* Download button - Updated Playful Indigo Color */
+  .btn-download {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 320px;
+    background: linear-gradient(135deg, #7c22f0, #5d00d1);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 12px;
+    padding: 18px 24px;
+    cursor: pointer;
+    box-shadow: 0 6px 24px rgba(93, 0, 209, 0.4);
+    transition: transform 0.1s, box-shadow 0.1s;
+    text-decoration: none;
+  }
+
+  .btn-download:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 12px rgba(93, 0, 209, 0.3);
+  }
+
+  .btn-download svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .trusted {
+    margin-top: 18px;
+    font-size: 12px;
+    color: #8b7ca6;
+  }
+
+  /* ===== MODAL ===== */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 100;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .modal-overlay.hidden {
+    display: none;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .modal {
+    width: 100%;
+    max-width: 390px;
+    background: #150a2b;
+    border-radius: 20px 20px 0 0;
+    padding: 28px 20px 40px;
+    position: relative;
+    animation: slideUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border: 1px solid #3b1c7a;
+    border-bottom: none;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: #8b7ca6;
+    font-size: 20px;
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  .modal-title {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #8b7ca6;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  /* Steps */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 20px;
+  }
+
+  .step {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 16px;
+    border-radius: 12px;
+    transition: background 0.2s;
+  }
+
+  .step.active {
+    background: rgba(93, 0, 209, 0.1);
+    border: 1px solid rgba(93, 0, 209, 0.2);
+  }
+
+  .step-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #25124a;
+    color: #8b7ca6;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .step.active .step-num {
+    background: #5d00d1;
+    color: #fff;
+    box-shadow: 0 0 12px rgba(93, 0, 209, 0.5);
+  }
+
+  .step-content h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .step-content p {
+    font-size: 13px;
+    color: #b0a4c4;
+    line-height: 1.4;
+  }
+
+  /* Bonus tip */
+  .bonus-box {
+    background: #1c0e3a;
+    border: 1px solid #3b1c7a;
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+
+  .bonus-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .bonus-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  .bonus-label span:first-child {
+    font-size: 11px;
+    font-weight: 800;
+    color: #ccc;
+    letter-spacing: 0.5px;
+  }
+
+  .badge-important {
+    background: #5d00d1;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+
+  .bonus-box p {
+    font-size: 13px;
+    color: #b0a4c4;
+    line-height: 1.5;
+  }
+
+  .bonus-box p strong {
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .bonus-box p .gold {
+    color: #f59e0b;
+    font-weight: 800;
+  }
+
+  /* Continue button - Playful Indigo */
+  .btn-continue {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    background: linear-gradient(135deg, #7c22f0, #5d00d1);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 12px;
+    padding: 18px 24px;
+    cursor: pointer;
+    box-shadow: 0 6px 24px rgba(93, 0, 209, 0.4);
+    transition: transform 0.1s;
+  }
+
+  .btn-continue:active {
+    transform: scale(0.98);
+  }
+</style>
 </head>
 <body>
 
-    <div class="landing-page-container">
-        
-        <div class="logos-section">
-            <div class="logo-circle">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCJAT7iNdljL2ZmI8_2MTH92ZbhLDSZaVAzQ&s" alt="Logo">
-            </div>
-            <span class="cross-icon">×</span>
-            <div class="logo-circle" style="background-color: black;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ee/Roblox_Logo.svg" alt="Roblox Logo">
-            </div>
-        </div>
-
-        <div class="verified-badge">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Tiktok_icon.svg/512px-Tiktok_icon.svg.png" alt="TikTok Icon">
-            <span>Vérifié par TikTok</span>
-        </div>
-
-        <h1>Être payé pour jouer à Roblox</h1>
-
-        <a href="#" class="download-button">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Download_alt_font_awesome.svg/1024px-Download_alt_font_awesome.svg.png" alt="Download Icon" style="filter: invert(1);">
-            <span>TÉLÉCHARGER MAINTENANT</span>
-        </a>
-
-        <p class="disclaimer-text">Approuvé par plus de 500 000 utilisateurs rémunérés chaque jour</p>
-
+<div class="page">
+  <div class="logos">
+    <div class="logo-circle" style="padding:0; overflow:hidden; background:#fff;">
+      <img src="https://play-lh.googleusercontent.com/Lx-lkUUlaa-VfYYO_bgxW4Cp5a-4X3nfjnEHXt1iHn2FZW15s3ewUH5PT-kq9MrI5vs=w600-h300-pc0xffffff-pd" width="72" height="72" alt="Playful Rewards">
     </div>
+
+    <span class="x-divider">✕</span>
+
+    <div class="logo-circle" style="padding:0; overflow:hidden; background:#fff;">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCJAT7iNdljL2ZmI8_2MTH92ZbhLDSZaVAzQ&s" width="72" height="72" alt="Roblox">
+    </div>
+  </div>
+
+  <div class="verified-badge">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+    Vérifié par TikTok
+  </div>
+
+  <h1>Être payé pour jouer à Roblox</h1>
+  <p class="subtitle">Télécharge l'application pour activer ton accès et commence à gagner de l'argent dès aujourd'hui avec Roblox.</p>
+
+  <a href="#" class="btn-download" onclick="openModal(event)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 4v12M8 12l4 4 4-4"></path>
+    </svg>
+    TÉLÉCHARGER MAINTENANT
+  </a>
+
+  <p class="trusted">Approuvé par plus de 500 000 utilisateurs rémunérés chaque jour</p>
+</div>
+
+<div class="modal-overlay hidden" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+
+    <div class="modal-title">TON PARCOURS DE RÉCOMPENSES</div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Télécharge Playful Rewards</h3>
+          <p>Disponible sur iOS & Android · Prend moins de 30 secondes</p>
+        </div>
+      </div>
+
+      <div class="step active">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Débloque l'accès rémunéré</h3>
+          <p>Joue à au moins 1 jeu pour débloquer les paiements Roblox.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Retire tes gains</h3>
+          <p>Paiements instantanés : PayPal, Apple Pay, Virement Bancaire & Crypto</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bonus-box">
+      <div class="bonus-icon">🔓</div>
+      <div>
+        <div class="bonus-label">
+          <span>ASTUCE BONUS</span>
+          <span class="badge-important">IMPORTANT</span>
+        </div>
+        <p>Joue à <strong>2 jeux pendant quelques minutes</strong> chacun pour débloquer ton <span class="gold">Bonus de 25€</span> — crédité instantanément sur ton compte.</p>
+      </div>
+    </div>
+
+    <button class="btn-continue" onclick="goOffer(event)">
+      CONTINUER  ›
+    </button>
+  </div>
+</div>
+
+<script>
+  // ==========================================
+  // YOUR FRANCE PLAYFUL REWARDS AFFILIATE LINK
+  // ==========================================
+  var AFF_LINK = 'https://taptrcks.com/r/eyJ0IjoicGxheWZ1bC1yZXdhcmRzLXJldnNoYXJlIiwidGlkIjoiNzA1NWY0NDc5OWE3NDRmN2ZiYTc1ZDhhYjQ4MDliNzYiLCJ0cyI6MTc3Njk0MjY4MjU5Nn0?s1=GT1&s2=GT1&feb=1';
+
+  function openModal(e) {
+    e.preventDefault();
+    try { gtag('event', 'click_cta', { 'event_category': 'engagement' }); } catch(err){}
+    document.getElementById('modal').classList.remove('hidden');
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.add('hidden');
+  }
+
+  function goOffer(e) {
+    if(e) e.preventDefault();
+    try { gtag('event', 'click_continue', { 'event_category': 'conversion' }); } catch(err){}
+    
+    // 250ms smooth delay for GA4 pixel fire before redirect
+    setTimeout(function(){
+      window.location.href = AFF_LINK;
+    }, 250);
+  }
+</script>
 
 </body>
 </html>
