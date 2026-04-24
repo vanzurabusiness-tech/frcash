@@ -2,9 +2,10 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Missions Disponibles</title>
-    
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>Playful Rewards</title>
+<meta name="description" content="Sélectionne un jeu et commence à gagner dès aujourd'hui.">
+
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-7FRZMX1VN5"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -14,366 +15,501 @@
 </script>
 
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background-color: #0b051a;
-    color: white;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:hsl(0,0%,4%);
+  --fg:hsl(0,0%,95%);
+  --card:hsl(0,0%,7%);
+  --card-fg:hsl(0,0%,95%);
+  --primary:hsl(270,70%,55%);
+  --primary-fg:#fff;
+  --primary-h:270;--primary-s:70%;--primary-l:55%;
+  --muted:hsl(0,0%,12%);
+  --muted-fg:hsl(0,0%,60%);
+  --border:hsl(0,0%,16%);
+  --success:hsl(142,71%,45%);
+  --success-fg:#fff;
+  --radius:0.75rem;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  background:var(--bg);
+  color:var(--fg);
+  line-height:1.5;
+  min-height:100vh;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
 
-  /* Global Dark Background */
-  .bg-overlay {
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(ellipse at 50% 40%, #2e008a 0%, #0b051a 60%, #05020a 100%);
-    z-index: -2;
-  }
-  .bg-noise {
-    position: fixed;
-    inset: 0;
-    background-image: repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.01) 39px, rgba(255,255,255,0.01) 40px), repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.01) 39px, rgba(255,255,255,0.01) 40px);
-    z-index: -1;
-  }
+/* Background */
+.bg-gradient{
+  position:fixed;inset:0;
+  background-image:
+    radial-gradient(at left top,rgb(51,15,87) 0%,transparent 50%),
+    radial-gradient(at right bottom,rgb(38,15,61) 0%,transparent 50%),
+    radial-gradient(rgb(10,10,10) 0%,rgb(5,5,5) 100%);
+  background-size:300% 300%;
+  animation:gradShift 20s ease infinite;
+}
+@keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.bg-grid{
+  position:fixed;inset:0;
+  opacity:0.04;
+  background-image:
+    linear-gradient(#fff 1px,transparent 1px),
+    linear-gradient(90deg,#fff 1px,transparent 1px);
+  background-size:60px 60px;
+}
 
-  .container {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-  }
+/* Views */
+.view{
+  position:relative;z-index:10;
+  margin:0 auto;
+  max-width:28rem;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:100vh;
+  padding:64px 20px;
+}
+.view.hidden{display:none}
 
-  /* ==================== OFFER WALL ==================== */
-  #page-wall {
-    display: block;
-    animation: fadeIn 0.3s ease;
-  }
+/* Logo */
+.logo-ring{
+  display:flex;align-items:center;justify-content:center;
+  width:80px;height:80px;
+  border-radius:50%;
+  border:1px solid hsla(270,70%,55%,0.2);
+  background:rgba(255,255,255,0.1);
+  overflow:hidden;
+  animation:logoEntrance .6s ease-out .3s both,logoGlow 3s ease-in-out infinite;
+}
+.logo-ring img{width:64px;height:64px;border-radius:50%;object-fit:cover}
+@keyframes logoEntrance{from{opacity:0;transform:scale(0.5)}to{opacity:1;transform:scale(1)}}
+@keyframes logoGlow{
+  0%,100%{box-shadow:0 0 20px hsla(270,70%,55%,0.2),0 0 60px hsla(270,70%,55%,0.1)}
+  50%{box-shadow:0 0 30px hsla(270,70%,55%,0.35),0 0 80px hsla(270,70%,55%,0.15)}
+}
 
-  .header {
-    text-align: center;
-    margin-bottom: 30px;
-    padding-top: 20px;
-  }
-  .header h1 {
-    font-size: 24px;
-    font-weight: 800;
-    margin-bottom: 8px;
-  }
-  .header p {
-    font-size: 14px;
-    color: #b0a4c4;
-  }
+/* Badge */
+.badge{
+  display:flex;align-items:center;gap:10px;
+  margin-top:20px;
+  border-radius:9999px;
+  border:1px solid hsla(142,71%,45%,0.3);
+  background:hsla(142,71%,45%,0.1);
+  padding:8px 16px;
+  animation:badgePop .4s ease-out .7s both;
+}
+@keyframes badgePop{from{opacity:0;transform:scale(0.8)}to{opacity:1;transform:scale(1)}}
+.badge-icon{
+  display:flex;align-items:center;justify-content:center;
+  width:20px;height:20px;border-radius:50%;
+  background:var(--success);
+}
+.badge-icon svg{width:12px;height:12px;color:var(--success-fg)}
+.badge span{font-size:12px;font-weight:600;color:var(--success)}
 
-  .offer-card {
-    background: #150a2b;
-    border: 1px solid #3b1c7a;
-    border-radius: 16px;
-    padding: 16px;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    cursor: pointer;
-    transition: transform 0.1s, background 0.2s;
-  }
-  .offer-card:active {
-    transform: scale(0.98);
-    background: #1c0e3a;
-  }
-  
-  .offer-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 14px;
-    object-fit: cover;
-    background: #fff;
-    flex-shrink: 0;
-  }
-  
-  .offer-info h2 {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 4px;
-    line-height: 1.2;
-  }
-  .offer-info p {
-    font-size: 12px;
-    color: #b0a4c4;
-    line-height: 1.4;
-    margin-bottom: 8px;
-  }
-  .offer-tags {
-    display: flex;
-    gap: 8px;
-  }
-  .tag {
-    font-size: 10px;
-    font-weight: 800;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 6px;
-  }
-  .tag-game { background: rgba(255,255,255,0.1); color: #ccc; }
-  .tag-hot { background: rgba(93, 0, 209, 0.2); color: #a78bfa; border: 1px solid rgba(93, 0, 209, 0.5); }
+/* Headings */
+.main-title{
+  margin-top:24px;
+  text-align:center;
+  font-size:24px;font-weight:700;
+  letter-spacing:-0.025em;
+  color:var(--fg);
+  animation:textSlide .5s ease-out .9s both;
+}
+.main-sub{
+  margin-top:12px;
+  max-width:280px;
+  text-align:center;
+  font-size:14px;
+  line-height:1.6;
+  color:var(--muted-fg);
+  animation:textSlide .5s ease-out 1.1s both;
+}
+@keyframes textSlide{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
-  /* ==================== DETAIL PAGE ==================== */
-  #page-detail {
-    display: none;
-    text-align: center;
-    padding-top: 40px;
-    animation: slideIn 0.3s ease;
-  }
+/* Game cards */
+.cards{margin-top:32px;width:100%;max-width:320px;display:flex;flex-direction:column;gap:12px}
+.game-card{
+  display:flex;align-items:center;gap:16px;
+  width:100%;
+  padding:16px;
+  border-radius:12px;
+  border:1px solid hsla(0,0%,16%,0.5);
+  background:hsla(0,0%,7%,0.6);
+  backdrop-filter:blur(8px);
+  cursor:pointer;
+  transition:all .2s;
+  animation:cardReveal .5s ease-out both;
+}
+.game-card:nth-child(1){animation-delay:1.3s}
+.game-card:nth-child(2){animation-delay:1.45s}
+.game-card:nth-child(3){animation-delay:1.6s}
+@keyframes cardReveal{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.game-card:active{
+  border-color:hsla(270,70%,55%,0.4);
+  background:hsla(270,70%,55%,0.1);
+  box-shadow:0 0 20px hsla(270,70%,55%,0.15);
+}
+.card-icon{
+  width:56px;height:56px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:12px;
+  border:1px solid hsla(270,70%,55%,0.2);
+  background:rgba(255,255,255,0.1);
+  overflow:hidden;
+}
+.card-icon img{width:48px;height:48px;border-radius:8px;object-fit:cover;background:white;}
+.card-text{flex:1;text-align:left}
+.card-text h3{font-size:14px;font-weight:700;color:var(--fg)}
+.card-text p{font-size:12px;font-weight:700;color:var(--primary); margin-top:2px;}
+.card-chevron{
+  width:20px;height:20px;flex-shrink:0;
+  color:var(--muted-fg);
+  transition:transform .2s,color .2s;
+}
+.game-card:active .card-chevron{transform:translateX(4px);color:var(--primary)}
 
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes slideIn { from { transform: translateX(20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+/* Footer */
+.trust-footer{
+  margin-top:40px;
+  text-align:center;
+  font-size:11px;
+  color:hsla(0,0%,60%,0.6);
+  animation:textSlide .5s ease-out 1.8s both;
+}
 
-  .back-btn {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    background: rgba(255,255,255,0.1);
-    border: none;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
+/* ═══════ DETAIL VIEW ═══════ */
+.detail-logos{display:flex;align-items:center;gap:12px}
+.detail-logo-ring{
+  display:flex;align-items:center;justify-content:center;
+  width:80px;height:80px;
+  border-radius:50%;
+  border:1px solid hsla(270,70%,55%,0.2);
+  background:rgba(255,255,255,0.1);
+  overflow:hidden;
+  box-shadow:0 0 20px hsla(270,70%,55%,0.2),0 0 60px hsla(270,70%,55%,0.1);
+}
+.detail-logo-ring img{width:64px;height:64px;border-radius:50%;object-fit:cover;background:white;}
+.detail-x{font-size:18px;font-weight:700;color:var(--muted-fg)}
 
-  .logos {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 20px;
-    margin-top: 30px;
-  }
-  .logo-circle {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-  }
-  .logo-circle img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .x-divider {
-    font-size: 20px;
-    font-weight: 700;
-    color: #8b7ca6;
-  }
+.detail-title{
+  margin-top:24px;
+  text-align:center;
+  font-size:24px;font-weight:700;
+  letter-spacing:-0.025em;
+  color:var(--fg);
+}
+.detail-desc{
+  margin-top:12px;
+  max-width:280px;
+  text-align:center;
+  font-size:14px;
+  line-height:1.6;
+  color:var(--muted-fg);
+}
 
-  .verified-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(74, 222, 128, 0.15);
-    border: 1px solid rgba(74, 222, 128, 0.3);
-    color: #4ade80;
-    border-radius: 20px;
-    padding: 6px 14px;
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 24px;
-  }
+/* Download button */
+.download-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  margin-top:32px;
+  width:100%;max-width:320px;
+  padding:16px 32px;
+  border:none;border-radius:8px;
+  font-size:16px;font-weight:700;
+  letter-spacing:0.05em;
+  color:var(--primary-fg);
+  background:var(--primary);
+  cursor:pointer;
+  animation:dlPulse 1.8s ease-in-out infinite;
+  transition:all .2s;
+}
+.download-btn:active{animation-play-state:paused;transform:scale(1.04)}
+.download-btn svg{width:20px;height:20px;margin-right:8px}
+@keyframes dlPulse{
+  0%,100%{transform:scale(1);box-shadow:0 0 20px hsla(270,70%,55%,0.45)}
+  50%{transform:scale(1.035);box-shadow:0 0 34px hsla(270,70%,55%,0.75)}
+}
 
-  .detail-title {
-    font-size: 28px;
-    font-weight: 800;
-    line-height: 1.2;
-    margin-bottom: 12px;
-  }
-  .detail-desc {
-    font-size: 14px;
-    color: #b0a4c4;
-    line-height: 1.5;
-    margin-bottom: 32px;
-    padding: 0 10px;
-  }
+/* Journey section */
+.journey{margin-top:32px;width:100%;max-width:320px}
+.journey-title{
+  text-align:center;
+  font-size:12px;font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.2em;
+  color:var(--muted-fg);
+  margin-bottom:16px;
+}
+.journey-steps{display:flex;flex-direction:column;gap:12px}
+.step{
+  display:flex;align-items:flex-start;gap:12px;
+  border-radius:12px;
+  padding:10px;
+}
+.step.highlighted{
+  border:1px solid hsla(270,70%,55%,0.3);
+  background:hsla(270,70%,55%,0.1);
+}
+.step-num{
+  width:28px;height:28px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;
+  font-size:12px;font-weight:700;
+}
+.step-num.dim{background:hsla(270,70%,55%,0.15);color:var(--primary)}
+.step-num.bright{background:var(--primary);color:var(--primary-fg)}
+.step-info{flex:1;min-width:0}
+.step-info h3{font-size:14px;font-weight:600;color:var(--fg)}
+.step-info p{margin-top:2px;font-size:12px;color:var(--muted-fg)}
 
-  .btn-download {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    background: linear-gradient(135deg, #7c22f0, #5d00d1);
-    color: #fff;
-    font-size: 15px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    border: none;
-    border-radius: 12px;
-    padding: 20px;
-    cursor: pointer;
-    box-shadow: 0 6px 24px rgba(93, 0, 209, 0.4);
-    text-decoration: none;
-    transition: transform 0.1s;
-  }
-  .btn-download:active {
-    transform: scale(0.98);
-  }
+/* Bonus tip */
+.bonus{
+  margin-top:16px;
+  border-radius:12px;
+  border:1px solid hsla(270,70%,55%,0.2);
+  background:hsla(270,70%,55%,0.05);
+  padding:12px;
+}
+.bonus-inner{display:flex;align-items:flex-start;gap:10px}
+.bonus-lock{width:16px;height:16px;flex-shrink:0;margin-top:2px;color:var(--primary)}
+.bonus-content{flex:1;min-width:0}
+.bonus-header{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.bonus-header h3{font-size:12px;font-weight:700;color:var(--fg)}
+.bonus-tag{
+  display:inline-block;
+  padding:2px 6px;
+  border-radius:4px;
+  background:hsla(270,70%,55%,0.9);
+  font-size:9px;font-weight:700;
+  text-transform:uppercase;
+  color:var(--primary-fg);
+}
+.bonus-content p{font-size:12px;line-height:1.6;color:var(--muted-fg)}
+.bonus-content .hl{font-weight:700;color:var(--primary)}
 
-  .trusted-text {
-    margin-top: 20px;
-    font-size: 12px;
-    color: #8b7ca6;
-  }
+/* Back button */
+.back-btn {
+  position: absolute;
+  top: 24px;
+  left: 20px;
+  background: transparent;
+  border: none;
+  color: var(--muted-fg);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 20;
+}
 </style>
 </head>
 <body>
 
-<div class="bg-overlay"></div>
-<div class="bg-noise"></div>
+<div class="bg-gradient"></div>
+<div class="bg-grid"></div>
 
-<div class="container">
+<div id="selectorView" class="view">
+  <div class="logo-ring">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDGFFyLahQPLJOtlcdPrVpv88eKC1rMrYXUw&s" alt="Playful">
+  </div>
+  <div class="badge">
+    <div class="badge-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    </div>
+    <span>En direct</span>
+  </div>
+  <h1 class="main-title">Missions Actives</h1>
+  <p class="main-sub">Sélectionne une application ci-dessous pour commencer à générer des gains.</p>
   
-  <div id="page-wall">
-    <div class="header">
-      <h1>Missions Actives</h1>
-      <p>Sélectionne une application pour commencer</p>
+  <div class="cards">
+    <div class="game-card" data-game="roblox">
+      <div class="card-icon"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSamc9AAiWWnWJPprb0wxskGiVdI7TtcKKHOw&s" alt="Roblox"></div>
+      <div class="card-text">
+        <h3>Être payé pour jouer à Roblox</h3>
+        <p>Jeu · Paiement Élevé</p>
+      </div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
     </div>
 
-    <div class="offer-card" onclick="openDetail('roblox')">
-      <img src="roblox.png" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_icon_black.svg'" alt="Roblox" class="offer-icon">
-      <div class="offer-info">
-        <h2>Être payé pour jouer à Roblox</h2>
-        <p>Joue et atteins des paliers pour débloquer tes récompenses.</p>
-        <div class="offer-tags">
-          <span class="tag tag-game">JEU</span>
-          <span class="tag tag-hot">PAIEMENT ÉLEVÉ</span>
+    <div class="game-card" data-game="tiktok">
+      <div class="card-icon"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS45jF2oX5HYzhemcWzyNdDf9PuYxjj8cf6ww&s" alt="TikTok" style="background: black;"></div>
+      <div class="card-text">
+        <h3>Être payé pour scroller sur TikTok</h3>
+        <p>Social · Populaire</p>
+      </div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </div>
+
+    <div class="game-card" data-game="blockblast">
+      <div class="card-icon"><img src="https://play-lh.googleusercontent.com/Abzm9CjXi_DZjGzalQqVFMNZL8Wcx4uxtT5wcGOBaclbjvb3UYA2Bi6s6ff2SFRktdXehBsocFKkGUeIffUkLg" alt="Block Blast"></div>
+      <div class="card-text">
+        <h3>Être payé pour jouer à Block Blast</h3>
+        <p>Puzzle · Facile</p>
+      </div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </div>
+  </div>
+
+  <div class="trust-footer">Approuvé par plus de 500 000 utilisateurs rémunérés chaque jour</div>
+</div>
+
+<div id="detailView" class="view hidden">
+  <button class="back-btn" onclick="showSelector()">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    Retour
+  </button>
+
+  <div class="detail-logos">
+    <div class="detail-logo-ring"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDGFFyLahQPLJOtlcdPrVpv88eKC1rMrYXUw&s" alt="Playful"></div>
+    <div class="detail-x">✕</div>
+    <div class="detail-logo-ring"><img id="gameLogo" src="" alt="App"></div>
+  </div>
+
+  <div class="badge" style="margin-top: 16px;">
+    <div class="badge-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+    <span>Vérifié par TikTok</span>
+  </div>
+
+  <h1 id="gameTitle" class="detail-title"></h1>
+  <p id="gameDesc" class="detail-desc"></p>
+
+  <button id="downloadBtn" class="download-btn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+    TÉLÉCHARGER MAINTENANT
+  </button>
+
+  <div class="journey">
+    <div class="journey-title">TON PARCOURS DE RÉCOMPENSES</div>
+    <div class="journey-steps">
+      <div class="step">
+        <div class="step-num dim">1</div>
+        <div class="step-info">
+          <h3>Télécharge Playful Rewards</h3>
+          <p>Disponible sur iOS & Android · Prend 30s</p>
         </div>
       </div>
-    </div>
-
-    <div class="offer-card" onclick="openDetail('tiktok')">
-      <img src="tiktok.png" alt="TikTok" class="offer-icon" style="background: black; padding: 4px;">
-      <div class="offer-info">
-        <h2>Être payé pour scroller sur TikTok</h2>
-        <p>Regarde des vidéos et interagis pour valider la mission.</p>
-        <div class="offer-tags">
-          <span class="tag tag-game">SOCIAL</span>
-          <span class="tag tag-hot">POPULAIRE</span>
+      <div class="step highlighted">
+        <div class="step-num bright">2</div>
+        <div class="step-info">
+          <h3 id="step2Title">Débloque l'accès rémunéré</h3>
+          <p id="step2Desc">Joue à au moins 1 jeu pour débloquer les paiements.</p>
         </div>
       </div>
-    </div>
-
-    <div class="offer-card" onclick="openDetail('blockblast')">
-      <img src="blockblast.png" alt="Block Blast" class="offer-icon">
-      <div class="offer-info">
-        <h2>Être payé pour jouer à Block Blast</h2>
-        <p>Résous des puzzles et gagne de l'argent par niveau terminé.</p>
-        <div class="offer-tags">
-          <span class="tag tag-game">PUZZLE</span>
-          <span class="tag tag-hot">FACILE</span>
+      <div class="step">
+        <div class="step-num dim">3</div>
+        <div class="step-info">
+          <h3>Retire tes gains</h3>
+          <p>Paiements instantanés: PayPal, Apple Pay & Crypto</p>
         </div>
       </div>
     </div>
   </div>
 
-  <div id="page-detail">
-    <button class="back-btn" onclick="closeDetail()">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      Retour
-    </button>
-
-    <div class="logos">
-      <div class="logo-circle"><img src="playful.png" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Tiktok_icon.svg/512px-Tiktok_icon.svg.png'" alt="Playful"></div>
-      <span class="x-divider">✕</span>
-      <div class="logo-circle"><img id="detail-img" src="" alt="App"></div>
+  <div class="bonus">
+    <div class="bonus-inner">
+      <svg class="bonus-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+      <div class="bonus-content">
+        <div class="bonus-header">
+          <h3>ASTUCE BONUS</h3>
+          <span class="bonus-tag">IMPORTANT</span>
+        </div>
+        <p>Joue à <span class="hl">2 jeux pendant quelques minutes</span> chacun pour débloquer ton Bonus de 25€.</p>
+      </div>
     </div>
-
-    <div class="verified-badge">
-      <svg style="width:16px;height:16px;" viewBox="0 0 24 24" fill="currentColor"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-      Vérifié par TikTok
-    </div>
-
-    <h1 id="detail-title" class="detail-title">Être payé pour...</h1>
-    <p id="detail-desc" class="detail-desc">Télécharge l'application pour activer ton accès et commence à gagner de l'argent dès aujourd'hui.</p>
-
-    <a href="#" class="btn-download" onclick="claimOffer(event)">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 4v12M8 12l4 4 4-4"/></svg>
-      TÉLÉCHARGER MAINTENANT
-    </a>
-    
-    <p class="trusted-text">Approuvé par plus de 500 000 utilisateurs rémunérés chaque jour</p>
   </div>
-
 </div>
 
 <script>
-  // ==========================================
-  // YOUR AFFILIATE LINK
-  // ==========================================
-  const AFF_LINK = 'https://taptrcks.com/r/eyJ0IjoicGxheWZ1bC1yZXdhcmRzLXJldnNoYXJlIiwidGlkIjoiNzA1NWY0NDc5OWE3NDRmN2ZiYTc1ZDhhYjQ4MDliNzYiLCJ0cyI6MTc3Njk0MjY4MjU5Nn0?s1=GT1&s2=GT1&feb=1';
-  
-  let currentApp = '';
-
-  const appData = {
-    'roblox': {
-      logo: 'roblox.png',
-      fallback: 'https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_icon_black.svg',
-      title: 'Être payé pour jouer à Roblox',
-      desc: "Télécharge l'application pour activer ton accès et commence à gagner de l'argent dès aujourd'hui avec Roblox."
+(function(){
+  // ALL YOUR DATA & TEXT
+  var games = {
+    roblox: {
+      name: 'Roblox',
+      verb: 'jouer à',
+      descEnd: 'avec Roblox.',
+      logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSamc9AAiWWnWJPprb0wxskGiVdI7TtcKKHOw&s'
     },
-    'tiktok': {
-      logo: 'tiktok.png',
-      title: 'Être payé pour scroller sur TikTok',
-      desc: "Télécharge l'application pour activer ton accès et commence à gagner de l'argent dès aujourd'hui en regardant des vidéos."
+    tiktok: {
+      name: 'TikTok',
+      verb: 'scroller sur',
+      descEnd: 'en regardant des vidéos.',
+      logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS45jF2oX5HYzhemcWzyNdDf9PuYxjj8cf6ww&s'
     },
-    'blockblast': {
-      logo: 'blockblast.png',
-      title: 'Être payé pour jouer à Block Blast',
-      desc: "Télécharge l'application pour activer ton accès et commence à gagner de l'argent dès aujourd'hui avec Block Blast."
+    blockblast: {
+      name: 'Block Blast',
+      verb: 'jouer à',
+      descEnd: 'avec Block Blast.',
+      logo: 'https://play-lh.googleusercontent.com/Abzm9CjXi_DZjGzalQqVFMNZL8Wcx4uxtT5wcGOBaclbjvb3UYA2Bi6s6ff2SFRktdXehBsocFKkGUeIffUkLg'
     }
   };
 
-  function openDetail(appId) {
-    currentApp = appId;
-    const data = appData[appId];
-    
-    // Set Images and Text
-    const imgElement = document.getElementById('detail-img');
-    imgElement.src = data.logo;
-    imgElement.onerror = function() { if(data.fallback) this.src = data.fallback; };
-    
-    document.getElementById('detail-title').innerText = data.title;
-    document.getElementById('detail-desc').innerText = data.desc;
-    
-    // Swap Pages
-    document.getElementById('page-wall').style.display = 'none';
-    document.getElementById('page-detail').style.display = 'block';
-    window.scrollTo(0, 0);
+  var selectorView=document.getElementById('selectorView');
+  var detailView=document.getElementById('detailView');
+  var gameLogoEl=document.getElementById('gameLogo');
+  var gameTitleEl=document.getElementById('gameTitle');
+  var gameDescEl=document.getElementById('gameDesc');
+  var step2TitleEl=document.getElementById('step2Title');
+  var step2DescEl=document.getElementById('step2Desc');
+  var downloadBtn=document.getElementById('downloadBtn');
 
-    // Track click
-    try { gtag('event', 'click_' + appId, { 'event_category': 'engagement' }); } catch(err){}
+  // YOUR TAPTRCKS AFFILIATE LINK
+  function computeDownloadURL(){
+    return 'https://taptrcks.com/r/eyJ0IjoicGxheWZ1bC1yZXdhcmRzLXJldnNoYXJlIiwidGlkIjoiNzA1NWY0NDc5OWE3NDRmN2ZiYTc1ZDhhYjQ4MDliNzYiLCJ0cyI6MTc3Njk0MjY4MjU5Nn0?s1=GT1&s2=GT1&feb=1';
   }
 
-  function closeDetail() {
-    document.getElementById('page-detail').style.display = 'none';
-    document.getElementById('page-wall').style.display = 'block';
+  function populateDetail(gameKey){
+    var game=games[gameKey]||games.roblox;
+    gameLogoEl.src=game.logo;
+    gameTitleEl.textContent='Être payé pour '+game.verb+' '+game.name;
+    gameDescEl.textContent="Télécharge l'application pour activer ton accès et commence à gagner de l'argent dès aujourd'hui "+game.descEnd;
+    step2TitleEl.textContent="Débloque l'accès rémunéré";
+    step2DescEl.textContent='Joue à au moins 1 jeu pour débloquer les paiements '+game.name+'.';
   }
 
-  function claimOffer(e) {
+  var currentGame=null;
+
+  window.showSelector = function(){
+    currentGame=null;
+    selectorView.classList.remove('hidden');
+    detailView.classList.add('hidden');
+    window.scrollTo(0,0);
+  }
+
+  function showDetail(gameKey){
+    if(gameKey&&games[gameKey]){
+      currentGame=gameKey;
+      populateDetail(gameKey);
+      selectorView.classList.add('hidden');
+      detailView.classList.remove('hidden');
+      window.scrollTo(0,0);
+
+      // Fire GA4 Wall Click
+      try { gtag('event', 'click_' + gameKey, { 'event_category': 'engagement' }); } catch(err){}
+    }
+  }
+
+  downloadBtn.addEventListener('click',function(e){
     e.preventDefault();
-    try { gtag('event', 'click_download_' + currentApp, { 'event_category': 'conversion' }); } catch(err){}
-    setTimeout(function(){ window.location.href = AFF_LINK; }, 250);
-  }
-</script>
+    
+    // Fire GA4 Download Click
+    try { gtag('event', 'click_download_' + currentGame, { 'event_category': 'conversion' }); } catch(err){}
+    
+    setTimeout(function(){ window.location.href=computeDownloadURL(); }, 250);
+  });
 
+  document.querySelectorAll('#selectorView .game-card').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var gameKey=btn.getAttribute('data-game');
+      showDetail(gameKey);
+    });
+  });
+
+  showSelector();
+})();
+</script>
 </body>
 </html>
