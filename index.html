@@ -1,225 +1,134 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Playful Rewards – Guadagna Scorrendo</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missions de Testeur Disponibles</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4F46E5', /* Indigo 600 */
+                        secondary: '#10B981', /* Emerald 500 */
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7FRZMX1VN5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-7FRZMX1VN5');
+    </script>
 
-    html, body {
-      min-height: 100%;
-      font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
-      font-feature-settings: 'cv02','cv03','cv04','cv11';
-      -webkit-font-smoothing: antialiased;
-    }
-
-    body {
-      background-color: #0d0714;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
-      background-size: 44px 44px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .wrapper {
-      width: 100%;
-      max-width: 430px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 56px 24px 48px;
-    }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes pulse-ring {
-      0%, 100% { box-shadow: 0 0 0 0px rgba(139,92,246,0.5), 0 0 20px 4px rgba(139,92,246,0.25); }
-      50%       { box-shadow: 0 0 0 7px rgba(139,92,246,0.12), 0 0 28px 8px rgba(139,92,246,0.35); }
-    }
-
-    .a0 { animation: fadeUp 0.5s cubic-bezier(.22,.68,0,1.1) both 0.05s; }
-    .a1 { animation: fadeUp 0.5s cubic-bezier(.22,.68,0,1.1) both 0.15s; }
-    .a2 { animation: fadeUp 0.5s cubic-bezier(.22,.68,0,1.1) both 0.25s; }
-    .a3 { animation: fadeUp 0.5s cubic-bezier(.22,.68,0,1.1) both 0.32s; }
-    .a4 { animation: fadeUp 0.5s cubic-bezier(.22,.68,0,1.1) both 0.40s; }
-    .a5 { animation: fadeUp 0.5s cubic-bezier(.22,.68,0,1.1) both 0.48s; }
-    .a6 { animation: fadeUp 0.5s cubic-bezier(.22,.68,0,1.1) both 0.60s; }
-
-    /* LOGO */
-    .logo-wrap {
-      position: relative;
-      width: 88px;
-      height: 88px;
-      margin-bottom: 18px;
-    }
-    .logo-circle {
-      width: 88px;
-      height: 88px;
-      border-radius: 50%;
-      overflow: hidden;
-      animation: pulse-ring 2.8s ease-in-out infinite;
-    }
-    .logo-circle img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-    }
-    .logo-dot {
-      position: absolute;
-      border-radius: 50%;
-      background: #fbbf24;
-    }
-    .d1 { width: 10px; height: 10px; top: 3px;  right: 8px; }
-    .d2 { width: 7px;  height: 7px;  top: 18px; right: -1px; }
-    .d3 { width: 8px;  height: 8px;  bottom: 9px; right: 5px; }
-    .d4 { width: 6px;  height: 6px;  top: 9px;  left: 3px; }
-
-    /* BADGE */
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      background: rgba(20, 83, 45, 0.25);
-      border: 1.5px solid #22c55e;
-      border-radius: 999px;
-      padding: 6px 14px 6px 8px;
-      margin-bottom: 22px;
-    }
-    .badge-check {
-      width: 20px; height: 20px;
-      background: #22c55e;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .badge-check svg { width: 11px; height: 11px; }
-    .badge-text { font-size: 14px; font-weight: 600; color: #22c55e; white-space: nowrap; }
-
-    /* HEADLINE */
-    .headline {
-      font-size: 28px;
-      font-weight: 900;
-      color: #ffffff;
-      text-align: center;
-      line-height: 1.15;
-      letter-spacing: -0.03em;
-      margin-bottom: 10px;
-    }
-    .subtitle {
-      font-size: 15px;
-      color: #9ca3af;
-      text-align: center;
-      line-height: 1.55;
-      margin-bottom: 30px;
-      max-width: 300px;
-    }
-
-    /* CARDS */
-    .cards { width: 100%; display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
-
-    .card {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      background: #140e20;
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 14px;
-      padding: 14px 16px;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background 0.18s, border-color 0.18s, transform 0.15s;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .card:hover  { background: #1c1430; border-color: rgba(139,92,246,0.35); transform: translateY(-1px); }
-    .card:active { transform: scale(0.985); }
-
-    .card-icon {
-      width: 56px; height: 56px;
-      border-radius: 13px;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-    .card-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .card-text { flex: 1; }
-    .card-top  { font-size: 15.5px; font-weight: 700; color: #fff; margin-bottom: 2px; }
-    .card-name { font-size: 15.5px; font-weight: 700; color: #a855f7; }
-    .card-chevron { color: #6b7280; font-size: 20px; font-weight: 300; }
-
-    /* SOCIAL PROOF */
-    .social-proof { font-size: 13px; color: #6b7280; text-align: center; }
-  </style>
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        }
+        .app-icon {
+            border-radius: 22.5%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        body {
+            background-color: #f3f4f6;
+            background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
 </head>
-<body>
-<div class="wrapper">
+<body class="text-gray-800 font-sans antialiased pb-12">
 
-  <div class="logo-wrap a0">
-    <div class="logo-circle">
-      <img src="images/logo playful1.jpg" alt="Playful Rewards" />
-    </div>
-    <div class="logo-dot d1"></div>
-    <div class="logo-dot d2"></div>
-    <div class="logo-dot d3"></div>
-    <div class="logo-dot d4"></div>
-  </div>
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="max-w-md mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                    P
+                </div>
+                <span class="font-bold text-xl tracking-tight text-gray-900">Playful Rewards</span>
+            </div>
+            <div class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                En direct
+            </div>
+        </div>
+    </header>
 
-  <div class="badge a1">
-    <div class="badge-check">
-      <svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5L4.5 9L10 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </div>
-    <span class="badge-text">Verificato da TikTok</span>
-  </div>
+    <main class="max-w-md mx-auto px-4 mt-6">
+        
+        <div class="mb-6">
+            <h1 class="text-2xl font-extrabold text-gray-900 mb-1">Missions Actives</h1>
+            <p class="text-sm text-gray-500">Sélectionne une application ci-dessous pour commencer à générer des gains.</p>
+        </div>
 
-  <h1 class="headline a2">Scegli Come Guadagnare</h1>
-  <p class="subtitle a3">Scegli un'app qui sotto e inizia a guadagnare soldi veri mentre fai quello che fai già.</p>
+        <div class="space-y-4">
+            
+            <div class="glass-card rounded-2xl p-4 transition-transform active:scale-[0.98]">
+                <div class="flex items-start gap-4">
+                    <img src="img/roblox.png" alt="Roblox" class="w-20 h-20 app-icon object-cover bg-white">
+                    <div class="flex-1">
+                        <div class="flex justify-between items-start">
+                            <h2 class="font-bold text-lg leading-tight text-gray-900">Être payé pour jouer à Roblox !</h2>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1 mb-2">Joue et atteins des paliers pour débloquer tes récompenses.</p>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="bg-gray-100 text-gray-700 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Jeu</span>
+                            <span class="bg-blue-50 text-blue-600 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Paiement Élevé</span>
+                        </div>
+                    </div>
+                </div>
+                <a href="roblox.html" class="block text-center w-full mt-2 bg-primary hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-colors shadow-md shadow-indigo-200">
+                    Accepter la Mission
+                </a>
+            </div>
 
-  <div class="cards">
+            <div class="glass-card rounded-2xl p-4 transition-transform active:scale-[0.98]">
+                <div class="flex items-start gap-4">
+                    <img src="img/tiktok.png" alt="TikTok" class="w-20 h-20 app-icon object-cover">
+                    <div class="flex-1">
+                        <div class="flex justify-between items-start">
+                            <h2 class="font-bold text-lg leading-tight text-gray-900">Être payé pour scroller sur TikTok !</h2>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1 mb-2">Regarde des vidéos et interagis pour valider la mission.</p>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="bg-gray-100 text-gray-700 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Social</span>
+                            <span class="bg-orange-50 text-orange-600 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Populaire</span>
+                        </div>
+                    </div>
+                </div>
+                <a href="tiktok.html" class="block text-center w-full mt-2 bg-gray-900 hover:bg-gray-800 text-white font-bold py-3 rounded-xl transition-colors shadow-md shadow-gray-300">
+                    Accepter la Mission
+                </a>
+            </div>
 
-    <a class="card a3" href="tiktok.html">
-      <div class="card-icon">
-        <img src="images/Tiktok_icon.svg.png" alt="TikTok" />
-      </div>
-      <div class="card-text">
-        <div class="card-top">Vieni pagato per scrollare</div>
-        <div class="card-name">TikTok</div>
-      </div>
-      <span class="card-chevron">›</span>
-    </a>
+            <div class="glass-card rounded-2xl p-4 transition-transform active:scale-[0.98]">
+                <div class="flex items-start gap-4">
+                    <img src="img/blockblast.png" alt="Block Blast" class="w-20 h-20 app-icon object-cover">
+                    <div class="flex-1">
+                        <div class="flex justify-between items-start">
+                            <h2 class="font-bold text-lg leading-tight text-gray-900">Être payé pour jouer à Block Blast !</h2>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1 mb-2">Résous des puzzles et gagne de l'argent par niveau terminé.</p>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="bg-gray-100 text-gray-700 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Puzzle</span>
+                            <span class="bg-green-50 text-green-600 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Facile</span>
+                        </div>
+                    </div>
+                </div>
+                <a href="blockblast.html" class="block text-center w-full mt-2 bg-primary hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-colors shadow-md shadow-indigo-200">
+                    Accepter la Mission
+                </a>
+            </div>
 
-    <a class="card a4" href="blockblast.html">
-      <div class="card-icon">
-        <img src="images/blockblast.png" alt="Block Blast" />
-      </div>
-      <div class="card-text">
-        <div class="card-top">Vieni pagato per giocare</div>
-        <div class="card-name">Block Blast</div>
-      </div>
-      <span class="card-chevron">›</span>
-    </a>
+        </div>
+    </main>
 
-    <a class="card a5" href="subway.html">
-      <div class="card-icon">
-        <img src="images/subway.png" alt="Subway Surfers" />
-      </div>
-      <div class="card-text">
-        <div class="card-top">Vieni pagato per giocare</div>
-        <div class="card-name">Subway Surfers</div>
-      </div>
-      <span class="card-chevron">›</span>
-    </a>
-
-  </div>
-
-  <p class="social-proof a6">Disponibile in Italia · Oltre 500.000 utenti guadagnano ogni giorno</p>
-
-</div>
 </body>
 </html>
