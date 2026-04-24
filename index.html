@@ -1,222 +1,379 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Missions de Testeur Disponibles</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#4F46E5', /* Indigo 600 */
-                        secondary: '#10B981', /* Emerald 500 */
-                    }
-                }
-            }
-        }
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Missions Disponibles</title>
     
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7FRZMX1VN5"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-7FRZMX1VN5');
-    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7FRZMX1VN5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7FRZMX1VN5');
+</script>
 
-    <style>
-        body {
-            background-color: #f3f4f6;
-            background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
-            background-size: 20px 20px;
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 1);
-            border: 1px solid rgba(229, 231, 235, 1);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-        }
-        .app-icon {
-            border-radius: 22.5%;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-    </style>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: #0b051a;
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Global Dark Background */
+  .bg-overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 40%, #2e008a 0%, #0b051a 60%, #05020a 100%);
+    z-index: -2;
+  }
+  .bg-noise {
+    position: fixed;
+    inset: 0;
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.01) 39px, rgba(255,255,255,0.01) 40px), repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.01) 39px, rgba(255,255,255,0.01) 40px);
+    z-index: -1;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  /* ==================== OFFER WALL ==================== */
+  #page-wall {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-top: 20px;
+  }
+  .header h1 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+  .header p {
+    font-size: 14px;
+    color: #b0a4c4;
+  }
+
+  .offer-card {
+    background: #150a2b;
+    border: 1px solid #3b1c7a;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    transition: transform 0.1s, background 0.2s;
+  }
+  .offer-card:active {
+    transform: scale(0.98);
+    background: #1c0e3a;
+  }
+  
+  .offer-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+    object-fit: cover;
+    background: #fff;
+    flex-shrink: 0;
+  }
+  
+  .offer-info h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+  .offer-info p {
+    font-size: 12px;
+    color: #b0a4c4;
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+  .offer-tags {
+    display: flex;
+    gap: 8px;
+  }
+  .tag {
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+  .tag-game { background: rgba(255,255,255,0.1); color: #ccc; }
+  .tag-hot { background: rgba(93, 0, 209, 0.2); color: #a78bfa; border: 1px solid rgba(93, 0, 209, 0.5); }
+
+  /* ==================== DETAIL PAGE ==================== */
+  #page-detail {
+    display: none;
+    text-align: center;
+    padding-top: 40px;
+    animation: slideIn 0.3s ease;
+  }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slideIn { from { transform: translateX(20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+  .back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+  }
+  .logo-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  }
+  .logo-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .x-divider {
+    font-size: 20px;
+    font-weight: 700;
+    color: #8b7ca6;
+  }
+
+  .verified-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(74, 222, 128, 0.15);
+    border: 1px solid rgba(74, 222, 128, 0.3);
+    color: #4ade80;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+
+  .detail-title {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  .detail-desc {
+    font-size: 14px;
+    color: #b0a4c4;
+    line-height: 1.5;
+    margin-bottom: 32px;
+    padding: 0 10px;
+  }
+
+  .btn-download {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    background: linear-gradient(135deg, #7c22f0, #5d00d1);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 12px;
+    padding: 20px;
+    cursor: pointer;
+    box-shadow: 0 6px 24px rgba(93, 0, 209, 0.4);
+    text-decoration: none;
+    transition: transform 0.1s;
+  }
+  .btn-download:active {
+    transform: scale(0.98);
+  }
+
+  .trusted-text {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #8b7ca6;
+  }
+</style>
 </head>
-<body class="text-gray-800 font-sans antialiased pb-12">
+<body>
 
-    <header class="bg-white shadow-sm sticky top-0 z-10">
-        <div class="max-w-md mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-xl">
-                    P
-                </div>
-                <span class="font-bold text-xl tracking-tight text-gray-900">Playful Rewards</span>
-            </div>
-            <div class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
-                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                En direct
-            </div>
-        </div>
-    </header>
+<div class="bg-overlay"></div>
+<div class="bg-noise"></div>
 
-    <main class="max-w-md mx-auto px-4 mt-6">
-        
-        <div class="mb-6">
-            <h1 class="text-2xl font-extrabold text-gray-900 mb-1">Missions Actives</h1>
-            <p class="text-sm text-gray-500">Sélectionne une application ci-dessous pour commencer à gagner de l'argent.</p>
-        </div>
-
-        <div class="space-y-4">
-            
-            <div class="glass-card rounded-2xl p-4 transition-transform active:scale-[0.98]">
-                <div class="flex items-start gap-4">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCJAT7iNdljL2ZmI8_2MTH92ZbhLDSZaVAzQ&s" alt="Roblox" class="w-20 h-20 app-icon object-cover bg-white">
-                    <div class="flex-1">
-                        <div class="flex justify-between items-start">
-                            <h2 class="font-bold text-lg leading-tight text-gray-900">Être payé pour jouer à Roblox !</h2>
-                        </div>
-                        <p class="text-xs text-gray-500 mt-1 mb-2">Joue et atteins des paliers pour débloquer tes récompenses.</p>
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="bg-gray-100 text-gray-700 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Jeu</span>
-                            <span class="bg-blue-50 text-blue-600 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Paiement Élevé</span>
-                        </div>
-                    </div>
-                </div>
-                <button onclick="openModal('roblox')" class="w-full mt-2 bg-primary hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-colors shadow-md shadow-indigo-200">
-                    Accepter la Mission
-                </button>
-            </div>
-
-            <div class="glass-card rounded-2xl p-4 transition-transform active:scale-[0.98]">
-                <div class="flex items-start gap-4">
-                    <img src="tiktok.png" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3046/3046121.png'" alt="TikTok" class="w-20 h-20 app-icon object-cover bg-black p-1">
-                    <div class="flex-1">
-                        <div class="flex justify-between items-start">
-                            <h2 class="font-bold text-lg leading-tight text-gray-900">Être payé pour scroller sur TikTok !</h2>
-                        </div>
-                        <p class="text-xs text-gray-500 mt-1 mb-2">Regarde des vidéos et interagis pour valider la mission.</p>
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="bg-gray-100 text-gray-700 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Social</span>
-                            <span class="bg-orange-50 text-orange-600 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Populaire</span>
-                        </div>
-                    </div>
-                </div>
-                <button onclick="openModal('tiktok')" class="w-full mt-2 bg-gray-900 hover:bg-gray-800 text-white font-bold py-3 rounded-xl transition-colors shadow-md shadow-gray-300">
-                    Accepter la Mission
-                </button>
-            </div>
-
-            <div class="glass-card rounded-2xl p-4 transition-transform active:scale-[0.98]">
-                <div class="flex items-start gap-4">
-                    <img src="blockblast.png" onerror="this.src='https://play-lh.googleusercontent.com/B9O0l7R1dZ64J3cK1Rj2P28kI_D4S8l2h3uP9w0E1z0y3Z1Q9r8u3r9Q1X2P0Q3Z1g=w240-h480-rw'" alt="Block Blast" class="w-20 h-20 app-icon object-cover">
-                    <div class="flex-1">
-                        <div class="flex justify-between items-start">
-                            <h2 class="font-bold text-lg leading-tight text-gray-900">Être payé pour jouer à Block Blast !</h2>
-                        </div>
-                        <p class="text-xs text-gray-500 mt-1 mb-2">Résous des puzzles et gagne de l'argent par niveau terminé.</p>
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="bg-gray-100 text-gray-700 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Puzzle</span>
-                            <span class="bg-green-50 text-green-600 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Facile</span>
-                        </div>
-                    </div>
-                </div>
-                <button onclick="openModal('blockblast')" class="w-full mt-2 bg-primary hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-colors shadow-md shadow-indigo-200">
-                    Accepter la Mission
-                </button>
-            </div>
-
-        </div>
-    </main>
-
-    <div id="termsModal" class="fixed inset-0 bg-gray-900/60 backdrop-blur-sm z-50 hidden items-end sm:items-center justify-center">
-        <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-3xl p-6 transform transition-transform translate-y-full relative" id="modalContent">
-            
-            <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-6 sm:hidden"></div>
-            
-            <div class="flex items-center gap-3 mb-4">
-                <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold text-gray-900">Conditions Générales</h3>
-            </div>
-            
-            <div class="bg-gray-50 rounded-xl p-4 mb-6 border border-gray-100">
-                <p class="text-sm text-gray-600 leading-relaxed">
-                    En acceptant cette mission, tu t'engages à atteindre les paliers requis pour recevoir ton paiement. Assure-toi d'utiliser le même appareil et de ne pas utiliser de VPN.
-                </p>
-                <ul class="mt-3 space-y-2 text-sm text-gray-600">
-                    <li class="flex items-center gap-2">
-                        <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        Nouveaux utilisateurs uniquement
-                    </li>
-                    <li class="flex items-center gap-2">
-                        <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        Suivi autorisé sur l'appareil
-                    </li>
-                </ul>
-            </div>
-
-            <div class="flex gap-3">
-                <button onclick="closeModal()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-3.5 rounded-xl transition-colors">
-                    Annuler
-                </button>
-                <button onclick="acceptAndRedirect()" class="flex-[2] bg-primary hover:bg-indigo-700 text-white font-bold py-3.5 rounded-xl transition-colors shadow-lg shadow-indigo-200 flex justify-center items-center gap-2">
-                    Accepter & Continuer
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
-                    </svg>
-                </button>
-            </div>
-        </div>
+<div class="container">
+  
+  <div id="page-wall">
+    <div class="header">
+      <h1>Missions Actives</h1>
+      <p>Sélectionne une application pour commencer</p>
     </div>
 
-    <script>
-        // ==========================================
-        // YOUR SINGLE AFFILIATE LINK
-        // ==========================================
-        const AFFILIATE_LINK = 'https://taptrcks.com/r/eyJ0IjoicGxheWZ1bC1yZXdhcmRzLXJldnNoYXJlIiwidGlkIjoiNzA1NWY0NDc5OWE3NDRmN2ZiYTc1ZDhhYjQ4MDliNzYiLCJ0cyI6MTc3Njk0MjY4MjU5Nn0?s1=GT1&s2=GT1&feb=1';
+    <div class="offer-card" onclick="openDetail('roblox')">
+      <img src="roblox.png" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_icon_black.svg'" alt="Roblox" class="offer-icon">
+      <div class="offer-info">
+        <h2>Être payé pour jouer à Roblox</h2>
+        <p>Joue et atteins des paliers pour débloquer tes récompenses.</p>
+        <div class="offer-tags">
+          <span class="tag tag-game">JEU</span>
+          <span class="tag tag-hot">PAIEMENT ÉLEVÉ</span>
+        </div>
+      </div>
+    </div>
 
-        // Modal Logic & Tracking
-        function openModal(appType) {
-            // Fires unique GA4 event based on which app they clicked
-            try { gtag('event', 'click_' + appType, { 'event_category': 'engagement' }); } catch(e){}
-            
-            const modal = document.getElementById('termsModal');
-            const content = document.getElementById('modalContent');
-            
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            
-            // Slide up animation
-            setTimeout(() => {
-                content.classList.remove('translate-y-full');
-            }, 10);
-        }
+    <div class="offer-card" onclick="openDetail('tiktok')">
+      <img src="tiktok.png" alt="TikTok" class="offer-icon" style="background: black; padding: 4px;">
+      <div class="offer-info">
+        <h2>Être payé pour scroller sur TikTok</h2>
+        <p>Regarde des vidéos et interagis pour valider la mission.</p>
+        <div class="offer-tags">
+          <span class="tag tag-game">SOCIAL</span>
+          <span class="tag tag-hot">POPULAIRE</span>
+        </div>
+      </div>
+    </div>
 
-        function closeModal() {
-            const modal = document.getElementById('termsModal');
-            const content = document.getElementById('modalContent');
-            
-            content.classList.add('translate-y-full');
-            
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-            }, 300);
-        }
+    <div class="offer-card" onclick="openDetail('blockblast')">
+      <img src="blockblast.png" alt="Block Blast" class="offer-icon">
+      <div class="offer-info">
+        <h2>Être payé pour jouer à Block Blast</h2>
+        <p>Résous des puzzles et gagne de l'argent par niveau terminé.</p>
+        <div class="offer-tags">
+          <span class="tag tag-game">PUZZLE</span>
+          <span class="tag tag-hot">FACILE</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        function acceptAndRedirect() {
-            // Fires final conversion event before redirecting
-            try { gtag('event', 'click_continue', { 'event_category': 'conversion' }); } catch(e){}
-            
-            // 250ms smooth delay to ensure GA4 pixel fires
-            setTimeout(function(){
-                window.location.href = AFFILIATE_LINK;
-            }, 250);
-        }
-    </script>
+  <div id="page-detail">
+    <button class="back-btn" onclick="closeDetail()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      Retour
+    </button>
+
+    <div class="logos">
+      <div class="logo-circle"><img src="playful.png" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Tiktok_icon.svg/512px-Tiktok_icon.svg.png'" alt="Playful"></div>
+      <span class="x-divider">✕</span>
+      <div class="logo-circle"><img id="detail-img" src="" alt="App"></div>
+    </div>
+
+    <div class="verified-badge">
+      <svg style="width:16px;height:16px;" viewBox="0 0 24 24" fill="currentColor"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      Vérifié par TikTok
+    </div>
+
+    <h1 id="detail-title" class="detail-title">Être payé pour...</h1>
+    <p id="detail-desc" class="detail-desc">Télécharge l'application pour activer ton accès et commence à gagner de l'argent dès aujourd'hui.</p>
+
+    <a href="#" class="btn-download" onclick="claimOffer(event)">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 4v12M8 12l4 4 4-4"/></svg>
+      TÉLÉCHARGER MAINTENANT
+    </a>
+    
+    <p class="trusted-text">Approuvé par plus de 500 000 utilisateurs rémunérés chaque jour</p>
+  </div>
+
+</div>
+
+<script>
+  // ==========================================
+  // YOUR AFFILIATE LINK
+  // ==========================================
+  const AFF_LINK = 'https://taptrcks.com/r/eyJ0IjoicGxheWZ1bC1yZXdhcmRzLXJldnNoYXJlIiwidGlkIjoiNzA1NWY0NDc5OWE3NDRmN2ZiYTc1ZDhhYjQ4MDliNzYiLCJ0cyI6MTc3Njk0MjY4MjU5Nn0?s1=GT1&s2=GT1&feb=1';
+  
+  let currentApp = '';
+
+  const appData = {
+    'roblox': {
+      logo: 'roblox.png',
+      fallback: 'https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_icon_black.svg',
+      title: 'Être payé pour jouer à Roblox',
+      desc: "Télécharge l'application pour activer ton accès et commence à gagner de l'argent dès aujourd'hui avec Roblox."
+    },
+    'tiktok': {
+      logo: 'tiktok.png',
+      title: 'Être payé pour scroller sur TikTok',
+      desc: "Télécharge l'application pour activer ton accès et commence à gagner de l'argent dès aujourd'hui en regardant des vidéos."
+    },
+    'blockblast': {
+      logo: 'blockblast.png',
+      title: 'Être payé pour jouer à Block Blast',
+      desc: "Télécharge l'application pour activer ton accès et commence à gagner de l'argent dès aujourd'hui avec Block Blast."
+    }
+  };
+
+  function openDetail(appId) {
+    currentApp = appId;
+    const data = appData[appId];
+    
+    // Set Images and Text
+    const imgElement = document.getElementById('detail-img');
+    imgElement.src = data.logo;
+    imgElement.onerror = function() { if(data.fallback) this.src = data.fallback; };
+    
+    document.getElementById('detail-title').innerText = data.title;
+    document.getElementById('detail-desc').innerText = data.desc;
+    
+    // Swap Pages
+    document.getElementById('page-wall').style.display = 'none';
+    document.getElementById('page-detail').style.display = 'block';
+    window.scrollTo(0, 0);
+
+    // Track click
+    try { gtag('event', 'click_' + appId, { 'event_category': 'engagement' }); } catch(err){}
+  }
+
+  function closeDetail() {
+    document.getElementById('page-detail').style.display = 'none';
+    document.getElementById('page-wall').style.display = 'block';
+  }
+
+  function claimOffer(e) {
+    e.preventDefault();
+    try { gtag('event', 'click_download_' + currentApp, { 'event_category': 'conversion' }); } catch(err){}
+    setTimeout(function(){ window.location.href = AFF_LINK; }, 250);
+  }
+</script>
+
 </body>
 </html>
