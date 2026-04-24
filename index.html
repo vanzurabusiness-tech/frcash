@@ -10,8 +10,8 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#4F46E5', 
-                        secondary: '#10B981', 
+                        primary: '#4F46E5', /* Indigo 600 */
+                        secondary: '#10B981', /* Emerald 500 */
                     }
                 }
             }
@@ -27,198 +27,195 @@
     </script>
 
     <style>
-        /* Offer Wall Styles */
         body {
             background-color: #f3f4f6;
             background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
             background-size: 20px 20px;
         }
         .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            background: rgba(255, 255, 255, 1);
+            border: 1px solid rgba(229, 231, 235, 1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
         }
         .app-icon {
             border-radius: 22.5%;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-
-        /* Full Screen Detail Overlay Styles */
-        #detail-overlay {
-            display: none; /* Hidden by default */
-            position: fixed;
-            inset: 0;
-            background-color: #0b051a;
-            z-index: 50;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-            overflow-y: auto;
-        }
-        .logos { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 20px; }
-        .logo-circle { width: 72px; height: 72px; border-radius: 50%; background: #fff; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-        .logo-circle img { max-width: 100%; max-height: 100%; object-fit: cover; }
-        .close-btn { color: #ccc; font-weight: bold; font-size: 22px; cursor: pointer; padding: 10px; }
-        .detail-h1 { font-size: 26px; font-weight: 800; margin-bottom: 14px; max-width: 320px; }
-        .detail-p { color: #b0a4c4; font-size: 14px; margin-bottom: 30px; max-width: 300px; }
-        .btn-download { display: block; background: #5d00d1; color: #fff; padding: 18px 24px; border-radius: 12px; font-weight: 800; text-decoration: none; width: 100%; max-width: 320px; margin: 0 auto; text-transform: uppercase; box-shadow: 0 6px 24px rgba(93, 0, 209, 0.4); }
     </style>
 </head>
 <body class="text-gray-800 font-sans antialiased pb-12">
 
-    <div id="offer-wall">
-        <header class="bg-white shadow-sm sticky top-0 z-10">
-            <div class="max-w-md mx-auto px-4 py-4 flex justify-between items-center">
-                <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-xl">P</div>
-                    <span class="font-bold text-xl tracking-tight text-gray-900">Playful Rewards</span>
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="max-w-md mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                    P
                 </div>
-                <div class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
-                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                    En direct
-                </div>
+                <span class="font-bold text-xl tracking-tight text-gray-900">Playful Rewards</span>
             </div>
-        </header>
-
-        <main class="max-w-md mx-auto px-4 mt-6">
-            <div class="mb-6">
-                <h1 class="text-2xl font-extrabold text-gray-900 mb-1">Missions Actives</h1>
-                <p class="text-sm text-gray-500">Sélectionne une application ci-dessous pour commencer à générer des gains.</p>
+            <div class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                En direct
             </div>
-
-            <div class="space-y-4">
-                <div class="glass-card rounded-2xl p-4 transition-transform active:scale-[0.98] cursor-pointer" onclick="openDetail('roblox')">
-                    <div class="flex items-start gap-4">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCJAT7iNdljL2ZmI8_2MTH92ZbhLDSZaVAzQ&s" alt="Roblox" class="w-20 h-20 app-icon object-cover bg-white">
-                        <div class="flex-1">
-                            <h2 class="font-bold text-lg leading-tight text-gray-900">Être payé pour jouer à Roblox !</h2>
-                            <p class="text-xs text-gray-500 mt-1 mb-2">Joue et atteins des paliers pour débloquer tes récompenses.</p>
-                            <div class="flex items-center gap-2 mb-3">
-                                <span class="bg-gray-100 text-gray-700 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Jeu</span>
-                                <span class="bg-blue-50 text-blue-600 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Paiement Élevé</span>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="w-full mt-2 bg-primary text-white font-bold py-3 rounded-xl shadow-md shadow-indigo-200">Accepter la Mission</button>
-                </div>
-
-                <div class="glass-card rounded-2xl p-4 transition-transform active:scale-[0.98] cursor-pointer" onclick="openDetail('tiktok')">
-                    <div class="flex items-start gap-4">
-                        <img src="img/tiktok.png" alt="TikTok" class="w-20 h-20 app-icon object-cover bg-black p-2">
-                        <div class="flex-1">
-                            <h2 class="font-bold text-lg leading-tight text-gray-900">Être payé pour scroller sur TikTok !</h2>
-                            <p class="text-xs text-gray-500 mt-1 mb-2">Regarde des vidéos et interagis pour valider la mission.</p>
-                            <div class="flex items-center gap-2 mb-3">
-                                <span class="bg-gray-100 text-gray-700 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Social</span>
-                                <span class="bg-orange-50 text-orange-600 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Populaire</span>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="w-full mt-2 bg-gray-900 text-white font-bold py-3 rounded-xl shadow-md shadow-gray-300">Accepter la Mission</button>
-                </div>
-
-                <div class="glass-card rounded-2xl p-4 transition-transform active:scale-[0.98] cursor-pointer" onclick="openDetail('blockblast')">
-                    <div class="flex items-start gap-4">
-                        <img src="img/blockblast.png" alt="Block Blast" class="w-20 h-20 app-icon object-cover">
-                        <div class="flex-1">
-                            <h2 class="font-bold text-lg leading-tight text-gray-900">Être payé pour jouer à Block Blast !</h2>
-                            <p class="text-xs text-gray-500 mt-1 mb-2">Résous des puzzles et gagne de l'argent par niveau terminé.</p>
-                            <div class="flex items-center gap-2 mb-3">
-                                <span class="bg-gray-100 text-gray-700 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Puzzle</span>
-                                <span class="bg-green-50 text-green-600 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Facile</span>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="w-full mt-2 bg-primary text-white font-bold py-3 rounded-xl shadow-md shadow-indigo-200">Accepter la Mission</button>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <div id="detail-overlay">
-        <div class="logos">
-            <div class="logo-circle"><img src="img/playful.png" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Tiktok_icon.svg/512px-Tiktok_icon.svg.png'" alt="Playful"></div>
-            
-            <span class="close-btn" onclick="closeDetail()">✕</span>
-            
-            <div class="logo-circle"><img id="detail-app-logo" src="" alt="App"></div>
         </div>
+    </header>
+
+    <main class="max-w-md mx-auto px-4 mt-6">
         
-        <div style="background: rgba(74, 222, 128, 0.15); color: #4ade80; display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-bottom: 24px;">
-            <svg style="width:16px;height:16px;" viewBox="0 0 24 24" fill="currentColor"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            Vérifié par TikTok
+        <div class="mb-6">
+            <h1 class="text-2xl font-extrabold text-gray-900 mb-1">Missions Actives</h1>
+            <p class="text-sm text-gray-500">Sélectionne une application ci-dessous pour commencer à gagner de l'argent.</p>
         </div>
 
-        <h1 id="detail-headline" class="detail-h1">Être payé pour...</h1>
-        <p id="detail-desc" class="detail-p">Télécharge l'application pour activer ton accès et commence à gagner de l'argent dès aujourd'hui.</p>
+        <div class="space-y-4">
+            
+            <div class="glass-card rounded-2xl p-4 transition-transform active:scale-[0.98]">
+                <div class="flex items-start gap-4">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCJAT7iNdljL2ZmI8_2MTH92ZbhLDSZaVAzQ&s" alt="Roblox" class="w-20 h-20 app-icon object-cover bg-white">
+                    <div class="flex-1">
+                        <div class="flex justify-between items-start">
+                            <h2 class="font-bold text-lg leading-tight text-gray-900">Être payé pour jouer à Roblox !</h2>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1 mb-2">Joue et atteins des paliers pour débloquer tes récompenses.</p>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="bg-gray-100 text-gray-700 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Jeu</span>
+                            <span class="bg-blue-50 text-blue-600 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Paiement Élevé</span>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="openModal('roblox')" class="w-full mt-2 bg-primary hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-colors shadow-md shadow-indigo-200">
+                    Accepter la Mission
+                </button>
+            </div>
 
-        <a href="#" class="btn-download" onclick="claimOffer(event)">TÉLÉCHARGER MAINTENANT</a>
-        <p style="margin-top: 20px; font-size: 12px; color: #8b7ca6;">Approuvé par plus de 500 000 utilisateurs rémunérés chaque jour</p>
+            <div class="glass-card rounded-2xl p-4 transition-transform active:scale-[0.98]">
+                <div class="flex items-start gap-4">
+                    <img src="tiktok.png" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3046/3046121.png'" alt="TikTok" class="w-20 h-20 app-icon object-cover bg-black p-1">
+                    <div class="flex-1">
+                        <div class="flex justify-between items-start">
+                            <h2 class="font-bold text-lg leading-tight text-gray-900">Être payé pour scroller sur TikTok !</h2>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1 mb-2">Regarde des vidéos et interagis pour valider la mission.</p>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="bg-gray-100 text-gray-700 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Social</span>
+                            <span class="bg-orange-50 text-orange-600 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Populaire</span>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="openModal('tiktok')" class="w-full mt-2 bg-gray-900 hover:bg-gray-800 text-white font-bold py-3 rounded-xl transition-colors shadow-md shadow-gray-300">
+                    Accepter la Mission
+                </button>
+            </div>
+
+            <div class="glass-card rounded-2xl p-4 transition-transform active:scale-[0.98]">
+                <div class="flex items-start gap-4">
+                    <img src="blockblast.png" onerror="this.src='https://play-lh.googleusercontent.com/B9O0l7R1dZ64J3cK1Rj2P28kI_D4S8l2h3uP9w0E1z0y3Z1Q9r8u3r9Q1X2P0Q3Z1g=w240-h480-rw'" alt="Block Blast" class="w-20 h-20 app-icon object-cover">
+                    <div class="flex-1">
+                        <div class="flex justify-between items-start">
+                            <h2 class="font-bold text-lg leading-tight text-gray-900">Être payé pour jouer à Block Blast !</h2>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1 mb-2">Résous des puzzles et gagne de l'argent par niveau terminé.</p>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="bg-gray-100 text-gray-700 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Puzzle</span>
+                            <span class="bg-green-50 text-green-600 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Facile</span>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="openModal('blockblast')" class="w-full mt-2 bg-primary hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-colors shadow-md shadow-indigo-200">
+                    Accepter la Mission
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="termsModal" class="fixed inset-0 bg-gray-900/60 backdrop-blur-sm z-50 hidden items-end sm:items-center justify-center">
+        <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-3xl p-6 transform transition-transform translate-y-full relative" id="modalContent">
+            
+            <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-6 sm:hidden"></div>
+            
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900">Conditions Générales</h3>
+            </div>
+            
+            <div class="bg-gray-50 rounded-xl p-4 mb-6 border border-gray-100">
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    En acceptant cette mission, tu t'engages à atteindre les paliers requis pour recevoir ton paiement. Assure-toi d'utiliser le même appareil et de ne pas utiliser de VPN.
+                </p>
+                <ul class="mt-3 space-y-2 text-sm text-gray-600">
+                    <li class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        Nouveaux utilisateurs uniquement
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        Suivi autorisé sur l'appareil
+                    </li>
+                </ul>
+            </div>
+
+            <div class="flex gap-3">
+                <button onclick="closeModal()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-3.5 rounded-xl transition-colors">
+                    Annuler
+                </button>
+                <button onclick="acceptAndRedirect()" class="flex-[2] bg-primary hover:bg-indigo-700 text-white font-bold py-3.5 rounded-xl transition-colors shadow-lg shadow-indigo-200 flex justify-center items-center gap-2">
+                    Accepter & Continuer
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
     </div>
 
     <script>
-        // YOUR SINGLE AFFILIATE LINK HERE
-        const AFF_LINK = 'https://taptrcks.com/r/eyJ0IjoicGxheWZ1bC1yZXdhcmRzLXJldnNoYXJlIiwidGlkIjoiNzA1NWY0NDc5OWE3NDRmN2ZiYTc1ZDhhYjQ4MDliNzYiLCJ0cyI6MTc3Njk0MjY4MjU5Nn0?s1=GT1&s2=GT1&feb=1';
-        
-        let currentApp = '';
+        // ==========================================
+        // YOUR SINGLE AFFILIATE LINK
+        // ==========================================
+        const AFFILIATE_LINK = 'https://taptrcks.com/r/eyJ0IjoicGxheWZ1bC1yZXdhcmRzLXJldnNoYXJlIiwidGlkIjoiNzA1NWY0NDc5OWE3NDRmN2ZiYTc1ZDhhYjQ4MDliNzYiLCJ0cyI6MTc3Njk0MjY4MjU5Nn0?s1=GT1&s2=GT1&feb=1';
 
-        // App Data Dictionary
-        const appData = {
-            'roblox': {
-                logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCJAT7iNdljL2ZmI8_2MTH92ZbhLDSZaVAzQ&s',
-                action: 'jouer à Roblox',
-                endText: 'avec Roblox.'
-            },
-            'tiktok': {
-                logo: 'img/tiktok.png',
-                action: 'scroller sur TikTok',
-                endText: 'en regardant des vidéos.'
-            },
-            'blockblast': {
-                logo: 'img/blockblast.png',
-                action: 'jouer à Block Blast',
-                endText: 'avec Block Blast.'
-            }
-        };
-
-        function openDetail(appId) {
-            currentApp = appId;
-            const data = appData[appId];
+        // Modal Logic & Tracking
+        function openModal(appType) {
+            // Fires unique GA4 event based on which app they clicked
+            try { gtag('event', 'click_' + appType, { 'event_category': 'engagement' }); } catch(e){}
             
-            // Update the overlay content
-            document.getElementById('detail-app-logo').src = data.logo;
-            document.getElementById('detail-headline').innerText = "Être payé pour " + data.action;
-            document.getElementById('detail-desc').innerText = "Télécharge l'application pour activer ton accès et commence à gagner de l'argent dès aujourd'hui " + data.endText;
+            const modal = document.getElementById('termsModal');
+            const content = document.getElementById('modalContent');
             
-            // Hide the wall, show the overlay
-            document.getElementById('offer-wall').style.display = 'none';
-            document.getElementById('detail-overlay').style.display = 'flex';
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
             
-            // Scroll to top
-            window.scrollTo(0, 0);
-
-            // Fire GA4 Wall Click Event
-            try { gtag('event', 'click_' + appId, { 'event_category': 'engagement' }); } catch(err){}
+            // Slide up animation
+            setTimeout(() => {
+                content.classList.remove('translate-y-full');
+            }, 10);
         }
 
-        function closeDetail() {
-            // Hide the overlay, show the wall
-            document.getElementById('detail-overlay').style.display = 'none';
-            document.getElementById('offer-wall').style.display = 'block';
+        function closeModal() {
+            const modal = document.getElementById('termsModal');
+            const content = document.getElementById('modalContent');
+            
+            content.classList.add('translate-y-full');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
         }
 
-        function claimOffer(e) {
-            e.preventDefault();
+        function acceptAndRedirect() {
+            // Fires final conversion event before redirecting
+            try { gtag('event', 'click_continue', { 'event_category': 'conversion' }); } catch(e){}
             
-            // Fire GA4 Download Click Event based on which app they are viewing
-            try { gtag('event', 'click_download_' + currentApp, { 'event_category': 'conversion' }); } catch(err){}
-            
-            // Redirect to offer
-            setTimeout(function(){ window.location.href = AFF_LINK; }, 250);
+            // 250ms smooth delay to ensure GA4 pixel fires
+            setTimeout(function(){
+                window.location.href = AFFILIATE_LINK;
+            }, 250);
         }
     </script>
 </body>
