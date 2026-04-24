@@ -1,493 +1,219 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Être payé pour jouer à Roblox</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offres de Testeur Disponibles</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4F46E5', // Indigo 600
+                        secondary: '#10B981', // Emerald 500
+                    }
+                }
+            }
+        }
+    </script>
     
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7FRZMX1VN5"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-7FRZMX1VN5');
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7FRZMX1VN5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-7FRZMX1VN5');
+    </script>
 
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background-color: #0b051a; /* Dark vibrant Indigo */
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    position: relative;
-  }
-
-  /* Deep purple/blue textured background for Playful Rewards vibe */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(ellipse at 50% 40%, #2e008a 0%, #0b051a 60%, #05020a 100%);
-    z-index: 0;
-  }
-
-  /* Subtle grid/noise texture */
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.01) 39px, rgba(255,255,255,0.01) 40px),
-      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.01) 39px, rgba(255,255,255,0.01) 40px);
-    z-index: 0;
-  }
-
-  .page {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 390px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 20px;
-    text-align: center;
-  }
-
-  /* Logo section - Both logos now real and distinct */
-  .logos {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 16px;
-  }
-
-  .logo-circle {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    overflow: hidden;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-  }
-
-  .logo-circle img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-  }
-
-  .x-divider {
-    font-size: 22px;
-    font-weight: 700;
-    color: #ccc;
-  }
-
-  /* Verified badge */
-  .verified-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(74, 222, 128, 0.15);
-    border: 1px solid rgba(74, 222, 128, 0.3);
-    color: #4ade80;
-    border-radius: 20px;
-    padding: 6px 14px;
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 24px;
-  }
-
-  .verified-badge svg {
-    width: 16px;
-    height: 16px;
-  }
-
-  /* Headline */
-  h1 {
-    font-size: 26px;
-    font-weight: 800;
-    color: #ffffff;
-    line-height: 1.2;
-    margin-bottom: 14px;
-    max-width: 300px;
-  }
-
-  .subtitle {
-    font-size: 14px;
-    color: #b0a4c4;
-    line-height: 1.5;
-    max-width: 280px;
-    margin-bottom: 32px;
-  }
-
-  /* Download button - Updated Playful Indigo Color */
-  .btn-download {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    max-width: 320px;
-    background: linear-gradient(135deg, #7c22f0, #5d00d1);
-    color: #fff;
-    font-size: 15px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    border: none;
-    border-radius: 12px;
-    padding: 18px 24px;
-    cursor: pointer;
-    box-shadow: 0 6px 24px rgba(93, 0, 209, 0.4);
-    transition: transform 0.1s, box-shadow 0.1s;
-    text-decoration: none;
-  }
-
-  .btn-download:active {
-    transform: scale(0.98);
-    box-shadow: 0 2px 12px rgba(93, 0, 209, 0.3);
-  }
-
-  .btn-download svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  .trusted {
-    margin-top: 18px;
-    font-size: 12px;
-    color: #8b7ca6;
-  }
-
-  /* ===== MODAL ===== */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.8);
-    z-index: 100;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    animation: fadeIn 0.3s ease;
-  }
-
-  .modal-overlay.hidden {
-    display: none;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  .modal {
-    width: 100%;
-    max-width: 390px;
-    background: #150a2b;
-    border-radius: 20px 20px 0 0;
-    padding: 28px 20px 40px;
-    position: relative;
-    animation: slideUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-    border: 1px solid #3b1c7a;
-    border-bottom: none;
-  }
-
-  @keyframes slideUp {
-    from { transform: translateY(100%); }
-    to { transform: translateY(0); }
-  }
-
-  .modal-close {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    background: none;
-    border: none;
-    color: #8b7ca6;
-    font-size: 20px;
-    cursor: pointer;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-  }
-
-  .modal-title {
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    color: #8b7ca6;
-    text-transform: uppercase;
-    text-align: center;
-    margin-bottom: 24px;
-  }
-
-  /* Steps */
-  .steps {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    margin-bottom: 20px;
-  }
-
-  .step {
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
-    padding: 16px;
-    border-radius: 12px;
-    transition: background 0.2s;
-  }
-
-  .step.active {
-    background: rgba(93, 0, 209, 0.1);
-    border: 1px solid rgba(93, 0, 209, 0.2);
-  }
-
-  .step-num {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: #25124a;
-    color: #8b7ca6;
-    font-size: 13px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  .step.active .step-num {
-    background: #5d00d1;
-    color: #fff;
-    box-shadow: 0 0 12px rgba(93, 0, 209, 0.5);
-  }
-
-  .step-content h3 {
-    font-size: 15px;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 4px;
-  }
-
-  .step-content p {
-    font-size: 13px;
-    color: #b0a4c4;
-    line-height: 1.4;
-  }
-
-  /* Bonus tip */
-  .bonus-box {
-    background: #1c0e3a;
-    border: 1px solid #3b1c7a;
-    border-radius: 12px;
-    padding: 14px 16px;
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    margin-bottom: 24px;
-  }
-
-  .bonus-icon {
-    font-size: 20px;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  .bonus-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 6px;
-  }
-
-  .bonus-label span:first-child {
-    font-size: 11px;
-    font-weight: 800;
-    color: #ccc;
-    letter-spacing: 0.5px;
-  }
-
-  .badge-important {
-    background: #5d00d1;
-    color: #fff;
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: 1px;
-    padding: 2px 6px;
-    border-radius: 4px;
-    text-transform: uppercase;
-  }
-
-  .bonus-box p {
-    font-size: 13px;
-    color: #b0a4c4;
-    line-height: 1.5;
-  }
-
-  .bonus-box p strong {
-    color: #fff;
-    font-weight: 700;
-  }
-
-  .bonus-box p .gold {
-    color: #f59e0b;
-    font-weight: 800;
-  }
-
-  /* Continue button - Playful Indigo */
-  .btn-continue {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    background: linear-gradient(135deg, #7c22f0, #5d00d1);
-    color: #fff;
-    font-size: 14px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    border: none;
-    border-radius: 12px;
-    padding: 18px 24px;
-    cursor: pointer;
-    box-shadow: 0 6px 24px rgba(93, 0, 209, 0.4);
-    transition: transform 0.1s;
-  }
-
-  .btn-continue:active {
-    transform: scale(0.98);
-  }
-</style>
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        }
+        .app-icon {
+            border-radius: 22.5%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        body {
+            background-color: #f3f4f6;
+            background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
 </head>
-<body>
+<body class="text-gray-800 font-sans antialiased pb-12">
 
-<div class="page">
-  <div class="logos">
-    <div class="logo-circle" style="padding:0; overflow:hidden; background:#fff;">
-      <img src="https://play-lh.googleusercontent.com/Lx-lkUUlaa-VfYYO_bgxW4Cp5a-4X3nfjnEHXt1iHn2FZW15s3ewUH5PT-kq9MrI5vs=w600-h300-pc0xffffff-pd" width="72" height="72" alt="Playful Rewards">
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="max-w-md mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                    P
+                </div>
+                <span class="font-bold text-xl tracking-tight text-gray-900">Playful Rewards</span>
+            </div>
+            <div class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                En direct
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-md mx-auto px-4 mt-6">
+        
+        <div class="mb-6">
+            <h1 class="text-2xl font-extrabold text-gray-900 mb-1">Missions Actives</h1>
+            <p class="text-sm text-gray-500">Sélectionne une application ci-dessous pour commencer à générer des gains.</p>
+        </div>
+
+        <div class="space-y-4">
+            
+            <div class="glass-card rounded-2xl p-4 transition-transform active:scale-[0.98]">
+                <div class="flex items-start gap-4">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCJAT7iNdljL2ZmI8_2MTH92ZbhLDSZaVAzQ&s" alt="Roblox" class="w-20 h-20 app-icon object-cover bg-white">
+                    <div class="flex-1">
+                        <div class="flex justify-between items-start">
+                            <h2 class="font-bold text-lg leading-tight text-gray-900">Être payé pour jouer à Roblox !</h2>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1 mb-2">Joue et atteins des paliers pour débloquer tes récompenses.</p>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="bg-gray-100 text-gray-700 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Jeu</span>
+                            <span class="bg-blue-50 text-blue-600 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Paiement Élevé</span>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="openModal('roblox')" class="w-full mt-2 bg-primary hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-colors shadow-md shadow-indigo-200">
+                    Accepter la Mission
+                </button>
+            </div>
+
+            <div class="glass-card rounded-2xl p-4 transition-transform active:scale-[0.98]">
+                <div class="flex items-start gap-4">
+                    <img src="https://play-lh.googleusercontent.com/VSOQEpINh2H_AIt0Lh1P3-sFhS_Q5K4Gj1Fv9pA1x88F9AEMm1q61YcQ7Yk5G_4p3g" alt="TikTok" class="w-20 h-20 app-icon object-cover">
+                    <div class="flex-1">
+                        <div class="flex justify-between items-start">
+                            <h2 class="font-bold text-lg leading-tight text-gray-900">Être payé pour scroller sur TikTok !</h2>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1 mb-2">Regarde des vidéos et interagis pour valider la mission.</p>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="bg-gray-100 text-gray-700 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Social</span>
+                            <span class="bg-orange-50 text-orange-600 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Populaire</span>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="openModal('tiktok')" class="w-full mt-2 bg-gray-900 hover:bg-gray-800 text-white font-bold py-3 rounded-xl transition-colors shadow-md shadow-gray-300">
+                    Accepter la Mission
+                </button>
+            </div>
+
+            <div class="glass-card rounded-2xl p-4 transition-transform active:scale-[0.98]">
+                <div class="flex items-start gap-4">
+                    <img src="https://play-lh.googleusercontent.com/97QnZg78eI9Z74lKkS_EclBblAWeZ7l47N-t7UvGqL1o90G-b63iE6Q4uL1j5i14yA" alt="Block Blast" class="w-20 h-20 app-icon object-cover">
+                    <div class="flex-1">
+                        <div class="flex justify-between items-start">
+                            <h2 class="font-bold text-lg leading-tight text-gray-900">Être payé pour jouer à Block Blast !</h2>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1 mb-2">Résous des puzzles et gagne de l'argent par niveau terminé.</p>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="bg-gray-100 text-gray-700 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Puzzle</span>
+                            <span class="bg-green-50 text-green-600 text-[10px] uppercase font-bold px-2 py-1 rounded-md">Facile</span>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="openModal('blockblast')" class="w-full mt-2 bg-primary hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-colors shadow-md shadow-indigo-200">
+                    Accepter la Mission
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="termsModal" class="fixed inset-0 bg-gray-900/60 backdrop-blur-sm z-50 hidden items-end sm:items-center justify-center">
+        <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-3xl p-6 transform transition-transform translate-y-0 relative">
+            
+            <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-6 sm:hidden"></div>
+            
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900">Conditions Générales</h3>
+            </div>
+            
+            <div class="bg-gray-50 rounded-xl p-4 mb-6 border border-gray-100">
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    En acceptant cette mission, tu t'engages à atteindre les paliers requis pour recevoir ton paiement. Assure-toi d'utiliser le même appareil et de ne pas utiliser de VPN.
+                </p>
+                <ul class="mt-3 space-y-2 text-sm text-gray-600">
+                    <li class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        Nouveaux utilisateurs uniquement
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        Suivi autorisé sur l'appareil
+                    </li>
+                </ul>
+            </div>
+
+            <div class="flex gap-3">
+                <button onclick="closeModal()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-3.5 rounded-xl transition-colors">
+                    Annuler
+                </button>
+                <button onclick="acceptAndRedirect()" class="flex-[2] bg-primary hover:bg-indigo-700 text-white font-bold py-3.5 rounded-xl transition-colors shadow-lg shadow-indigo-200 flex justify-center items-center gap-2">
+                    Accepter & Continuer
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
     </div>
 
-    <span class="x-divider">✕</span>
+    <script>
+        // ==========================================
+        // CHANGE THIS SINGLE LINK FOR YOUR REDIRECT
+        // ==========================================
+        const AFFILIATE_LINK = 'https://taptrcks.com/r/eyJ0IjoicGxheWZ1bC1yZXdhcmRzLXJldnNoYXJlIiwidGlkIjoiNzA1NWY0NDc5OWE3NDRmN2ZiYTc1ZDhhYjQ4MDliNzYiLCJ0cyI6MTc3Njk0MjY4MjU5Nn0?s1=GT1&s2=GT1&feb=1';
 
-    <div class="logo-circle" style="padding:0; overflow:hidden; background:#fff;">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCJAT7iNdljL2ZmI8_2MTH92ZbhLDSZaVAzQ&s" width="72" height="72" alt="Roblox">
-    </div>
-  </div>
+        // Modal Logic & Tracking
+        function openModal(appType) {
+            // Fires unique GA4 event based on which app they clicked
+            try { gtag('event', 'click_' + appType, { 'event_category': 'engagement' }); } catch(e){}
+            
+            const modal = document.getElementById('termsModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            // Small delay to allow CSS animation to trigger smoothly
+            setTimeout(() => {
+                modal.children[0].classList.remove('translate-y-full');
+            }, 10);
+        }
 
-  <div class="verified-badge">
-    <svg viewBox="0 0 24 24" fill="currentColor">
-      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-    </svg>
-    Vérifié par TikTok
-  </div>
+        function closeModal() {
+            const modal = document.getElementById('termsModal');
+            modal.children[0].classList.add('translate-y-full');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
+        }
 
-  <h1>Être payé pour jouer à Roblox</h1>
-  <p class="subtitle">Télécharge l'application pour activer ton accès et commence à gagner de l'argent dès aujourd'hui avec Roblox.</p>
-
-  <a href="#" class="btn-download" onclick="openModal(event)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-      <path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 4v12M8 12l4 4 4-4"></path>
-    </svg>
-    TÉLÉCHARGER MAINTENANT
-  </a>
-
-  <p class="trusted">Approuvé par plus de 500 000 utilisateurs rémunérés chaque jour</p>
-</div>
-
-<div class="modal-overlay hidden" id="modal">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-
-    <div class="modal-title">TON PARCOURS DE RÉCOMPENSES</div>
-
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-content">
-          <h3>Télécharge Playful Rewards</h3>
-          <p>Disponible sur iOS & Android · Prend moins de 30 secondes</p>
-        </div>
-      </div>
-
-      <div class="step active">
-        <div class="step-num">2</div>
-        <div class="step-content">
-          <h3>Débloque l'accès rémunéré</h3>
-          <p>Joue à au moins 1 jeu pour débloquer les paiements Roblox.</p>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-content">
-          <h3>Retire tes gains</h3>
-          <p>Paiements instantanés : PayPal, Apple Pay, Virement Bancaire & Crypto</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="bonus-box">
-      <div class="bonus-icon">🔓</div>
-      <div>
-        <div class="bonus-label">
-          <span>ASTUCE BONUS</span>
-          <span class="badge-important">IMPORTANT</span>
-        </div>
-        <p>Joue à <strong>2 jeux pendant quelques minutes</strong> chacun pour débloquer ton <span class="gold">Bonus de 25€</span> — crédité instantanément sur ton compte.</p>
-      </div>
-    </div>
-
-    <button class="btn-continue" onclick="goOffer(event)">
-      CONTINUER  ›
-    </button>
-  </div>
-</div>
-
-<script>
-  // ==========================================
-  // YOUR FRANCE PLAYFUL REWARDS AFFILIATE LINK
-  // ==========================================
-  var AFF_LINK = 'https://taptrcks.com/r/eyJ0IjoicGxheWZ1bC1yZXdhcmRzLXJldnNoYXJlIiwidGlkIjoiNzA1NWY0NDc5OWE3NDRmN2ZiYTc1ZDhhYjQ4MDliNzYiLCJ0cyI6MTc3Njk2NjA1ODUzMX0?s1=rblx1&s2=rblx1';
-
-  function openModal(e) {
-    e.preventDefault();
-    try { gtag('event', 'click_cta', { 'event_category': 'engagement' }); } catch(err){}
-    document.getElementById('modal').classList.remove('hidden');
-  }
-
-  function closeModal() {
-    document.getElementById('modal').classList.add('hidden');
-  }
-
-  function goOffer(e) {
-    if(e) e.preventDefault();
-    try { gtag('event', 'click_continue', { 'event_category': 'conversion' }); } catch(err){}
-    
-    // 250ms smooth delay for GA4 pixel fire before redirect
-    setTimeout(function(){
-      window.location.href = AFF_LINK;
-    }, 250);
-  }
-</script>
-
+        function acceptAndRedirect() {
+            // Fires final conversion event before redirecting
+            try { gtag('event', 'click_continue', { 'event_category': 'conversion' }); } catch(e){}
+            
+            // 250ms smooth delay to ensure GA4 pixel fires
+            setTimeout(function(){
+                window.location.href = AFFILIATE_LINK;
+            }, 250);
+        }
+    </script>
 </body>
 </html>
