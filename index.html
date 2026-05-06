@@ -3,7 +3,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="format-detection" content="telephone=no">
     <title>Zarabiaj grając w Block Blast</title>
+    
+    <!-- Google tag (gtag.js) - GA4 Integration -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JW1QWB73B1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      // This automatically tracks the "visit" (page_view)
+      gtag('config', 'G-JW1QWB73B1');
+    </script>
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
@@ -349,7 +361,7 @@
             </div>
         </div>
 
-        <!-- Initial Button (Triggers Modal) -->
+        <!-- Initial Button (Triggers Modal & Event 1) -->
         <button id="trigger-modal" class="cta-btn">ZACZNIJ ZARABIAĆ TERAZ</button>
 
         <!-- Steps -->
@@ -385,17 +397,43 @@
             <h2 class="modal-title">Wybierz <span class="text-green">21+</span> przy rejestracji</h2>
             <p class="modal-desc">To odblokowuje funkcje zarabiania na grach i wszystkie oferty z wysokimi stawkami.</p>
             
-            <!-- PUT YOUR ACTUAL TRACKING LINK HERE -->
-            <a href="https://your-tracker-link-here.com" class="cta-btn" style="margin-bottom: 0;">Rozumiem &rarr;</a>
+            <!-- Final Affiliate Button (Triggers Redirect & Event 2) -->
+            <a href="https://taprkr.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidGlkIjoiNzA1NWY0NDc5OWE3NDRmN2ZiYTc1ZDhhYjQ4MDliNzYiLCJ0cyI6MTc3ODA4Mjc0NjgyMn0?s1=pl1&s2=pl1&feb=1" id="final-affiliate-btn" class="cta-btn" style="margin-bottom: 0;">Rozumiem &rarr;</a>
         </div>
     </div>
 
     <script>
+        // EVENT 1: Opening the modal
         document.getElementById('trigger-modal').addEventListener('click', function(e) {
             e.preventDefault();
+            
+            // Fire GA4 Event for initial CTA click
+            gtag('event', 'click_initial_cta', {
+                'event_category': 'funnel',
+                'event_label': 'opened_21plus_modal'
+            });
+
             document.getElementById('age-modal').classList.add('active');
         });
 
+        // EVENT 2: Clicking the final affiliate link
+        document.getElementById('final-affiliate-btn').addEventListener('click', function(e) {
+            e.preventDefault(); // Temporarily stop redirect
+            var targetUrl = this.href;
+
+            // Fire GA4 Event for final conversion click
+            gtag('event', 'click_affiliate_link', {
+                'event_category': 'conversion',
+                'event_label': 'redirected_to_offer'
+            });
+
+            // Small delay to ensure Google registers the event before leaving the page
+            setTimeout(function() {
+                window.location.href = targetUrl;
+            }, 150);
+        });
+
+        // Close modal if they click the background
         document.getElementById('age-modal').addEventListener('click', function(e) {
             if (e.target === this) {
                 this.classList.remove('active');
