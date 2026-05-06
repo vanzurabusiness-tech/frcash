@@ -2,114 +2,395 @@
 <html lang="pl-PL">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="preload" href="/_next/static/media/797e433ab948586e-s.p.dbea232f.woff2" as="font" crossorigin="" type="font/woff2">
-    <link rel="preload" href="/_next/static/media/caa3a2e1cccd8315-s.p.853070df.woff2" as="font" crossorigin="" type="font/woff2">
-    <link rel="preload" href="/_next/static/media/fba5a26ea33df6a3-s.p.1bbdebe6.woff2" as="font" crossorigin="" type="font/woff2">
-    <link rel="preload" as="image" href="https://i.ibb.co/n8nPJrgg/d4r-EH4U.png">
-    <link rel="preload" as="image" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unnamed.png-7yiUNVfS61Z3eK1XcaPZlWtKOU5lFf.jpeg">
-    <link rel="stylesheet" href="/_next/static/chunks/c8b3025d421f133d.css?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh" data-precedence="next">
-    <link rel="stylesheet" href="/_next/static/chunks/fbdb973c5a6c1b7d.css?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh" data-precedence="next">
-    <link rel="preload" as="script" fetchpriority="low" href="/_next/static/chunks/414e77373f8ff61c.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh">
-    <script src="/_next/static/chunks/112f346e31f991df.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh" async=""></script>
-    <script src="/_next/static/chunks/c32d3fd0464d4674.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh" async=""></script>
-    <script src="/_next/static/chunks/0fc416a44ef6a4a9.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh" async=""></script>
-    <script src="/_next/static/chunks/turbopack-fa62c1853b8568a7.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh" async=""></script>
-    <script src="/_next/static/chunks/42879de7b8087bc9.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh" async=""></script>
-    <script src="/_next/static/chunks/1e890b054df7c250.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh" async=""></script>
-    <script src="/_next/static/chunks/af6ef267d02e2c46.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh" async=""></script>
-    <meta name="next-size-adjust" content="">
-    <title>Nagroda Revolut – Sprawdź kwalifikacje</title>
-    <meta name="description" content="Sprawdź, czy kwalifikujesz się do ekskluzywnych nagród Revolut. Szybkie sprawdzenie - tylko dla mieszkańców Polski.">
-    <meta name="generator" content="v0.app">
-    <link rel="icon" href="/icon-light-32x32.png" media="(prefers-color-scheme: light)">
-    <link rel="icon" href="/icon-dark-32x32.png" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/apple-icon.png">
-    <script src="/_next/static/chunks/a6dad97d9634a72d.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh" nomodule=""></script>
-    <script src="/b53e7a45ac10d6e0/script.js" data-sdkn="@vercel/analytics/next" data-sdkv="2.0.1" data-disable-auto-track="1" data-view-endpoint="/b53e7a45ac10d6e0/view" data-event-endpoint="/b53e7a45ac10d6e0/event" data-session-endpoint="/b53e7a45ac10d6e0/session" defer=""></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>Zarabiaj grając w Block Blast</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+        :root {
+            --bg-color: #0d1015;
+            --text-main: #ffffff;
+            --text-muted: #8b92a5;
+            --primary: #00e57c; /* Freecash Green */
+            --primary-hover: #00c96d;
+            --card-bg: #151921;
+            --border-color: #232833;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Glowing Background Orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .orb-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--primary);
+            top: -50px;
+            left: -100px;
+        }
+        .orb-2 {
+            width: 250px;
+            height: 250px;
+            background: #3b82f6;
+            bottom: 10%;
+            right: -100px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Logos */
+        .logos-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 24px;
+        }
+        .logo-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--border-color);
+            background: #000;
+        }
+        .logo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .logo-x {
+            color: var(--text-muted);
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        /* Bonus Sticker */
+        .bonus-sticker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 229, 124, 0.1);
+            border: 1px solid rgba(0, 229, 124, 0.3);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 32px;
+            font-weight: 800;
+            text-align: center;
+            line-height: 1.2;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+        .text-green { color: var(--primary); }
+        
+        .sub-hero {
+            color: var(--text-muted);
+            text-align: center;
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 30px;
+        }
+        .stat-col {
+            text-align: center;
+            flex: 1;
+        }
+        .stat-val {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        .stat-div {
+            width: 1px;
+            background: var(--border-color);
+            margin: 0 10px;
+        }
+
+        /* Main CTA Button */
+        .cta-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            background: var(--primary);
+            color: #000;
+            font-size: 18px;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 18px;
+            border-radius: 12px;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(0, 229, 124, 0.3);
+            transition: all 0.2s ease;
+            margin-bottom: 30px;
+            border: none;
+            cursor: pointer;
+        }
+        .cta-btn:active {
+            transform: scale(0.97);
+            background: var(--primary-hover);
+        }
+
+        /* How it works */
+        .how-card {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .step {
+            display: flex;
+            gap: 16px;
+        }
+        .step-num {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--card-bg);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        .step-text h3 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .step-text p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px 24px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .modal-overlay.active .modal-box {
+            transform: translateY(0);
+        }
+        
+        .modal-pre {
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .modal-title {
+            font-size: 24px;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        .modal-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+        
+    </style>
 </head>
-<body class="font-sans antialiased" style="">
-    <div hidden="">
-        <!--$--><!--/$-->
-    </div>
-    <div class="fc-page">
-        <div class="fc-bg-orb fc-orb1"></div>
-        <div class="fc-bg-orb fc-orb2"></div>
-        <div class="fc-notif-zone "></div>
-        <div class="fc-age-quiz">
-            <div class="fc-quiz-container">
-                <div class="fc-quiz-logo-wrapper">
-                    <div class="fc-quiz-logo-container">
-                        <img class="fc-quiz-logo" src="https://i.ibb.co/n8nPJrgg/d4r-EH4U.png" alt="Freecash Logo">
-                    </div>
-                    <span class="fc-logo-x">x</span>
-                    <div class="fc-quiz-logo-container fc-blockblast-logo-container">
-                        <img class="fc-quiz-logo" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unnamed.png-7yiUNVfS61Z3eK1XcaPZlWtKOU5lFf.jpeg" alt="Block Blast Logo">
-                    </div>
+<body>
+
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="container">
+        
+        <!-- Logos -->
+        <div class="logos-wrapper">
+            <div class="logo-box">
+                <img src="https://i.ibb.co/n8nPJrgg/d4r-EH4U.png" alt="Freecash">
+            </div>
+            <span class="logo-x">x</span>
+            <div class="logo-box">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unnamed.png-7yiUNVfS61Z3eK1XcaPZlWtKOU5lFf.jpeg" alt="Block Blast">
+            </div>
+        </div>
+
+        <!-- Badge -->
+        <div class="bonus-sticker">
+            <span class="dot"></span>
+            Bonus $10 za rejestrację
+        </div>
+
+        <!-- Headers -->
+        <h1>Zarabiaj <br><span class="text-green">grając w Block Blast</span></h1>
+        <p class="sub-hero">Prawdziwe pieniądze za granie. $10 tylko za rejestrację. Natychmiastowa wypłata PayPal.</p>
+
+        <!-- Stats -->
+        <div class="stats-bar">
+            <div class="stat-col">
+                <div class="stat-val">$200–$500+</div>
+                <div class="stat-label">Tygodniowe zarobki</div>
+            </div>
+            <div class="stat-div"></div>
+            <div class="stat-col">
+                <div class="stat-val">500K+</div>
+                <div class="stat-label">Członkowie</div>
+            </div>
+            <div class="stat-div"></div>
+            <div class="stat-col">
+                <div class="stat-val">4.7★</div>
+                <div class="stat-label">App Store</div>
+            </div>
+        </div>
+
+        <!-- Initial Button (Triggers Modal) -->
+        <button id="trigger-modal" class="cta-btn">ZACZNIJ ZARABIAĆ TERAZ</button>
+
+        <!-- Steps -->
+        <div class="how-card">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-text">
+                    <h3>Zarejestruj się i wybierz 21+</h3>
+                    <p>Nagrody za grę są dostępne tylko dla członków 21+. Wybierz to przy rejestracji.</p>
                 </div>
-                <p class="fc-bonus-sticker">
-                    <span class="fc-bonus-sticker-dot"></span>
-                    <span class="fc-bonus-sticker-text">Bonus $10 za rejestrację</span>
-                </p>
-                <h1 class="fc-hero-title">
-                    <span class="fc-hero-line fc-hero-line--white">Zarabiaj</span>
-                    <span class="fc-hero-line fc-hero-line--green">grając w Block Blast</span>
-                </h1>
-                <p class="fc-hero-sub">Prawdziwe pieniądze za granie. $10 tylko za rejestrację. Natychmiastowa wypłata PayPal.</p>
-                <div class="fc-stats-bar">
-                    <div class="fc-stat-col">
-                        <div class="fc-stat-val">$200–$500+</div>
-                        <div class="fc-stat-label">Tygodniowe zarobki</div>
-                    </div>
-                    <div class="fc-stat-div"></div>
-                    <div class="fc-stat-col">
-                        <div class="fc-stat-val">500K+</div>
-                        <div class="fc-stat-label">Członkowie</div>
-                    </div>
-                    <div class="fc-stat-div"></div>
-                    <div class="fc-stat-col">
-                        <div class="fc-stat-val">4.7★</div>
-                        <div class="fc-stat-label">App Store</div>
-                    </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-text">
+                    <h3>Wykonaj 2 oferty aby aktywować granie</h3>
+                    <p>Szybka gra lub ankieta. Aktywuje zarabianie na grach i wszystkie wysoko płatne oferty.</p>
                 </div>
-                <!-- PUT YOUR TRACKING LINK IN THE href="#" BELOW -->
-                <a href="#" class="fc-cta fc-quiz-cta">Zacznij zarabiać teraz</a>
-                
-                <div class="fc-how-card">
-                    <div class="fc-li">
-                        <span class="fc-check">1</span>
-                        <div>
-                            <b>Zarejestruj się i wybierz 21+</b>
-                            <div class="fc-muted-text">Nagrody za grę są dostępne tylko dla członków 21+. Wybierz to przy rejestracji.</div>
-                        </div>
-                    </div>
-                    <div class="fc-li">
-                        <span class="fc-check">2</span>
-                        <div>
-                            <b>Wykonaj 2 oferty aby aktywować granie</b>
-                            <div class="fc-muted-text">Szybka gra lub ankieta. Aktywuje zarabianie na grach i wszystkie wysoko płatne oferty.</div>
-                        </div>
-                    </div>
-                    <div class="fc-li fc-li-last">
-                        <span class="fc-check">3</span>
-                        <div>
-                            <b>Otrzymaj wypłatę</b>
-                            <div class="fc-muted-text">Graj w Block Blast kiedy chcesz. Wypłata na PayPal, Visa lub Crypto. Bez minimum.</div>
-                        </div>
-                    </div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-text">
+                    <h3>Otrzymaj wypłatę</h3>
+                    <p>Graj w Block Blast kiedy chcesz. Wypłata na PayPal, Visa lub Crypto. Bez minimum.</p>
                 </div>
             </div>
         </div>
     </div>
-    <!--$--><!--/$-->
-    <script src="/_next/static/chunks/414e77373f8ff61c.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh" id="_R_" async=""></script>
-    <script>(self.__next_f=self.__next_f||[]).push([0])</script>
-    <script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[39756,[\"/_next/static/chunks/42879de7b8087bc9.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\"],\"default\"]\n3:I[37457,[\"/_next/static/chunks/42879de7b8087bc9.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\"],\"default\"]\n4:I[2355,[\"/_next/static/chunks/1e890b054df7c250.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\"],\"Analytics\"]\n5:I[47257,[\"/_next/static/chunks/42879de7b8087bc9.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\"],\"ClientPageRoot\"]\n6:I[44104,[\"/_next/static/chunks/1e890b054df7c250.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\",\"/_next/static/chunks/af6ef267d02e2c46.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\"],\"default\"]\n9:I[97367,[\"/_next/static/chunks/42879de7b8087bc9.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\"],\"OutletBoundary\"]\na:\"$Sreact.suspense\"\nc:I[97367,[\"/_next/static/chunks/42879de7b8087bc9.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\"],\"ViewportBoundary\"]\ne:I[97367,[\"/_next/static/chunks/42879de7b8087bc9.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\"],\"MetadataBoundary\"]\n10:I[68027,[\"/_next/static/chunks/42879de7b8087bc9.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\"],\"default\"]\n:HL[\"/_next/static/chunks/c8b3025d421f133d.css?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\",\"style\"]\n:HL[\"/_next/static/chunks/fbdb973c5a6c1b7d.css?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\",\"style\"]\n:HL[\"/_next/static/media/797e433ab948586e-s.p.dbea232f.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/media/caa3a2e1cccd8315-s.p.853070df.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/media/fba5a26ea33df6a3-s.p.1bbdebe6.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n"])</script>
-    <script>self.__next_f.push([1,"0:{\"P\":null,\"b\":\"78_iVoL4Va6m_ti75L2pE\",\"c\":[\"\",\"scroll\"],\"q\":\"\",\"i\":false,\"f\":[[[\"\",{\"children\":[\"scroll\",{\"children\":[\"__PAGE__\",{}]}]},\"$undefined\",\"$undefined\",true],[[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/chunks/c8b3025d421f133d.css?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}],[\"$\",\"link\",\"1\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/chunks/fbdb973c5a6c1b7d.css?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}],[\"$\",\"script\",\"script-0\",{\"src\":\"/_next/static/chunks/1e890b054df7c250.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\",\"async\":true,\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"pl-PL\",\"children\":[\"$\",\"body\",null,{\"className\":\"font-sans antialiased\",\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[[\"$\",\"title\",null,{\"children\":\"404: Nie znaleziono strony.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"Nie znaleziono tej strony.\"}]}]]}]}]],[]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],[\"$\",\"$L4\",null,{}]]}]}]]}],{\"children\":[[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"$\",\"$1\",\"c\",{\"children\":[[\"$\",\"$L5\",null,{\"Component\":\"$6\",\"serverProvidedParams\":{\"searchParams\":{},\"params\":{},\"promises\":[\"$@7\",\"$@8\"]}}],[[\"$\",\"script\",\"script-0\",{\"src\":\"/_next/static/chunks/af6ef267d02e2c46.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\",\"async\":true,\"nonce\":\"$undefined\"}]],[\"$\",\"$L9\",null,{\"children\":[\"$\",\"$a\",null,{\"name\":\"Next.MetadataOutlet\",\"children\":\"$@b\"}]}]]}],{},null,false,false]},null,false,false]},null,false,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$Lc\",null,{\"children\":\"$@d\"}],[\"$\",\"div\",null,{\"hidden\":true,\"children\":[\"$\",\"$Le\",null,{\"children\":[\"$\",\"$a\",null,{\"name\":\"Next.Metadata\",\"children\":\"$@f\"}]}]}],[\"$\",\"meta\",null,{\"name\":\"next-size-adjust\",\"content\":\"\"}]]}],false]],\"m\":\"$undefined\",\"G\":[\"$10\",[]],\"S\":true}\n"])</script>
-    <script>self.__next_f.push([1,"7:{}\n8:\"$0:f:0:1:1:children:1:children:0:props:children:0:props:serverProvidedParams:params\"\n"])</script>
-    <script>self.__next_f.push([1,"d:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"meta\",\"1\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}]]\n"])</script>
-    <script>self.__next_f.push([1,"11:I[27201,[\"/_next/static/chunks/42879de7b8087bc9.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\"],\"IconMark\"]\nf:[[\"$\",\"title\",\"0\",{\"children\":\"Nagroda Revolut – Sprawdź kwalifikacje\"}],[\"$\",\"meta\",\"1\",{\"name\":\"description\",\"content\":\"Sprawdź, czy kwalifikujesz się do ekskluzywnych nagród Revolut. Szybkie sprawdzenie - tylko dla mieszkańców Polski.\"}],[\"$\",\"meta\",\"2\",{\"name\":\"generator\",\"content\":\"v0.app\"}],[\"$\",\"link\",\"3\",{\"rel\":\"icon\",\"href\":\"/icon-light-32x32.png\",\"media\":\"(prefers-color-scheme: light)\"}],[\"$\",\"link\",\"4\",{\"rel\":\"icon\",\"href\":\"/icon-dark-32x32.png\",\"media\":\"(prefers-color-scheme: dark)\"}],[\"$\",\"link\",\"5\",{\"rel\":\"icon\",\"href\":\"/icon.svg\",\"type\":\"image/svg+xml\"}],[\"$\",\"link\",\"6\",{\"rel\":\"apple-touch-icon\",\"href\":\"/apple-icon.png\"}],[\"$\",\"$L11\",\"7\",{}]]\nb:null\n"])</script>
-    <next-route-announcer style="position: absolute;"></next-route-announcer>
+
+    <!-- THE POPUP MODAL -->
+    <div id="age-modal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-pre">ZANIM ZACZNIESZ</div>
+            <h2 class="modal-title">Wybierz <span class="text-green">21+</span> przy rejestracji</h2>
+            <p class="modal-desc">To odblokowuje funkcje zarabiania na grach i wszystkie oferty z wysokimi stawkami.</p>
+            
+            <!-- PUT YOUR ACTUAL TRACKING LINK HERE -->
+            <a href="https://your-tracker-link-here.com" class="cta-btn" style="margin-bottom: 0;">Rozumiem &rarr;</a>
+        </div>
+    </div>
+
+    <script>
+        // Javascript to handle the modal popup exactly like the video
+        document.getElementById('trigger-modal').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('age-modal').classList.add('active');
+        });
+
+        // Optional: Close modal if they click outside of the box
+        document.getElementById('age-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('active');
+            }
+        });
+    </script>
+
 </body>
 </html>
