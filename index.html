@@ -1,517 +1,115 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="pl-PL">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<title>Playful Rewards</title>
-<meta name="description" content="Scegli un gioco e inizia a guadagnare oggi stesso.">
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7FRZMX1VN5"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-7FRZMX1VN5');
-</script>
-
-<style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --bg:hsl(0,0%,4%);
-  --fg:hsl(0,0%,95%);
-  --card:hsl(0,0%,7%);
-  --card-fg:hsl(0,0%,95%);
-  --primary:hsl(270,70%,55%);
-  --primary-fg:#fff;
-  --primary-h:270;--primary-s:70%;--primary-l:55%;
-  --muted:hsl(0,0%,12%);
-  --muted-fg:hsl(0,0%,60%);
-  --border:hsl(0,0%,16%);
-  --success:hsl(142,71%,45%);
-  --success-fg:#fff;
-  --radius:0.75rem;
-}
-html{scroll-behavior:smooth}
-body{
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
-  background:var(--bg);
-  color:var(--fg);
-  line-height:1.5;
-  min-height:100vh;
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-}
-
-/* Background */
-.bg-gradient{
-  position:fixed;inset:0;
-  background-image:
-    radial-gradient(at left top,rgb(51,15,87) 0%,transparent 50%),
-    radial-gradient(at right bottom,rgb(38,15,61) 0%,transparent 50%),
-    radial-gradient(rgb(10,10,10) 0%,rgb(5,5,5) 100%);
-  background-size:300% 300%;
-  animation:gradShift 20s ease infinite;
-}
-@keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-.bg-grid{
-  position:fixed;inset:0;
-  opacity:0.04;
-  background-image:
-    linear-gradient(#fff 1px,transparent 1px),
-    linear-gradient(90deg,#fff 1px,transparent 1px);
-  background-size:60px 60px;
-}
-
-/* Views (TIGHTENED PADDING) */
-.view{
-  position:relative;z-index:10;
-  margin:0 auto;
-  max-width:28rem;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  min-height:100vh;
-  padding:32px 20px 20px; /* Reduced top padding */
-}
-.view.hidden{display:none}
-
-/* Logo (SHRUNK SLIGHTLY) */
-.logo-ring{
-  display:flex;align-items:center;justify-content:center;
-  width:64px;height:64px; /* Reduced from 80px */
-  border-radius:50%;
-  border:1px solid hsla(270,70%,55%,0.2);
-  background:rgba(255,255,255,0.1);
-  overflow:hidden;
-  animation:logoEntrance .6s ease-out .3s both,logoGlow 3s ease-in-out infinite;
-}
-.logo-ring img{width:50px;height:50px;border-radius:50%;object-fit:cover} /* Reduced from 64px */
-@keyframes logoEntrance{from{opacity:0;transform:scale(0.5)}to{opacity:1;transform:scale(1)}}
-@keyframes logoGlow{
-  0%,100%{box-shadow:0 0 20px hsla(270,70%,55%,0.2),0 0 60px hsla(270,70%,55%,0.1)}
-  50%{box-shadow:0 0 30px hsla(270,70%,55%,0.35),0 0 80px hsla(270,70%,55%,0.15)}
-}
-
-/* Badge (TIGHTENED MARGINS) */
-.badge{
-  display:flex;align-items:center;gap:8px;
-  margin-top:12px; /* Reduced from 20px */
-  border-radius:9999px;
-  border:1px solid hsla(142,71%,45%,0.3);
-  background:hsla(142,71%,45%,0.1);
-  padding:6px 14px;
-  animation:badgePop .4s ease-out .7s both;
-}
-@keyframes badgePop{from{opacity:0;transform:scale(0.8)}to{opacity:1;transform:scale(1)}}
-.badge-icon{
-  display:flex;align-items:center;justify-content:center;
-  width:18px;height:18px;border-radius:50%;
-  background:var(--success);
-}
-.badge-icon svg{width:10px;height:10px;color:var(--success-fg)}
-.badge span{font-size:11px;font-weight:600;color:var(--success)}
-
-/* Headings (TIGHTENED MARGINS) */
-.main-title{
-  margin-top:16px; /* Reduced from 24px */
-  text-align:center;
-  font-size:22px; /* Reduced slightly */
-  font-weight:700;
-  letter-spacing:-0.025em;
-  color:var(--fg);
-  animation:textSlide .5s ease-out .9s both;
-}
-.main-sub{
-  margin-top:6px; /* Reduced from 12px */
-  max-width:280px;
-  text-align:center;
-  font-size:13px; /* Reduced from 14px */
-  line-height:1.4;
-  color:var(--muted-fg);
-  animation:textSlide .5s ease-out 1.1s both;
-}
-@keyframes textSlide{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-
-/* Game cards (CONDENSED) */
-.cards{margin-top:20px;width:100%;max-width:320px;display:flex;flex-direction:column;gap:10px} /* Reduced margin and gap */
-.game-card{
-  display:flex;align-items:center;gap:14px;
-  width:100%;
-  padding:12px 16px; /* Reduced vertical padding */
-  border-radius:12px;
-  border:1px solid hsla(0,0%,16%,0.5);
-  background:hsla(0,0%,7%,0.6);
-  backdrop-filter:blur(8px);
-  cursor:pointer;
-  transition:all .2s;
-  animation:cardReveal .5s ease-out both;
-}
-.game-card:nth-child(1){animation-delay:1.3s}
-.game-card:nth-child(2){animation-delay:1.45s}
-.game-card:nth-child(3){animation-delay:1.6s}
-@keyframes cardReveal{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.game-card:active{
-  border-color:hsla(270,70%,55%,0.4);
-  background:hsla(270,70%,55%,0.1);
-  box-shadow:0 0 20px hsla(270,70%,55%,0.15);
-}
-.card-icon{
-  width:48px;height:48px;flex-shrink:0; /* Reduced from 56px */
-  display:flex;align-items:center;justify-content:center;
-  border-radius:10px;
-  border:1px solid hsla(270,70%,55%,0.2);
-  background:rgba(255,255,255,0.1);
-  overflow:hidden;
-}
-.card-icon img{width:40px;height:40px;border-radius:8px;object-fit:cover;background:white;} /* Reduced from 48px */
-.card-text{flex:1;text-align:left}
-.card-text h3{font-size:13px;font-weight:700;color:var(--fg)}
-.card-text p{font-size:11px;font-weight:700;color:var(--primary); margin-top:2px;}
-.card-chevron{
-  width:18px;height:18px;flex-shrink:0;
-  color:var(--muted-fg);
-  transition:transform .2s,color .2s;
-}
-.game-card:active .card-chevron{transform:translateX(4px);color:var(--primary)}
-
-/* Footer (TIGHTENED MARGIN) */
-.trust-footer{
-  margin-top:24px; /* Reduced from 40px */
-  text-align:center;
-  font-size:11px;
-  color:hsla(0,0%,60%,0.6);
-  animation:textSlide .5s ease-out 1.8s both;
-}
-
-/* ═══════ DETAIL VIEW ═══════ */
-.detail-logos{display:flex;align-items:center;gap:12px;margin-top:10px;}
-.detail-logo-ring{
-  display:flex;align-items:center;justify-content:center;
-  width:72px;height:72px;
-  border-radius:50%;
-  border:1px solid hsla(270,70%,55%,0.2);
-  background:rgba(255,255,255,0.1);
-  overflow:hidden;
-  box-shadow:0 0 20px hsla(270,70%,55%,0.2),0 0 60px hsla(270,70%,55%,0.1);
-}
-.detail-logo-ring img{width:56px;height:56px;border-radius:50%;object-fit:cover;background:white;}
-.detail-x{font-size:18px;font-weight:700;color:var(--muted-fg)}
-
-.detail-title{
-  margin-top:20px;
-  text-align:center;
-  font-size:22px;font-weight:700;
-  letter-spacing:-0.025em;
-  color:var(--fg);
-}
-.detail-desc{
-  margin-top:8px;
-  max-width:280px;
-  text-align:center;
-  font-size:13px;
-  line-height:1.5;
-  color:var(--muted-fg);
-}
-
-/* Download button */
-.download-btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  margin-top:24px;
-  width:100%;max-width:320px;
-  padding:14px 24px;
-  border:none;border-radius:8px;
-  font-size:15px;font-weight:700;
-  letter-spacing:0.05em;
-  color:var(--primary-fg);
-  background:var(--primary);
-  cursor:pointer;
-  animation:dlPulse 1.8s ease-in-out infinite;
-  transition:all .2s;
-}
-.download-btn:active{animation-play-state:paused;transform:scale(1.04)}
-.download-btn svg{width:18px;height:18px;margin-right:8px}
-@keyframes dlPulse{
-  0%,100%{transform:scale(1);box-shadow:0 0 20px hsla(270,70%,55%,0.45)}
-  50%{transform:scale(1.035);box-shadow:0 0 34px hsla(270,70%,55%,0.75)}
-}
-
-/* Journey section */
-.journey{margin-top:24px;width:100%;max-width:320px}
-.journey-title{
-  text-align:center;
-  font-size:11px;font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:0.2em;
-  color:var(--muted-fg);
-  margin-bottom:12px;
-}
-.journey-steps{display:flex;flex-direction:column;gap:10px}
-.step{
-  display:flex;align-items:flex-start;gap:12px;
-  border-radius:12px;
-  padding:8px 10px;
-}
-.step.highlighted{
-  border:1px solid hsla(270,70%,55%,0.3);
-  background:hsla(270,70%,55%,0.1);
-}
-.step-num{
-  width:24px;height:24px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  border-radius:50%;
-  font-size:11px;font-weight:700;
-  margin-top: 2px;
-}
-.step-num.dim{background:hsla(270,70%,55%,0.15);color:var(--primary)}
-.step-num.bright{background:var(--primary);color:var(--primary-fg)}
-.step-info{flex:1;min-width:0}
-.step-info h3{font-size:13px;font-weight:600;color:var(--fg)}
-.step-info p{margin-top:2px;font-size:11px;color:var(--muted-fg)}
-
-/* Bonus tip */
-.bonus{
-  margin-top:12px;
-  border-radius:12px;
-  border:1px solid hsla(270,70%,55%,0.2);
-  background:hsla(270,70%,55%,0.05);
-  padding:10px;
-}
-.bonus-inner{display:flex;align-items:flex-start;gap:10px}
-.bonus-lock{width:16px;height:16px;flex-shrink:0;margin-top:2px;color:var(--primary)}
-.bonus-content{flex:1;min-width:0}
-.bonus-header{display:flex;align-items:center;gap:8px;margin-bottom:4px}
-.bonus-header h3{font-size:11px;font-weight:700;color:var(--fg)}
-.bonus-tag{
-  display:inline-block;
-  padding:2px 6px;
-  border-radius:4px;
-  background:hsla(270,70%,55%,0.9);
-  font-size:9px;font-weight:700;
-  text-transform:uppercase;
-  color:var(--primary-fg);
-}
-.bonus-content p{font-size:11px;line-height:1.5;color:var(--muted-fg)}
-.bonus-content .hl{font-weight:700;color:var(--primary)}
-
-/* Back button */
-.back-btn {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  background: transparent;
-  border: none;
-  color: var(--muted-fg);
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  z-index: 20;
-}
-</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preload" href="/_next/static/media/797e433ab948586e-s.p.dbea232f.woff2" as="font" crossorigin="" type="font/woff2">
+    <link rel="preload" href="/_next/static/media/caa3a2e1cccd8315-s.p.853070df.woff2" as="font" crossorigin="" type="font/woff2">
+    <link rel="preload" href="/_next/static/media/fba5a26ea33df6a3-s.p.1bbdebe6.woff2" as="font" crossorigin="" type="font/woff2">
+    <link rel="preload" as="image" href="https://i.ibb.co/n8nPJrgg/d4r-EH4U.png">
+    <link rel="preload" as="image" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unnamed.png-7yiUNVfS61Z3eK1XcaPZlWtKOU5lFf.jpeg">
+    <link rel="stylesheet" href="/_next/static/chunks/c8b3025d421f133d.css?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh" data-precedence="next">
+    <link rel="stylesheet" href="/_next/static/chunks/fbdb973c5a6c1b7d.css?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh" data-precedence="next">
+    <link rel="preload" as="script" fetchpriority="low" href="/_next/static/chunks/414e77373f8ff61c.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh">
+    <script src="/_next/static/chunks/112f346e31f991df.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh" async=""></script>
+    <script src="/_next/static/chunks/c32d3fd0464d4674.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh" async=""></script>
+    <script src="/_next/static/chunks/0fc416a44ef6a4a9.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh" async=""></script>
+    <script src="/_next/static/chunks/turbopack-fa62c1853b8568a7.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh" async=""></script>
+    <script src="/_next/static/chunks/42879de7b8087bc9.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh" async=""></script>
+    <script src="/_next/static/chunks/1e890b054df7c250.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh" async=""></script>
+    <script src="/_next/static/chunks/af6ef267d02e2c46.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh" async=""></script>
+    <meta name="next-size-adjust" content="">
+    <title>Nagroda Revolut – Sprawdź kwalifikacje</title>
+    <meta name="description" content="Sprawdź, czy kwalifikujesz się do ekskluzywnych nagród Revolut. Szybkie sprawdzenie - tylko dla mieszkańców Polski.">
+    <meta name="generator" content="v0.app">
+    <link rel="icon" href="/icon-light-32x32.png" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="/icon-dark-32x32.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-icon.png">
+    <script src="/_next/static/chunks/a6dad97d9634a72d.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh" nomodule=""></script>
+    <script src="/b53e7a45ac10d6e0/script.js" data-sdkn="@vercel/analytics/next" data-sdkv="2.0.1" data-disable-auto-track="1" data-view-endpoint="/b53e7a45ac10d6e0/view" data-event-endpoint="/b53e7a45ac10d6e0/event" data-session-endpoint="/b53e7a45ac10d6e0/session" defer=""></script>
 </head>
-<body>
-
-<div class="bg-gradient"></div>
-<div class="bg-grid"></div>
-
-<div id="selectorView" class="view">
-  <div class="logo-ring">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDGFFyLahQPLJOtlcdPrVpv88eKC1rMrYXUw&s" alt="Playful">
-  </div>
-  <div class="badge">
-    <div class="badge-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+<body class="font-sans antialiased" style="">
+    <div hidden="">
+        <!--$--><!--/$-->
     </div>
-    <span>In diretta</span>
-  </div>
-  <h1 class="main-title">Missioni Attive</h1>
-  <p class="main-sub">Scegli un'app qui sotto per iniziare a generare guadagni.</p>
-  
-  <div class="cards">
-    <div class="game-card" data-game="roblox">
-      <div class="card-icon"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSamc9AAiWWnWJPprb0wxskGiVdI7TtcKKHOw&s" alt="Roblox"></div>
-      <div class="card-text">
-        <h3>Vieni pagata per giocare a Roblox</h3>
-        <p>Gioco · Pagamento Alto</p>
-      </div>
-      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-    </div>
-
-    <div class="game-card" data-game="tiktok">
-      <div class="card-icon"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS45jF2oX5HYzhemcWzyNdDf9PuYxjj8cf6ww&s" alt="TikTok" style="background: black;"></div>
-      <div class="card-text">
-        <h3>Vieni pagata per scrollare su TikTok</h3>
-        <p>Social · Popolare</p>
-      </div>
-      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-    </div>
-
-    <div class="game-card" data-game="blockblast">
-      <div class="card-icon"><img src="https://play-lh.googleusercontent.com/Abzm9CjXi_DZjGzalQqVFMNZL8Wcx4uxtT5wcGOBaclbjvb3UYA2Bi6s6ff2SFRktdXehBsocFKkGUeIffUkLg" alt="Block Blast"></div>
-      <div class="card-text">
-        <h3>Vieni pagata per giocare a Block Blast</h3>
-        <p>Puzzle · Facile</p>
-      </div>
-      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-    </div>
-  </div>
-
-  <div class="trust-footer">Approvato da oltre 500.000 ragazze pagate ogni giorno</div>
-</div>
-
-<div id="detailView" class="view hidden">
-  <button class="back-btn" onclick="showSelector()">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-    Indietro
-  </button>
-
-  <div class="detail-logos">
-    <div class="detail-logo-ring"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDGFFyLahQPLJOtlcdPrVpv88eKC1rMrYXUw&s" alt="Playful"></div>
-    <div class="detail-x">✕</div>
-    <div class="detail-logo-ring"><img id="gameLogo" src="" alt="App"></div>
-  </div>
-
-  <div class="badge">
-    <div class="badge-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-    <span>Verificato da TikTok</span>
-  </div>
-
-  <h1 id="gameTitle" class="detail-title"></h1>
-  <p id="gameDesc" class="detail-desc"></p>
-
-  <button id="downloadBtn" class="download-btn">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-    SCARICA ORA
-  </button>
-
-  <div class="journey">
-    <div class="journey-title">IL TUO PERCORSO DI GUADAGNO</div>
-    <div class="journey-steps">
-      <div class="step">
-        <div class="step-num dim">1</div>
-        <div class="step-info">
-          <h3>Scarica Playful Rewards</h3>
-          <p>Disponibile su iOS e Android · Richiede 30s</p>
+    <div class="fc-page">
+        <div class="fc-bg-orb fc-orb1"></div>
+        <div class="fc-bg-orb fc-orb2"></div>
+        <div class="fc-notif-zone "></div>
+        <div class="fc-age-quiz">
+            <div class="fc-quiz-container">
+                <div class="fc-quiz-logo-wrapper">
+                    <div class="fc-quiz-logo-container">
+                        <img class="fc-quiz-logo" src="https://i.ibb.co/n8nPJrgg/d4r-EH4U.png" alt="Freecash Logo">
+                    </div>
+                    <span class="fc-logo-x">x</span>
+                    <div class="fc-quiz-logo-container fc-blockblast-logo-container">
+                        <img class="fc-quiz-logo" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unnamed.png-7yiUNVfS61Z3eK1XcaPZlWtKOU5lFf.jpeg" alt="Block Blast Logo">
+                    </div>
+                </div>
+                <p class="fc-bonus-sticker">
+                    <span class="fc-bonus-sticker-dot"></span>
+                    <span class="fc-bonus-sticker-text">Bonus $10 za rejestrację</span>
+                </p>
+                <h1 class="fc-hero-title">
+                    <span class="fc-hero-line fc-hero-line--white">Zarabiaj</span>
+                    <span class="fc-hero-line fc-hero-line--green">grając w Block Blast</span>
+                </h1>
+                <p class="fc-hero-sub">Prawdziwe pieniądze za granie. $10 tylko za rejestrację. Natychmiastowa wypłata PayPal.</p>
+                <div class="fc-stats-bar">
+                    <div class="fc-stat-col">
+                        <div class="fc-stat-val">$200–$500+</div>
+                        <div class="fc-stat-label">Tygodniowe zarobki</div>
+                    </div>
+                    <div class="fc-stat-div"></div>
+                    <div class="fc-stat-col">
+                        <div class="fc-stat-val">500K+</div>
+                        <div class="fc-stat-label">Członkowie</div>
+                    </div>
+                    <div class="fc-stat-div"></div>
+                    <div class="fc-stat-col">
+                        <div class="fc-stat-val">4.7★</div>
+                        <div class="fc-stat-label">App Store</div>
+                    </div>
+                </div>
+                <!-- PUT YOUR TRACKING LINK IN THE href="#" BELOW -->
+                <a href="#" class="fc-cta fc-quiz-cta">Zacznij zarabiać teraz</a>
+                
+                <div class="fc-how-card">
+                    <div class="fc-li">
+                        <span class="fc-check">1</span>
+                        <div>
+                            <b>Zarejestruj się i wybierz 21+</b>
+                            <div class="fc-muted-text">Nagrody za grę są dostępne tylko dla członków 21+. Wybierz to przy rejestracji.</div>
+                        </div>
+                    </div>
+                    <div class="fc-li">
+                        <span class="fc-check">2</span>
+                        <div>
+                            <b>Wykonaj 2 oferty aby aktywować granie</b>
+                            <div class="fc-muted-text">Szybka gra lub ankieta. Aktywuje zarabianie na grach i wszystkie wysoko płatne oferty.</div>
+                        </div>
+                    </div>
+                    <div class="fc-li fc-li-last">
+                        <span class="fc-check">3</span>
+                        <div>
+                            <b>Otrzymaj wypłatę</b>
+                            <div class="fc-muted-text">Graj w Block Blast kiedy chcesz. Wypłata na PayPal, Visa lub Crypto. Bez minimum.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="step highlighted">
-        <div class="step-num bright">2</div>
-        <div class="step-info">
-          <h3 id="step2Title">Sblocca l'accesso retribuito</h3>
-          <p id="step2Desc">Gioca ad almeno 1 gioco per sbloccare i pagamenti.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num dim">3</div>
-        <div class="step-info">
-          <h3>Ritira i tuoi guadagni</h3>
-          <p>Pagamenti istantanei: PayPal, Apple Pay e Crypto</p>
-        </div>
-      </div>
     </div>
-  </div>
-
-  <div class="bonus">
-    <div class="bonus-inner">
-      <svg class="bonus-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-      <div class="bonus-content">
-        <div class="bonus-header">
-          <h3>CONSIGLIO BONUS</h3>
-          <span class="bonus-tag">IMPORTANTE</span>
-        </div>
-        <p>Gioca a <span class="hl">2 giochi per qualche minuto</span> ciascuno per sbloccare il tuo Bonus di 25€.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-(function(){
-  // ALL YOUR DATA & TEXT
-  var games = {
-    roblox: {
-      name: 'Roblox',
-      verb: 'giocare a',
-      descEnd: 'con Roblox.',
-      logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSamc9AAiWWnWJPprb0wxskGiVdI7TtcKKHOw&s'
-    },
-    tiktok: {
-      name: 'TikTok',
-      verb: 'scrollare su',
-      descEnd: 'guardando i video.',
-      logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS45jF2oX5HYzhemcWzyNdDf9PuYxjj8cf6ww&s'
-    },
-    blockblast: {
-      name: 'Block Blast',
-      verb: 'giocare a',
-      descEnd: 'con Block Blast.',
-      logo: 'https://play-lh.googleusercontent.com/Abzm9CjXi_DZjGzalQqVFMNZL8Wcx4uxtT5wcGOBaclbjvb3UYA2Bi6s6ff2SFRktdXehBsocFKkGUeIffUkLg'
-    }
-  };
-
-  var selectorView=document.getElementById('selectorView');
-  var detailView=document.getElementById('detailView');
-  var gameLogoEl=document.getElementById('gameLogo');
-  var gameTitleEl=document.getElementById('gameTitle');
-  var gameDescEl=document.getElementById('gameDesc');
-  var step2TitleEl=document.getElementById('step2Title');
-  var step2DescEl=document.getElementById('step2Desc');
-  var downloadBtn=document.getElementById('downloadBtn');
-
-  // YOUR TAPTRCKS AFFILIATE LINK
-  function computeDownloadURL(){
-    return 'https://taptrcks.com/r/eyJ0IjoicGxheWZ1bC1yZXdhcmRzLXJldnNoYXJlIiwidGlkIjoiNzA1NWY0NDc5OWE3NDRmN2ZiYTc1ZDhhYjQ4MDliNzYiLCJ0cyI6MTc3NzAyMDIzOTYwMX0?s1=hell&s2=hell&feb=1';
-  }
-
-  function populateDetail(gameKey){
-    var game=games[gameKey]||games.roblox;
-    gameLogoEl.src=game.logo;
-    gameTitleEl.textContent='Vieni pagata per '+game.verb+' '+game.name;
-    gameDescEl.textContent="Scarica l'app per attivare il tuo accesso e inizia a guadagnare oggi stesso "+game.descEnd;
-    step2TitleEl.textContent="Sblocca l'accesso retribuito";
-    step2DescEl.textContent='Gioca ad almeno 1 gioco per sbloccare i pagamenti '+game.name+'.';
-  }
-
-  var currentGame=null;
-
-  window.showSelector = function(){
-    currentGame=null;
-    selectorView.classList.remove('hidden');
-    detailView.classList.add('hidden');
-    window.scrollTo(0,0);
-  }
-
-  function showDetail(gameKey){
-    if(gameKey&&games[gameKey]){
-      currentGame=gameKey;
-      populateDetail(gameKey);
-      selectorView.classList.add('hidden');
-      detailView.classList.remove('hidden');
-      window.scrollTo(0,0);
-
-      // Fire GA4 Wall Click
-      try { gtag('event', 'click_' + gameKey, { 'event_category': 'engagement' }); } catch(err){}
-    }
-  }
-
-  downloadBtn.addEventListener('click',function(e){
-    e.preventDefault();
-    
-    // Fire GA4 Download Click
-    try { gtag('event', 'click_download_' + currentGame, { 'event_category': 'conversion' }); } catch(err){}
-    
-    setTimeout(function(){ window.location.href=computeDownloadURL(); }, 250);
-  });
-
-  document.querySelectorAll('#selectorView .game-card').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      var gameKey=btn.getAttribute('data-game');
-      showDetail(gameKey);
-    });
-  });
-
-  showSelector();
-})();
-</script>
+    <!--$--><!--/$-->
+    <script src="/_next/static/chunks/414e77373f8ff61c.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh" id="_R_" async=""></script>
+    <script>(self.__next_f=self.__next_f||[]).push([0])</script>
+    <script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[39756,[\"/_next/static/chunks/42879de7b8087bc9.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\"],\"default\"]\n3:I[37457,[\"/_next/static/chunks/42879de7b8087bc9.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\"],\"default\"]\n4:I[2355,[\"/_next/static/chunks/1e890b054df7c250.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\"],\"Analytics\"]\n5:I[47257,[\"/_next/static/chunks/42879de7b8087bc9.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\"],\"ClientPageRoot\"]\n6:I[44104,[\"/_next/static/chunks/1e890b054df7c250.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\",\"/_next/static/chunks/af6ef267d02e2c46.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\"],\"default\"]\n9:I[97367,[\"/_next/static/chunks/42879de7b8087bc9.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\"],\"OutletBoundary\"]\na:\"$Sreact.suspense\"\nc:I[97367,[\"/_next/static/chunks/42879de7b8087bc9.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\"],\"ViewportBoundary\"]\ne:I[97367,[\"/_next/static/chunks/42879de7b8087bc9.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\"],\"MetadataBoundary\"]\n10:I[68027,[\"/_next/static/chunks/42879de7b8087bc9.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\"],\"default\"]\n:HL[\"/_next/static/chunks/c8b3025d421f133d.css?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\",\"style\"]\n:HL[\"/_next/static/chunks/fbdb973c5a6c1b7d.css?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\",\"style\"]\n:HL[\"/_next/static/media/797e433ab948586e-s.p.dbea232f.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/media/caa3a2e1cccd8315-s.p.853070df.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/media/fba5a26ea33df6a3-s.p.1bbdebe6.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n"])</script>
+    <script>self.__next_f.push([1,"0:{\"P\":null,\"b\":\"78_iVoL4Va6m_ti75L2pE\",\"c\":[\"\",\"scroll\"],\"q\":\"\",\"i\":false,\"f\":[[[\"\",{\"children\":[\"scroll\",{\"children\":[\"__PAGE__\",{}]}]},\"$undefined\",\"$undefined\",true],[[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/chunks/c8b3025d421f133d.css?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}],[\"$\",\"link\",\"1\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/chunks/fbdb973c5a6c1b7d.css?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}],[\"$\",\"script\",\"script-0\",{\"src\":\"/_next/static/chunks/1e890b054df7c250.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\",\"async\":true,\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"pl-PL\",\"children\":[\"$\",\"body\",null,{\"className\":\"font-sans antialiased\",\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[[\"$\",\"title\",null,{\"children\":\"404: Nie znaleziono strony.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"Nie znaleziono tej strony.\"}]}]]}]}]],[]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],[\"$\",\"$L4\",null,{}]]}]}]]}],{\"children\":[[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"$\",\"$1\",\"c\",{\"children\":[[\"$\",\"$L5\",null,{\"Component\":\"$6\",\"serverProvidedParams\":{\"searchParams\":{},\"params\":{},\"promises\":[\"$@7\",\"$@8\"]}}],[[\"$\",\"script\",\"script-0\",{\"src\":\"/_next/static/chunks/af6ef267d02e2c46.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\",\"async\":true,\"nonce\":\"$undefined\"}]],[\"$\",\"$L9\",null,{\"children\":[\"$\",\"$a\",null,{\"name\":\"Next.MetadataOutlet\",\"children\":\"$@b\"}]}]]}],{},null,false,false]},null,false,false]},null,false,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$Lc\",null,{\"children\":\"$@d\"}],[\"$\",\"div\",null,{\"hidden\":true,\"children\":[\"$\",\"$Le\",null,{\"children\":[\"$\",\"$a\",null,{\"name\":\"Next.Metadata\",\"children\":\"$@f\"}]}]}],[\"$\",\"meta\",null,{\"name\":\"next-size-adjust\",\"content\":\"\"}]]}],false]],\"m\":\"$undefined\",\"G\":[\"$10\",[]],\"S\":true}\n"])</script>
+    <script>self.__next_f.push([1,"7:{}\n8:\"$0:f:0:1:1:children:1:children:0:props:children:0:props:serverProvidedParams:params\"\n"])</script>
+    <script>self.__next_f.push([1,"d:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"meta\",\"1\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}]]\n"])</script>
+    <script>self.__next_f.push([1,"11:I[27201,[\"/_next/static/chunks/42879de7b8087bc9.js?dpl=dpl_34eW1PT71evnMv1xoXJg7CycXbGh\"],\"IconMark\"]\nf:[[\"$\",\"title\",\"0\",{\"children\":\"Nagroda Revolut – Sprawdź kwalifikacje\"}],[\"$\",\"meta\",\"1\",{\"name\":\"description\",\"content\":\"Sprawdź, czy kwalifikujesz się do ekskluzywnych nagród Revolut. Szybkie sprawdzenie - tylko dla mieszkańców Polski.\"}],[\"$\",\"meta\",\"2\",{\"name\":\"generator\",\"content\":\"v0.app\"}],[\"$\",\"link\",\"3\",{\"rel\":\"icon\",\"href\":\"/icon-light-32x32.png\",\"media\":\"(prefers-color-scheme: light)\"}],[\"$\",\"link\",\"4\",{\"rel\":\"icon\",\"href\":\"/icon-dark-32x32.png\",\"media\":\"(prefers-color-scheme: dark)\"}],[\"$\",\"link\",\"5\",{\"rel\":\"icon\",\"href\":\"/icon.svg\",\"type\":\"image/svg+xml\"}],[\"$\",\"link\",\"6\",{\"rel\":\"apple-touch-icon\",\"href\":\"/apple-icon.png\"}],[\"$\",\"$L11\",\"7\",{}]]\nb:null\n"])</script>
+    <next-route-announcer style="position: absolute;"></next-route-announcer>
 </body>
 </html>
