@@ -4,9 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta name="format-detection" content="telephone=no">
-    <title>Zarabiaj grając w Block Blast</title>
+    <title>Zarabiaj na grach i ankietach | Freecash</title>
     
-    <!-- Google tag (gtag.js) - GA4 Integration -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JW1QWB73B1"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -87,13 +86,13 @@
         .logos-wrapper {
             display: flex;
             align-items: center;
-            gap: 15px;
+            justify-content: center;
             margin-bottom: 24px;
         }
         .logo-box {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
             overflow: hidden;
             border: 2px solid var(--border-color);
             background: #000;
@@ -103,11 +102,6 @@
             height: 100%;
             object-fit: cover;
         }
-        .logo-x {
-            color: var(--text-muted);
-            font-weight: 700;
-            font-size: 16px;
-        }
 
         /* Bonus Sticker */
         .bonus-sticker {
@@ -116,7 +110,7 @@
             gap: 8px;
             background: rgba(0, 229, 124, 0.1);
             border: 1px solid rgba(0, 229, 124, 0.3);
-            padding: 6px 12px;
+            padding: 6px 16px;
             border-radius: 20px;
             font-size: 13px;
             font-weight: 700;
@@ -322,83 +316,71 @@
 
     <div class="container">
         
-        <!-- Logos -->
         <div class="logos-wrapper">
             <div class="logo-box">
                 <img src="https://i.ibb.co/n8nPJrgg/d4r-EH4U.png" alt="Freecash">
             </div>
-            <span class="logo-x">x</span>
-            <div class="logo-box">
-                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unnamed.png-7yiUNVfS61Z3eK1XcaPZlWtKOU5lFf.jpeg" alt="Block Blast">
-            </div>
         </div>
 
-        <!-- Badge -->
         <div class="bonus-sticker">
             <span class="dot"></span>
-            Bonus 40 zł za rejestrację
+            Dołącz za darmo i zacznij zarabiać
         </div>
 
-        <!-- Headers -->
-        <h1>Zarabiaj <br><span class="text-green">grając w Block Blast</span></h1>
-        <p class="sub-hero">Prawdziwe pieniądze za granie. 40 zł tylko za rejestrację. Natychmiastowa wypłata PayPal.</p>
+        <h1>Zarabiaj prawdziwe pieniądze <br><span class="text-green">grając w gry</span></h1>
+        <p class="sub-hero">Otrzymuj zapłatę za granie w gry i wypełnianie ankiet na Freecash. Wypłacaj przez PayPal, krypto lub karty podarunkowe.</p>
 
-        <!-- Stats -->
         <div class="stats-bar">
             <div class="stat-col">
-                <div class="stat-val">800–2000 zł+</div>
-                <div class="stat-label">TYGODNIOWO</div>
+                <div class="stat-val">$50M+</div>
+                <div class="stat-label">WYPŁACONE</div>
             </div>
             <div class="stat-div"></div>
             <div class="stat-col">
-                <div class="stat-val">500K+</div>
-                <div class="stat-label">CZŁONKOWIE</div>
+                <div class="stat-val">270K+</div>
+                <div class="stat-label">OPINII</div>
             </div>
             <div class="stat-div"></div>
             <div class="stat-col">
                 <div class="stat-val">4.7★</div>
-                <div class="stat-label">APP STORE</div>
+                <div class="stat-label">TRUSTPILOT</div>
             </div>
         </div>
 
-        <!-- Initial Button (Triggers Modal & Event 1) -->
         <button id="trigger-modal" class="cta-btn">ZACZNIJ ZARABIAĆ TERAZ</button>
 
-        <!-- Steps -->
         <div class="how-card">
             <div class="step">
                 <div class="step-num">1</div>
                 <div class="step-text">
                     <h3>Zarejestruj się i wybierz 21+</h3>
-                    <p>Nagrody za grę są dostępne tylko dla członków 21+. Wybierz to przy rejestracji.</p>
+                    <p>Załóż darmowe konto w kilka sekund. Wybierz 21+ przy rejestracji, aby uzyskać pełny dostęp do zadań.</p>
                 </div>
             </div>
             <div class="step">
                 <div class="step-num">2</div>
                 <div class="step-text">
-                    <h3>Wykonaj 2 oferty aby aktywować granie</h3>
-                    <p>Szybka gra lub ankieta. Aktywuje zarabianie na grach i wszystkie wysoko płatne oferty.</p>
+                    <h3>Wykonuj zadania</h3>
+                    <p>Zarabiaj prawdziwe pieniądze, grając w wybrane gry na telefonie lub wypełniając krótkie ankiety.</p>
                 </div>
             </div>
             <div class="step">
                 <div class="step-num">3</div>
                 <div class="step-text">
                     <h3>Otrzymaj wypłatę</h3>
-                    <p>Graj w Block Blast kiedy chcesz. Wypłata na PayPal, Visa lub Crypto. Bez minimum.</p>
+                    <p>Odbierz swoje nagrody natychmiast. Wypłacaj środki przez PayPal, krypto lub wymieniaj na karty podarunkowe.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- THE POPUP MODAL -->
     <div id="age-modal" class="modal-overlay">
         <div class="modal-box">
             <div class="modal-pre">ZANIM ZACZNIESZ</div>
             <h2 class="modal-title">Wybierz <span class="text-green">21+</span> przy rejestracji</h2>
-            <p class="modal-desc">To odblokowuje funkcje zarabiania na grach i wszystkie oferty z wysokimi stawkami.</p>
+            <p class="modal-desc">Aby uzyskać dostęp do wszystkich ankiet i ofert z najwyższymi stawkami na platformie, upewnij się, że wybierasz 21+.</p>
             
-            <!-- Final Affiliate Button (Triggers Redirect & Event 2) -->
-            <a href="https://taprkr.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidGlkIjoiNzA1NWY0NDc5OWE3NDRmN2ZiYTc1ZDhhYjQ4MDliNzYiLCJ0cyI6MTc3ODA4Mjc0NjgyMn0?s1=pl1&s2=pl1&feb=1" id="final-affiliate-btn" class="cta-btn" style="margin-bottom: 0;">Rozumiem &rarr;</a>
+            <a href="https://taprkr.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidGlkIjoiNzA1NWY0NDc5OWE3NDRmN2ZiYTc1ZDhhYjQ4MDliNzYiLCJ0cyI6MTc3ODA4Mjc0NjgyMn0?s1=pl1&s2=pl1" id="final-affiliate-btn" class="cta-btn" style="margin-bottom: 0;">Rozumiem &rarr;</a>
         </div>
     </div>
 
