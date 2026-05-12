@@ -160,7 +160,7 @@
             border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 18px 12px;
-            margin-bottom: 30px;
+            margin-bottom: 24px; /* Reduced margin to fit pro tip */
         }
         .stat-col {
             text-align: center;
@@ -190,6 +190,33 @@
             height: 36px;
             background: var(--border-color);
             margin: 0 4px;
+        }
+
+        /* PRO TIP BOX - NEW */
+        .pro-tip-box {
+            background: rgba(0, 229, 124, 0.05);
+            border: 1px dashed var(--primary);
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 24px;
+            width: 100%;
+            text-align: center;
+        }
+        .pro-tip-title {
+            color: var(--primary);
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .pro-tip-desc {
+            color: var(--text-main);
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        .pro-tip-desc strong {
+            color: var(--primary);
         }
 
         /* Main CTA Button */
@@ -352,6 +379,13 @@
             </div>
         </div>
 
+        <div class="pro-tip-box">
+            <div class="pro-tip-title">💡 PRO TIP</div>
+            <div class="pro-tip-desc">
+                Zrób 1 ofertę lub grę od razu po rejestracji, aby odblokować wypłaty rzędu <strong>150 do 250</strong>.
+            </div>
+        </div>
+
         <button id="trigger-modal" class="cta-btn">ZACZNIJ ZARABIAĆ TERAZ</button>
 
         <div class="how-card">
@@ -381,13 +415,9 @@
 
     <div id="age-modal" class="modal-overlay">
         <div class="modal-box">
-            <div class="modal-pre">💡 PRO TIP</div>
-            <h2 class="modal-title">Zrób 1 ofertę na start</h2>
-            <p class="modal-desc">Aby odblokować najlepsze gry i ankiety z wypłatami rzędu <strong>150 do 250</strong>, upewnij się, że <b>ukończysz co najmniej jedno proste zadanie od razu po rejestracji.</b></p>
-            
-            <p class="modal-desc" style="font-size: 13px; margin-top: -10px; color: var(--text-muted);">
-                *Pamiętaj również, aby przy zakładaniu konta wybrać wiek <strong>21+</strong>.
-            </p>
+            <div class="modal-pre">ZANIM ZACZNIESZ</div>
+            <h2 class="modal-title">Wybierz <span class="text-green">21+</span> przy rejestracji</h2>
+            <p class="modal-desc">Aby uzyskać dostęp do wszystkich ankiet i ofert z najwyższymi stawkami na platformie, upewnij się, że wybierasz 21+.</p>
             
             <a href="https://taprkr.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidGlkIjoiNzA1NWY0NDc5OWE3NDRmN2ZiYTc1ZDhhYjQ4MDliNzYiLCJ0cyI6MTc3ODA4Mjc0NjgyMn0?s1=pl1&s2=pl1" id="final-affiliate-btn" class="cta-btn" style="margin-bottom: 0;">Rozumiem &rarr;</a>
         </div>
