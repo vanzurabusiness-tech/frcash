@@ -155,7 +155,7 @@
             border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 18px 12px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         .stat-col {
             text-align: center;
@@ -185,6 +185,36 @@
             height: 36px;
             background: var(--border-color);
             margin: 0 4px;
+        }
+
+        /* Pro Tip Box */
+        .pro-tip {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+            width: 100%;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .pro-tip-icon {
+            font-size: 20px;
+            line-height: 1;
+        }
+        .pro-tip-text {
+            font-size: 13px;
+            line-height: 1.5;
+            color: var(--text-muted);
+        }
+        .pro-tip-text strong {
+            color: #ffd700;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: block;
+            margin-bottom: 4px;
         }
 
         /* Main CTA Button */
@@ -344,6 +374,14 @@
             <div class="stat-col">
                 <div class="stat-val">4.7★</div>
                 <div class="stat-label">TRUSTPILOT</div>
+            </div>
+        </div>
+
+        <div class="pro-tip">
+            <div class="pro-tip-icon">💡</div>
+            <div class="pro-tip-text">
+                <strong>Pro Tip</strong>
+                Rozpocznij pierwszą grę lub ankietę natychmiast po założeniu konta, aby najszybciej odblokować swoją pierwszą wypłatę!
             </div>
         </div>
 
