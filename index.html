@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+<meta name="format-detection" content="telephone=no">
+<title>Kontynuuj</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+-webkit-tap-highlight-color: transparent;
+}
+body {
+background-color: #0d1015;
+color: #ffffff;
+font-family: 'Inter', -apple-system, sans-serif;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+min-height: 100vh;
+text-align: center;
+padding: 20px;
+}
+.icon-box {
+width: 72px;
+height: 72px;
+border: 2px solid #00e57c;
+border-radius: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+margin-bottom: 24px;
+box-shadow: 0 0 20px rgba(0, 229, 124, 0.15);
+background-color: #151921;
+}
+.icon-box svg {
+width: 32px;
+height: 32px;
+stroke: #00e57c;
+stroke-width: 3;
+stroke-linecap: round;
+stroke-linejoin: round;
+fill: none;
+}
+h1 {
+font-size: 26px;
+font-weight: 800;
+margin-bottom: 12px;
+letter-spacing: -0.5px;
+}
+p {
+color: #8b92a5;
+font-size: 15px;
+line-height: 1.5;
+margin-bottom: 40px;
+max-width: 320px;
+}
+.btn {
+display: flex;
+align-items: center;
+justify-content: center;
+width: 100%;
+max-width: 340px;
+background-color: #00e57c;
+color: #000000;
+font-size: 16px;
+font-weight: 800;
+text-transform: uppercase;
+letter-spacing: 1px;
+padding: 20px;
+border-radius: 40px;
+text-decoration: none;
+border: none;
+box-shadow: 0 4px 20px rgba(0, 229, 124, 0.3);
+transition: transform 0.2s ease;
+}
+.btn:active {
+transform: scale(0.97);
+}
+</style>
+</head>
+<body>
+<div class="icon-box">
+<svg viewBox="0 0 24 24">
+<path d="M7 17L17 7M17 7H7M17 7V17" />
+</svg>
+</div>
+<h1>Przejdź dalej</h1>
+<p>Dla najlepszego działania, kliknij przycisk poniżej, aby potwierdzić i kontynuować.</p>
+<a href="offer.html" class="btn">KONTYNUUJ</a>
+</body>
+</html>
