@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="format-detection" content="telephone=no">
+    <title>Zarabiaj na grach i ankietach | Freecash</title>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JW1QWB73B1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      // This automatically tracks the "visit" (page_view)
+      gtag('config', 'G-JW1QWB73B1');
+    </script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+        :root {
+            --bg-color: #0d1015;
+            --text-main: #ffffff;
+            --text-muted: #8b92a5;
+            --primary: #00e57c; /* Freecash Green */
+            --primary-hover: #00c96d;
+            --card-bg: #151921;
+            --border-color: #232833;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            width: 100%;
+        }
+
+        /* Glowing Background Orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .orb-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--primary);
+            top: -50px;
+            left: -100px;
+        }
+        .orb-2 {
+            width: 250px;
+            height: 250px;
+            background: #3b82f6;
+            bottom: 10%;
+            right: -100px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Logos */
+        .logos-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        .logo-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 2px solid var(--border-color);
+            background: #000;
+        }
+        .logo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Bonus Sticker */
+        .bonus-sticker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 229, 124, 0.1);
+            border: 1px solid rgba(0, 229, 124, 0.3);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 24px;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 32px;
+            font-weight: 800;
+            text-align: center;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+        .text-green { color: var(--primary); }
+        
+        .sub-hero {
+            color: var(--text-muted);
+            text-align: center;
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 30px;
+            padding: 0 10px;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 18px 12px;
+            margin-bottom: 24px;
+        }
+        .stat-col {
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .stat-val {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 4px;
+            white-space: nowrap;
+        }
+        .stat-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        .stat-div {
+            width: 1px;
+            height: 36px;
+            background: var(--border-color);
+            margin: 0 4px;
+        }
+
+        /* PRO TIP BOX - COMPLIANT */
+        .pro-tip-box {
+            background: rgba(0, 229, 124, 0.05);
+            border: 1px dashed var(--primary);
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 24px;
+            width: 100%;
+            text-align: center;
+        }
+        .pro-tip-title {
+            color: var(--primary);
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .pro-tip-desc {
+            color: var(--text-main);
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        .pro-tip-desc strong {
+            color: var(--primary);
+        }
+
+        /* Main CTA Button */
+        .cta-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            background: var(--primary);
+            color: #000;
+            font-size: 18px;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 18px;
+            border-radius: 12px;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(0, 229, 124, 0.3);
+            transition: all 0.2s ease;
+            margin-bottom: 30px;
+            border: none;
+            cursor: pointer;
+        }
+        .cta-btn:active {
+            transform: scale(0.97);
+            background: var(--primary-hover);
+            box-shadow: 0 2px 10px rgba(0, 229, 124, 0.2);
+        }
+
+        /* How it works */
+        .how-card {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .step {
+            display: flex;
+            gap: 16px;
+        }
+        .step-num {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--card-bg);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 14px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .step-text h3 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--text-main);
+        }
+        .step-text p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px 24px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .modal-overlay.active .modal-box {
+            transform: translateY(0);
+        }
+        
+        .modal-pre {
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .modal-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        .modal-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="container">
+        
+        <div class="logos-wrapper">
+            <div class="logo-box">
+                <img src="https://i.ibb.co/n8nPJrgg/d4r-EH4U.png" alt="Freecash">
+            </div>
+        </div>
+
+        <div class="bonus-sticker">
+            <span class="dot"></span>
+            Dołącz za darmo i zacznij zarabiać
+        </div>
+
+        <h1>Zarabiaj prawdziwe pieniądze <br><span class="text-green">grając w gry</span></h1>
+        <p class="sub-hero">Otrzymuj zapłatę za granie w gry i wypełnianie ankiet na Freecash. Wypłacaj przez PayPal, krypto lub karty podarunkowe.</p>
+
+        <div class="stats-bar">
+            <div class="stat-col">
+                <div class="stat-val">$50M+</div>
+                <div class="stat-label">WYPŁACONE</div>
+            </div>
+            <div class="stat-div"></div>
+            <div class="stat-col">
+                <div class="stat-val">270K+</div>
+                <div class="stat-label">OPINII</div>
+            </div>
+            <div class="stat-div"></div>
+            <div class="stat-col">
+                <div class="stat-val">4.7★</div>
+                <div class="stat-label">TRUSTPILOT</div>
+            </div>
+        </div>
+
+        <div class="pro-tip-box">
+            <div class="pro-tip-title">💡 PRO TIP</div>
+            <div class="pro-tip-desc">
+                Zrób 1 ofertę lub grę od razu po rejestracji, aby odblokować status konta z <strong>najwyżej płatnymi zadaniami i ankietami</strong>.
+            </div>
+        </div>
+
+        <button id="trigger-modal" class="cta-btn">ZACZNIJ ZARABIAĆ TERAZ</button>
+
+        <div class="how-card">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-text">
+                    <h3>Zarejestruj się i wybierz 21+</h3>
+                    <p>Załóż darmowe konto w kilka sekund. Wybierz 21+ przy rejestracji, aby uzyskać pełny dostęp do zadań.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-text">
+                    <h3>Wykonuj zadania</h3>
+                    <p>Zarabiaj prawdziwe pieniądze, grając w wybrane gry na telefonie lub wypełniając krótkie ankiety.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-text">
+                    <h3>Otrzymaj wypłatę</h3>
+                    <p>Odbierz swoje nagrody natychmiast. Wypłacaj środki przez PayPal, krypto lub wymieniaj na karty podarunkowe.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="age-modal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-pre">ZANIM ZACZNIESZ</div>
+            <h2 class="modal-title">Wybierz <span class="text-green">21+</span> przy rejestracji</h2>
+            <p class="modal-desc">Aby uzyskać dostęp do wszystkich ankiet i ofert z najwyższymi stawkami na platformie, upewnij się, że wybierasz 21+.</p>
+            
+            <a href="https://taprkr.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidGlkIjoiNzA1NWY0NDc5OWE3NDRmN2ZiYTc1ZDhhYjQ4MDliNzYiLCJ0cyI6MTc3OTc5MzU3NzMyMH0?s1=y1&feb=1" id="final-affiliate-btn" class="cta-btn" style="margin-bottom: 0;">Rozumiem &rarr;</a>
+        </div>
+    </div>
+
+    <script>
+        // EVENT 1: Opening the modal
+        document.getElementById('trigger-modal').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Fire GA4 Event for initial CTA click
+            gtag('event', 'click_initial_cta', {
+                'event_category': 'funnel',
+                'event_label': 'opened_21plus_modal'
+            });
+
+            document.getElementById('age-modal').classList.add('active');
+        });
+
+        // EVENT 2: Clicking the final affiliate link
+        document.getElementById('final-affiliate-btn').addEventListener('click', function(e) {
+            e.preventDefault(); // Temporarily stop redirect
+            var targetUrl = this.href;
+
+            // Fire GA4 Event for final conversion click
+            gtag('event', 'click_affiliate_link', {
+                'event_category': 'conversion',
+                'event_label': 'redirected_to_offer'
+            });
+
+            // Small delay to ensure Google registers the event before leaving the page
+            setTimeout(function() {
+                window.location.href = targetUrl;
+            }, 150);
+        });
+
+        // Close modal if they click the background
+        document.getElementById('age-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('active');
+            }
+        });
+    </script>
+
+</body>
+</html>
