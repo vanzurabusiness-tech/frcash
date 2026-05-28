@@ -455,22 +455,6 @@ src="https://www.facebook.com/tr?id=1490129652329526&ev=PageView&noscript=1"
             document.getElementById('age-modal').classList.add('active');
         });
 
-        // EVENT 2: Clicking the final affiliate link
-        document.getElementById('final-affiliate-btn').addEventListener('click', function(e) {
-            e.preventDefault(); // Temporarily stop redirect
-            var targetUrl = this.href;
-
-            // Fire GA4 Event for final conversion click
-            gtag('event', 'click_affiliate_link', {
-                'event_category': 'conversion',
-                'event_label': 'redirected_to_offer'
-            });
-
-            // Small delay to ensure Google registers the event before leaving the page
-            setTimeout(function() {
-                window.location.href = targetUrl;
-            }, 150);
-        });
 
         // Close modal if they click the background
         document.getElementById('age-modal').addEventListener('click', function(e) {
