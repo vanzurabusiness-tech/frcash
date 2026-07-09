@@ -1,96 +1,271 @@
-<!DOCTYPE html>
-<html lang="pl-PL">
-<head>
+<html lang="en"><head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-<meta name="format-detection" content="telephone=no">
-<title>Kontynuuj</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#faf8ff">
+<title>ZipRewards</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
-* {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
--webkit-tap-highlight-color: transparent;
+:root{
+  --bg:#faf8ff;
+  --bg-soft:#f3eefb;
+  --fg:#1d1733;
+  --muted:#6d6688;
+  --card:#ffffff;
+  --border:#ece6f7;
+  --border-strong:#e0d8f2;
+  --primary:#7a4ff2;
+  --pink:#ef4d8f;
+  --orange:#fb8a34;
+  --green:#16a564;
+  --grad:linear-gradient(95deg,#fb8a34,#ef4d8f 52%,#7a4ff2);
+  --shadow:0 10px 30px rgba(90,47,208,.08);
+  --shadow-lg:0 18px 50px rgba(90,47,208,.12);
 }
-body {
-background-color: #0d1015;
-color: #ffffff;
-font-family: 'Inter', -apple-system, sans-serif;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-min-height: 100vh;
-text-align: center;
-padding: 20px;
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{height:100%;background:var(--bg)}
+body{
+  height:100%;overflow:hidden;
+  background:var(--bg);color:var(--fg);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  line-height:1.5;letter-spacing:-.01em;
+  -webkit-font-smoothing:antialiased;
 }
-.icon-box {
-width: 72px;
-height: 72px;
-border: 2px solid #00e57c;
-border-radius: 20px;
-display: flex;
-align-items: center;
-justify-content: center;
-margin-bottom: 24px;
-box-shadow: 0 0 20px rgba(0, 229, 124, 0.15);
-background-color: #151921;
+
+.glow{position:fixed;border-radius:50%;filter:blur(90px);opacity:.45;pointer-events:none;z-index:0}
+.g1{width:420px;height:420px;background:radial-gradient(circle,rgba(138,99,245,.25),transparent 70%);top:-180px;left:50%;transform:translateX(-50%)}
+.g2{width:300px;height:300px;background:radial-gradient(circle,rgba(245,97,160,.18),transparent 70%);bottom:-100px;right:-80px}
+
+.screen{
+  position:fixed;inset:0;z-index:2;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:clamp(16px,3vh,28px);
+  padding:clamp(16px,4vh,32px) 20px clamp(16px,3vh,28px);
+  padding-top:max(clamp(16px,4vh,32px),env(safe-area-inset-top,0px));
+  padding-bottom:max(clamp(16px,3vh,28px),env(safe-area-inset-bottom,0px));
+  transition:transform .32s cubic-bezier(.4,0,.2,1),opacity .28s ease;
+  will-change:transform,opacity;
 }
-.icon-box svg {
-width: 32px;
-height: 32px;
-stroke: #00e57c;
-stroke-width: 3;
-stroke-linecap: round;
-stroke-linejoin: round;
-fill: none;
+.screen.out{transform:translateX(-100%);opacity:0;pointer-events:none;z-index:1}
+.screen.next{transform:translateX(100%);opacity:0;pointer-events:none;z-index:1}
+
+.progress{position:fixed;top:0;left:0;right:0;height:4px;background:var(--border);z-index:10}
+.progress-fill{height:100%;background:var(--grad);transition:width .4s ease;border-radius:0 2px 2px 0}
+
+.top{text-align:center;width:100%;max-width:380px;display:flex;flex-direction:column;align-items:center}
+.eyebrow{
+  display:inline-block;
+  font-size:11px;font-weight:800;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--primary);margin-bottom:8px;
 }
-h1 {
-font-size: 26px;
-font-weight: 800;
-margin-bottom: 12px;
-letter-spacing: -0.5px;
+.q-text{
+  font-size:clamp(20px,5.4vw,27px);
+  font-weight:900;letter-spacing:-.025em;
+  line-height:1.18;
 }
-p {
-color: #8b92a5;
-font-size: 15px;
-line-height: 1.5;
-margin-bottom: 40px;
-max-width: 320px;
+.grad-text{
+  background:var(--grad);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
 }
-.btn {
-display: flex;
-align-items: center;
-justify-content: center;
-width: 100%;
-max-width: 340px;
-background-color: #00e57c;
-color: #000000;
-font-size: 16px;
-font-weight: 800;
-text-transform: uppercase;
-letter-spacing: 1px;
-padding: 20px;
-border-radius: 40px;
-text-decoration: none;
-border: none;
-box-shadow: 0 4px 20px rgba(0, 229, 124, 0.3);
-transition: transform 0.2s ease;
+.q-img{
+  width:min(180px,40vw);border-radius:14px;
+  margin:clamp(8px,1.5vh,14px) auto 0;
+  box-shadow:0 8px 24px rgba(90,47,208,.15);
+  display:block;
 }
-.btn:active {
-transform: scale(0.97);
+
+.mid{width:100%;max-width:380px;display:flex;flex-direction:column;align-items:center;gap:clamp(8px,1.5vh,12px)}
+
+.opt{
+  width:100%;
+  padding:clamp(13px,2.8vh,17px) 16px;
+  border-radius:16px;
+  background:var(--card);
+  border:1.5px solid var(--border-strong);
+  color:var(--fg);font-family:inherit;
+  font-size:clamp(14px,3.6vw,16px);
+  font-weight:700;letter-spacing:-.01em;
+  text-align:left;cursor:pointer;
+  display:flex;align-items:center;gap:12px;
+  box-shadow:var(--shadow);
+  transition:border-color .15s ease,transform .12s ease;
+  line-height:1.35;
 }
+.opt:active{transform:scale(.97)}
+.opt:hover{border-color:var(--primary)}
+.opt .opt-icon{font-size:clamp(18px,4.5vw,22px);flex-shrink:0}
+
+.iap-card{
+  width:100%;
+  padding:clamp(14px,2.8vh,20px) 14px;
+  border-radius:18px;
+  background:var(--card);
+  border:1.5px solid var(--border-strong);
+  color:var(--fg);cursor:pointer;
+  text-align:center;
+  box-shadow:var(--shadow);
+  transition:border-color .15s ease,transform .12s ease;
+  position:relative;
+}
+.iap-card:active{transform:scale(.97)}
+.iap-card:hover{border-color:var(--primary)}
+.iap-card.pop{border-color:var(--primary);border-width:2px;box-shadow:var(--shadow-lg),0 0 0 1px rgba(122,79,242,.1)}
+.iap-badge{
+  position:absolute;top:-11px;left:50%;transform:translateX(-50%);
+  background:var(--grad);color:#fff;
+  font-size:10px;font-weight:800;
+  padding:4px 14px;border-radius:20px;
+  text-transform:uppercase;letter-spacing:1.5px;white-space:nowrap;
+}
+.iap-emoji{font-size:clamp(22px,5.5vw,30px);margin-bottom:2px}
+.iap-title{font-size:clamp(13px,3.6vw,16px);font-weight:800;letter-spacing:-.02em;margin-bottom:3px;line-height:1.25}
+.iap-sub{font-size:clamp(11px,2.8vw,13px);color:var(--muted);line-height:1.4}
+.iap-sub b{font-weight:800;color:var(--pink);-webkit-text-fill-color:var(--pink)}
+.iap-sub-big{font-size:clamp(14px,3.8vw,17px);font-weight:800;color:var(--fg);line-height:1.3;margin-top:4px}
+.iap-sub-big b{font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+
+.bot{text-align:center}
+.bot-note{font-size:clamp(10px,2.6vw,12px);color:var(--muted);font-weight:600}
+
+.result-emoji{font-size:clamp(40px,10vw,56px)}
+.result-head{
+  font-size:clamp(21px,5.6vw,28px);
+  font-weight:900;letter-spacing:-.025em;
+  text-align:center;line-height:1.18;
+}
+.result-sub{
+  font-size:clamp(13px,3.4vw,15px);
+  color:var(--muted);text-align:center;
+  line-height:1.5;max-width:300px;
+}
+.dl-btn{
+  width:100%;max-width:380px;
+  padding:clamp(15px,3.2vh,19px) 0;
+  border-radius:14px;border:none;
+  background:var(--grad);color:#fff;
+  font-family:inherit;
+  font-size:clamp(16px,4.5vw,19px);
+  font-weight:800;letter-spacing:.01em;
+  cursor:pointer;
+  box-shadow:0 12px 28px rgba(138,80,220,.32);
+  transition:transform .12s ease;
+}
+.dl-btn:active{transform:scale(.96)}
+.pills{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;font-size:12px;color:var(--muted);font-weight:600}
+.pills span{display:inline-flex;align-items:center;gap:5px}
+.pills .tick{color:var(--green)}
+.timer-tag{font-size:clamp(10px,2.8vw,12px);color:var(--muted)}
 </style>
+
+<!-- TikTok Pixel -->
+<script type="text/javascript" async="" src="https://analytics.tiktok.com/i18n/pixel/static/identify_b8133453.js"></script><script type="text/javascript" async="" src="https://analytics.tiktok.com/i18n/pixel/static/main.MTA2MWE1OWMwMA.js" data-id="YOUR_PIXEL_ID"></script><script type="text/javascript" async="" src="https://analytics.tiktok.com/i18n/pixel/events.js?sdkid=YOUR_PIXEL_ID&amp;lib=ttq"></script><script>
+!function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"];ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e};ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{};ttq._i[e]=[];ttq._i[e]._u=r;ttq._t=ttq._t||{};ttq._t[e]=+new Date;ttq._o=ttq._o||{};ttq._o[e]=n||{};var s=d.createElement("script");s.type="text/javascript";s.async=!0;s.src=r+"?sdkid="+e+"&lib="+t;var a=d.getElementsByTagName("script")[0];a.parentNode.insertBefore(s,a)};
+ttq.load('YOUR_PIXEL_ID');ttq.page();
+}(window,document,'ttq');
+</script>
 </head>
 <body>
-<div class="icon-box">
-<svg viewBox="0 0 24 24">
-<path d="M7 17L17 7M17 7H7M17 7V17" />
-</svg>
+
+<div class="glow g1"></div>
+<div class="glow g2"></div>
+<div class="progress"><div class="progress-fill" id="pf" style="width:25%"></div></div>
+
+<!-- Q1 — Age -->
+<div class="screen" id="s1">
+  <div class="top">
+    <div class="eyebrow">Question 1 of 3</div>
+    <div class="q-text">How Old <span class="grad-text">Are You?</span></div>
+    <div style="font-size:clamp(11px,3vw,13px);font-weight:800;color:var(--fg);margin-top:10px;line-height:1.4;max-width:320px">You Will Need To Verify Age With FaceID When Withdrawing Rewards — Please Answer Truthfully.</div>
+  </div>
+  <div class="mid">
+    <button class="opt" onclick="go(2)"><span class="opt-icon">🧑</span> 18 – 24</button>
+    <button class="opt" onclick="go(2)"><span class="opt-icon">👤</span> 25 – 34</button>
+    <button class="opt" onclick="go(2)"><span class="opt-icon">👥</span> 35+</button>
+    <button class="opt" onclick="u18=true;go(2)"><span class="opt-icon">🔞</span> Under 18</button>
+  </div>
+  <div class="bot"></div>
 </div>
-<h1>Przejdź dalej</h1>
-<p>Dla najlepszego działania, kliknij przycisk poniżej, aby potwierdzić i kontynuować.</p>
-<a href="offer.html" class="btn">KONTYNUUJ</a>
-</body>
-</html>
+
+<!-- Q2 — IAP Framing -->
+<div class="screen next" id="s2">
+  <div class="top">
+    <div class="eyebrow">Question 2 of 3</div>
+    <div class="q-text">Play Block Game, <span class="grad-text">Earn Up To $800.</span> Which Path Do You Take?</div>
+    <img class="q-img" src="/__l5e/assets-v1/efd4e6f0-ea5e-4973-a831-fde2f16fcc0d/block-game.png" alt="Block Game">
+  </div>
+  <div class="mid">
+    <div class="iap-card" onclick="go(3)">
+      <div class="iap-emoji">🐢</div>
+      <div class="iap-title">Play Free For A Week</div>
+      <div class="iap-sub">Grind the levels slowly → earn rewards over time &amp; <b>miss out on $300 bonus</b></div>
+    </div>
+    <div class="iap-card pop" onclick="go(3)">
+      <div class="iap-badge">Limited Time Bonus</div>
+      <div class="iap-emoji">⚡</div>
+      <div class="iap-sub-big">Spend $1.99 → Get A <b>+$300</b> Bonus Within 6 Hours</div>
+    </div>
+  </div>
+  <div class="bot"><div class="bot-note">Both Options Work — Pick What Fits You</div></div>
+</div>
+
+<!-- Q3 — Phone Time -->
+<div class="screen next" id="s3">
+  <div class="top">
+    <div class="eyebrow">Question 3 of 3</div>
+    <div class="q-text">How Much Free Time Do You Spend <span class="grad-text">On Your Phone?</span></div>
+  </div>
+  <div class="mid">
+    <button class="opt" onclick="go('r')"><span class="opt-icon">📱</span> Less Than 1 Hour</button>
+    <button class="opt" onclick="go('r')"><span class="opt-icon">🎮</span> 1 – 3 Hours</button>
+    <button class="opt" onclick="go('r')"><span class="opt-icon">🔥</span> 3+ Hours</button>
+  </div>
+  <div class="bot"><div class="bot-note">This Helps Us Match You With The Right Offers</div></div>
+</div>
+
+<!-- RESULT -->
+<div class="screen next" id="sr">
+  <div class="top">
+    <div class="result-emoji">🎉</div>
+    <div class="result-head">You Qualify! Start Earning With <span class="grad-text">ZipRewards</span></div>
+    <div class="result-sub">Download the free app, pick a game you like, and start earning real rewards for every level you hit.</div>
+  </div>
+  <div class="mid">
+    <button class="dl-btn" onclick="handleDl()">Download ZipRewards — It's Free</button>
+    <div class="pills">
+      <span><span class="tick">✓</span> Free Download</span>
+      <span><span class="tick">✓</span> No Credit Card</span>
+      <span><span class="tick">✓</span> Cash Out Anytime</span>
+    </div>
+    <div class="timer-tag">⏳ Offer Expires In <span id="cd">4:59</span></div>
+  </div>
+  <div class="bot"><div class="bot-note">18+ Only · Rewards Subject To T&amp;Cs</div></div>
+</div>
+
+<script>
+var cur='1',prog={1:25,2:50,3:75,r:100},u18=false;
+function go(id){
+  var cs=document.getElementById('s'+cur);
+  var ns=document.getElementById('s'+id);
+  cs.classList.add('out');cs.classList.remove('next');
+  ns.classList.remove('next','out');
+  if(prog[id])document.getElementById('pf').style.width=prog[id]+'%';
+  if(id==='2')try{ttq.track('ClickButton')}catch(e){}
+  if(id==='r'){try{ttq.track('ViewContent')}catch(e){}startTimer();}
+  cur=String(id);
+}
+function handleDl(){
+  try{ttq.track('CompleteRegistration',{pixelMethod:'standard'})}catch(e){}
+  var u=u18?'https://linkthem.net/aff_c?offer_id=4439&aff_id=11893&source=u18tieredtst':'https://giftclick.org/aff_c?tl_id=bc859c42&source=ovr18tieredtst';
+  var w=window.open(u,'_blank');
+  if(!w||w.closed||typeof w.closed==='undefined')window.location.href=u;
+}
+function startTimer(){
+  var t=299,el=document.getElementById('cd');
+  setInterval(function(){t--;if(t<=0)return;var m=Math.floor(t/60),s=t%60;el.textContent=m+':'+(s<10?'0':'')+s;},1000);
+}
+try{ttq.track('ViewContent')}catch(e){}
+</script>
+
+</body></html>
