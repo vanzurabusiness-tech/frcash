@@ -193,13 +193,13 @@
     }, 3800);
   })();
   (function(){
-    var OFFER = 'https://giftclick.org/aff_c?tl_id=bc859c42&source=ovr18tieredtst';
+    var OFFER = 'https://clickingg-tracking.tracknow.info/click?campaign_id=71&ref_id=226&sub1=TT';
     var q = new URLSearchParams(location.search);
     var out = new URLSearchParams();
     if (q.get('click_id')) out.set('sub1', q.get('click_id'));
     if (q.get('ttclid')) out.set('ttclid', q.get('ttclid'));
     var qs = out.toString();
-    var url = qs ? OFFER + '?' + qs : OFFER;
+    var url = qs ? OFFER + '&' + qs : OFFER;
     var overlay = document.getElementById('tipOverlay');
     document.getElementById('tipGo').href = url;
     function openTip(e){ if (e) e.preventDefault(); overlay.hidden = false; document.body.style.overflow = 'hidden'; }
