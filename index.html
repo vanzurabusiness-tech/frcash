@@ -3,213 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>ZipRewards - Get Paid for your Screen Time</title>
-<link rel="icon" type="image/png" href="logo.jpeg">
-<link rel="apple-touch-icon" href="logo.jpeg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<title>Continue</title>
 <style>
-  :root{
-    --bg:#12120e;
-    --card:#1c1c14;
-    --footer:#14140f;
-    --border:rgba(255,235,59,.12);
-    --yellow:#ffeb3b;
-    --yellow-dim:rgba(255,235,59,.16);
-    --yellow-line:rgba(255,235,59,.32);
-    --text:#fefefe;
-    --muted:#b0b09d;
-    --muted-2:#808070;
+  body {
+    background-color: #12120e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
   }
-  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-  html,body{background:var(--bg);}
-  body{
-    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-    color:var(--text);line-height:1.4;-webkit-font-smoothing:antialiased;
-    padding-bottom:56px;
-  }
-  .wrap{max-width:410px;margin:0 auto;padding:0 16px;}
-  .ticker{text-align:center;font-size:12.5px;font-weight:500;color:var(--text);padding:14px 18px 8px;letter-spacing:-.1px;}
-  .ticker .amt{color:var(--yellow);font-weight:700;}
-  .ticker .name{font-weight:700;}
-  .ticker-fade{transition:opacity .4s ease;}
-  .card{position:relative;background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;}
-  .hero{padding:22px 20px 18px;text-align:center;}
-  .hero .glow{position:absolute;top:-42%;left:50%;transform:translateX(-50%);width:300px;height:300px;
-    background:radial-gradient(circle,rgba(255,235,59,.24) 0%,rgba(255,235,59,.05) 42%,transparent 66%);pointer-events:none;}
-  .app-icon{position:relative;width:62px;height:62px;margin:0 auto 12px;border-radius:15px;overflow:hidden;
-    background:linear-gradient(160deg,#fff176 0%,#fbc02d 100%);
-    box-shadow:0 12px 28px rgba(251,192,45,.35), inset 0 2px 3px rgba(255,255,255,.4);}
-  .app-icon img{display:block;width:100%;height:100%;object-fit:cover;}
-  .signup-bonus-pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--yellow-line);border-radius:999px;
-    padding:5px 14px;font-size:12px;font-weight:700;background:rgba(255,235,59,.1);color:var(--yellow);margin-bottom:13px;}
-  .signup-bonus-pill .dot-sm{width:6px;height:6px;border-radius:50%;background:var(--yellow);}
-  h1.headline{font-size:35px;line-height:1.02;font-weight:800;letter-spacing:-1.2px;margin-bottom:11px;}
-  h1.headline .g{color:var(--yellow);display:block;}
-  .sub{font-size:14px;line-height:1.4;color:var(--muted);font-weight:400;max-width:320px;margin:0 auto 16px;letter-spacing:-.2px;}
-  .stats-top-row{display:flex;border:1px solid var(--border);background:#222218;border-radius:14px;margin-bottom:18px;overflow:hidden;}
-  .stat-sm{flex:1;text-align:center;padding:12px 4px;position:relative;}
-  .stat-sm + .stat-sm::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:1px;background:var(--border);}
-  .stat-sm .big{font-size:15px;font-weight:700;letter-spacing:-.4px;color:var(--yellow);}
-  .stat-sm .lbl{font-size:9.5px;font-weight:600;letter-spacing:.8px;color:var(--muted-2);margin-top:2px;}
-  .main-cta-btn{
-    display: block;
-    width: 100%;
-    background: var(--yellow);
+  .continue-btn {
+    background: #ffeb3b;
     color: #2b2600;
-    font-size: 16px;
-    font-weight: 800;
-    letter-spacing: -.3px;
     text-decoration: none;
-    padding: 16px 20px;
-    border-radius: 14px;
-    box-shadow: 0 10px 30px rgba(255,235,59,.35);
-    text-align: center;
-    cursor: pointer;
-    transition: transform .12s ease;
+    padding: 16px 36px;
+    border-radius: 12px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    box-shadow: 0 8px 24px rgba(255,235,59,.25);
+    transition: transform 0.1s ease;
   }
-  .main-cta-btn:active{transform:scale(0.97);}
-  .section-gap{margin-top:14px;}
-  .steps-card{padding:18px 18px;}
-  .steps{list-style:none;display:flex;flex-direction:column;gap:11px;}
-  .step{display:flex;align-items:flex-start;gap:13px;background:#202018;border:1px solid var(--border);border-radius:14px;padding:12px 14px;}
-  .step .num{flex:none;width:30px;height:30px;border-radius:8px;border:1px solid var(--yellow-line);background:var(--yellow-dim);
-    display:flex;align-items:center;justify-content:center;color:var(--yellow);font-weight:700;font-size:13.5px;}
-  .step .content-box{display:flex;flex-direction:column;}
-  .step .title-txt{font-size:14.5px;font-weight:700;letter-spacing:-.3px;color:var(--text);margin-bottom:2px;}
-  .step .desc-txt{font-size:12.5px;font-weight:400;color:var(--muted);line-height:1.35;letter-spacing:-.2px;}
-  .stats-bottom{margin-top:14px;padding:14px 8px;}
-  .stats-row{display:flex;}
-  .stat{flex:1;text-align:center;position:relative;padding:0 4px;}
-  .stat + .stat::before{content:"";position:absolute;left:0;top:4px;bottom:4px;width:1px;background:var(--border);}
-  .stat .big{font-size:18px;font-weight:700;letter-spacing:-.5px;color:var(--yellow);}
-  .stat .lbl{font-size:10px;font-weight:500;letter-spacing:1px;color:var(--muted-2);margin-top:4px;}
-  .disclaimer{text-align:center;font-size:11px;line-height:1.45;color:var(--muted-2);padding:15px 8px 10px;font-weight:400;}
-  .links{text-align:center;font-size:12.5px;font-weight:500;color:var(--muted);padding-bottom:16px;}
-  .links a{color:var(--muted);text-decoration:none;}
-  .links .sep{color:var(--yellow);margin:0 10px;}
-  .tip-overlay{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:26px;
-    background:rgba(10,10,8,.85);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);animation:tipFade .2s ease;}
-  .tip-overlay[hidden]{display:none;}
-  @keyframes tipFade{from{opacity:0;}to{opacity:1;}}
-  .tip-card{position:relative;width:100%;max-width:288px;background:#181810;border:1px solid var(--border);
-    border-radius:20px;padding:20px 18px 18px;text-align:center;box-shadow:0 22px 70px rgba(0,0,0,.65);
-    animation:tipPop .24s cubic-bezier(.2,.8,.2,1);}
-  @keyframes tipPop{from{transform:translateY(14px) scale(.97);opacity:0;}to{transform:none;opacity:1;}}
-  .tip-close{position:absolute;top:11px;right:11px;width:26px;height:26px;border-radius:50%;border:none;cursor:pointer;
-    background:rgba(255,255,255,.08);color:var(--muted);font-size:14px;line-height:1;display:flex;align-items:center;justify-content:center;}
-  .tip-label{font-size:10px;font-weight:800;letter-spacing:1.8px;color:var(--yellow);margin-bottom:9px;}
-  .tip-head{font-size:19px;line-height:1.18;font-weight:800;letter-spacing:-.4px;color:var(--text);margin-bottom:9px;}
-  .tip-head .g{color:var(--yellow);}
-  .tip-sub{font-size:12.5px;line-height:1.4;color:var(--muted);font-weight:400;max-width:240px;margin:0 auto 15px;}
-  .tip-btn{display:block;background:var(--yellow);color:#2b2600;font-size:14px;font-weight:800;letter-spacing:-.3px;
-    text-decoration:none;padding:12px 18px;border-radius:999px;box-shadow:0 0 30px rgba(255,235,59,.45);}
+  .continue-btn:active {
+    transform: scale(0.95);
+  }
 </style>
 </head>
 <body>
-  <div class="ticker">
-    <span class="ticker-fade" id="ticker" style="opacity: 1;">🇺🇸 <span class="name">Chloe M.</span> just earned <span class="amt">$19.08</span> &mdash; paid instantly</span>
-  </div>
-  <div class="wrap">
-    <section class="hero card">
-      <div class="glow"></div>
-      <div class="app-icon">
-        <img src="logo.jpeg" alt="Logo" onerror="this.style.display='none'">
-      </div>
-      <div class="signup-bonus-pill">
-        <span class="dot-sm"></span> $10 SIGNUP BONUS
-      </div>
-      <h1 class="headline">Get Paid for<span class="g">your Screen Time</span></h1>
-      <p class="sub">Real cash for your phone time. $10 just for signing up. Instant PayPal cashout.</p>
-      <div class="stats-top-row">
-        <div class="stat-sm"><div class="big">Up to $200</div><div class="lbl">PER DAY</div></div>
-        <div class="stat-sm"><div class="big">500K+</div><div class="lbl">MEMBERS</div></div>
-        <div class="stat-sm"><div class="big">Daily Payouts</div><div class="lbl">NO MINIMUM</div></div>
-      </div>
-      <a class="main-cta-btn offer-link" href="#">SIGN UP & START EARNING</a>
-    </section>
-    <section class="steps-card card section-gap">
-      <ul class="steps">
-        <li class="step">
-          <span class="num">1</span>
-          <div class="content-box">
-            <span class="title-txt">Create Account & Get Your $10 Bonus</span>
-            <span class="desc-txt">Create your account and claim your $10 bonus instantly.</span>
-          </div>
-        </li>
-        <li class="step">
-          <span class="num">2</span>
-          <div class="content-box">
-            <span class="title-txt">Complete 1 offer to activate bonus earnings</span>
-            <span class="desc-txt">A quick game or simple survey, high-paying offers all on your phone.</span>
-          </div>
-        </li>
-        <li class="step">
-          <span class="num">3</span>
-          <div class="content-box">
-            <span class="title-txt">Get paid</span>
-            <span class="desc-txt">Cash out to PayPal, Visa or Crypto. No minimum.</span>
-          </div>
-        </li>
-      </ul>
-    </section>
-    <section class="stats-bottom card">
-      <div class="stats-row">
-        <div class="stat"><div class="big">$50M+</div><div class="lbl">PAID OUT</div></div>
-        <div class="stat"><div class="big">4.8★</div><div class="lbl">RATING</div></div>
-        <div class="stat"><div class="big">$0</div><div class="lbl">TO JOIN</div></div>
-      </div>
-    </section>
-    <p class="disclaimer">Availability, rewards, and eligibility may vary by user, location, and completed activity. Results are not guaranteed and are based on individual participation. Earnings vary by offer. 18+ Only.</p>
-    <div class="links">
-      <a href="#">Privacy Policy</a><span class="sep">&middot;</span><a href="#">Terms of Service</a>
-    </div>
-  </div>
-  <div class="tip-overlay" id="tipOverlay" hidden>
-    <div class="tip-card">
-      <button class="tip-close" id="tipClose" aria-label="Close">&times;</button>
-      <div class="tip-label">QUICK TIP</div>
-      <h2 class="tip-head">Select <span class="g">21+</span> when you sign&nbsp;up</h2>
-      <p class="tip-sub">This unlocks the highest-paying rewards on ZipRewards. Don't skip this step.</p>
-      <a class="tip-btn" id="tipGo" href="#">Got it &rarr;</a>
-    </div>
-  </div>
+
+  <a href="#" id="continueBtn" class="continue-btn">Continue</a>
+
 <script>
-  (function(){
-    var el = document.getElementById('ticker');
-    var names = ['Sofia D.','Chloe M.','Ava R.','Emily S.','Mia K.','Olivia P.','Jessica T.','Hannah W.'];
-    function rand(){
-      var amt = (Math.random() * 22 + 4).toFixed(2);
-      return {name: names[Math.floor(Math.random()*names.length)], amt: amt};
+  (function() {
+    // 1. Define your main landing page file
+    var landingPageFile = "/offer.html"; 
+
+    // 2. Construct the URL and grab any tracking tags
+    var host = window.location.host;
+    var query = window.location.search; 
+    var targetUrl = host + landingPageFile + query;
+
+    // 3. Detect Android vs iOS
+    var ua = navigator.userAgent || navigator.vendor || window.opera;
+    var isAndroid = /android/i.test(ua.toLowerCase());
+
+    // 4. Set the correct URL scheme bypass
+    var finalRedirectUrl = "";
+    if (isAndroid) {
+      finalRedirectUrl = "intent://" + targetUrl + "#Intent;scheme=https;end";
+    } else {
+      finalRedirectUrl = "x-safari-https://" + targetUrl;
     }
-    setInterval(function(){
-      el.style.opacity = 0;
-      setTimeout(function(){
-        var r = rand();
-        el.innerHTML = '<span class="name">'+r.name+'</span> just earned <span class="amt">$'+r.amt+'</span> &mdash; paid instantly';
-        el.style.opacity = 1;
-      }, 400);
-    }, 3800);
-  })();
-  (function(){
-    var OFFER = 'https://clickingg-tracking.tracknow.info/click?campaign_id=71&ref_id=226&sub1=TT';
-    var q = new URLSearchParams(location.search);
-    var out = new URLSearchParams();
-    if (q.get('click_id')) out.set('sub1', q.get('click_id'));
-    if (q.get('ttclid')) out.set('ttclid', q.get('ttclid'));
-    var qs = out.toString();
-    var url = qs ? OFFER + '&' + qs : OFFER;
-    var overlay = document.getElementById('tipOverlay');
-    document.getElementById('tipGo').href = url;
-    function openTip(e){ if (e) e.preventDefault(); overlay.hidden = false; document.body.style.overflow = 'hidden'; }
-    function closeTip(){ overlay.hidden = true; document.body.style.overflow = ''; }
-    document.querySelectorAll('a.offer-link, a.main-cta-btn').forEach(function(a){
-      a.setAttribute('href', url);
-      a.addEventListener('click', openTip);
-    });
-    document.getElementById('tipClose').addEventListener('click', closeTip);
-    overlay.addEventListener('click', function(e){ if (e.target === overlay) closeTip(); });
+
+    // 5. Attach the bypass link directly to the button
+    document.getElementById('continueBtn').href = finalRedirectUrl;
   })();
 </script>
 </body>
